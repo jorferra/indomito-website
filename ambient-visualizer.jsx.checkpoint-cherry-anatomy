@@ -1,0 +1,331 @@
+// Ambient Visualizer — COFFEE CHERRY ANATOMY
+// Technical cross-section of Coffea arabica. Layers breathe slowly.
+// Mucílago dashes animate. Labels + leader lines in JetBrains Mono.
+// Paper grain baked underneath.
+//
+// Audio toggle + procedural drone unchanged.
+
+function AmbientVisualizer() {
+  const canvasRef = React.useRef(null);
+  const [on, setOn] = React.useState(false);
+  const audioRef = React.useRef({ ctx: null, analyser: null, master: null, nodes: [] });
+
+  // ── Audio toggle (procedural drone) ─────────────────────
+  const toggleAudio = async () => {
+    const a = audioRef.current;
+    if (!on) {
+      if (!a.ctx) {
+        const AC = window.AudioContext || window.webkitAudioContext;
+        const ctx = new AC();
+        const master = ctx.createGain();
+        master.gain.value = 0;
+        master.connect(ctx.destination);
+
+        const analyser = ctx.createAnalyser();
+        analyser.fftSize = 512;
+        analyser.smoothingTimeConstant = 0.85;
+        master.connect(analyser);
+
+        const osc1 = ctx.createOscillator(); osc1.type = 'sine'; osc1.frequency.value = 55;
+        const osc2 = ctx.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = 82.4;
+        const osc3 = ctx.createOscillator(); osc3.type = 'sine'; osc3.frequency.value = 110;
+
+        const g1 = ctx.createGain(); g1.gain.value = 0.18;
+        const g2 = ctx.createGain(); g2.gain.value = 0.12;
+        const g3 = ctx.createGain(); g3.gain.value = 0.09;
+
+        const lfo1 = ctx.createOscillator(); lfo1.frequency.value = 0.08;
+        const lfo1g = ctx.createGain(); lfo1g.gain.value = 0.08;
+        lfo1.connect(lfo1g).connect(g1.gain); lfo1.start();
+        const lfo2 = ctx.createOscillator(); lfo2.frequency.value = 0.11;
+        const lfo2g = ctx.createGain(); lfo2g.gain.value = 0.06;
+        lfo2.connect(lfo2g).connect(g2.gain); lfo2.start();
+
+        const bufSize = 2 * ctx.sampleRate;
+        const noiseBuf = ctx.createBuffer(1, bufSize, ctx.sampleRate);
+        const data = noiseBuf.getChannelData(0);
+        let b0=0,b1=0,b2=0;
+        for (let i = 0; i < bufSize; i++) {
+          const white = Math.random() * 2 - 1;
+          b0 = 0.99765 * b0 + white * 0.0990460;
+          b1 = 0.96300 * b1 + white * 0.2965164;
+          b2 = 0.57000 * b2 + white * 1.0526913;
+          data[i] = (b0 + b1 + b2 + white * 0.1848) * 0.08;
+        }
+        const noise = ctx.createBufferSource();
+        noise.buffer = noiseBuf; noise.loop = true;
+        const noiseFilter = ctx.createBiquadFilter();
+        noiseFilter.type = 'lowpass'; noiseFilter.frequency.value = 800; noiseFilter.Q.value = 0.5;
+        const ng = ctx.createGain(); ng.gain.value = 0.22;
+
+        const delay = ctx.createDelay(); delay.delayTime.value = 0.45;
+        const fb = ctx.createGain(); fb.gain.value = 0.35;
+        const wet = ctx.createGain(); wet.gain.value = 0.3;
+        delay.connect(fb).connect(delay);
+        delay.connect(wet).connect(master);
+
+        [[osc1,g1],[osc2,g2],[osc3,g3]].forEach(([o,g]) => { o.connect(g); g.connect(master); g.connect(delay); });
+        noise.connect(noiseFilter).connect(ng); ng.connect(master); ng.connect(delay);
+        osc1.start(); osc2.start(); osc3.start(); noise.start();
+
+        const now = ctx.currentTime;
+        master.gain.linearRampToValueAtTime(0, now);
+        master.gain.linearRampToValueAtTime(0.42, now + 2.5);
+
+        audioRef.current = { ctx, analyser, master, nodes: [osc1,osc2,osc3,noise,lfo1,lfo2] };
+      } else {
+        await a.ctx.resume();
+        const now = a.ctx.currentTime;
+        a.master.gain.cancelScheduledValues(now);
+        a.master.gain.linearRampToValueAtTime(0.42, now + 1.5);
+      }
+      setOn(true);
+    } else {
+      const now = a.ctx.currentTime;
+      a.master.gain.cancelScheduledValues(now);
+      a.master.gain.linearRampToValueAtTime(0, now + 0.8);
+      setOn(false);
+    }
+  };
+
+  // ── Visualization ────────────────────────────────────────
+  React.useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const ctx  = canvas.getContext('2d');
+
+    // ── Paper grain (baked once per size) ─────────────────
+    let grainCanvas = null;
+    const bakeGrain = (W, H) => {
+      grainCanvas = document.createElement('canvas');
+      grainCanvas.width  = W * dpr;
+      grainCanvas.height = H * dpr;
+      const gc = grainCanvas.getContext('2d');
+      gc.scale(dpr, dpr);
+      let gs = 13337;
+      const gr = () => { gs = (gs * 1664525 + 1013904223) & 0xffffffff; return (gs >>> 0) / 0xffffffff; };
+      for (let i = 0; i < 900; i++) {
+        const x = gr() * W, y = gr() * H, r = 0.4 + gr() * 0.9, ang = gr() * Math.PI;
+        gc.save(); gc.translate(x, y); gc.rotate(ang);
+        gc.beginPath(); gc.ellipse(0, 0, r * 2.5, r * 0.4, 0, 0, Math.PI * 2);
+        gc.fillStyle = `rgba(42,28,14,${(0.04 + gr() * 0.06).toFixed(3)})`; gc.fill();
+        gc.restore();
+      }
+    };
+
+    let W, H;
+    const resize = () => {
+      W = canvas.clientWidth;
+      H = canvas.clientHeight;
+      canvas.width  = W * dpr;
+      canvas.height = H * dpr;
+      bakeGrain(W, H);
+    };
+    resize();
+    window.addEventListener('resize', resize);
+
+    // ── Layer definitions ──────────────────────────────────
+    // [rx_frac, ry_frac, alpha, lineWidth, dash?, isTaupe?]
+    const LAYERS = [
+      [1.000, 1.000, 0.20, 0.9, null,       false],  // 0 Exocarpio
+      [0.909, 0.906, 0.16, 0.9, null,       false],  // 1 Mesocarpio
+      [0.795, 0.781, 0.75, 1.6, [5, 3.5],  true ],  // 2 Mucílago (taupe, dashed)
+      [0.705, 0.675, 0.24, 0.9, null,       false],  // 3 Pergamino
+      [0.636, 0.594, 0.12, 0.6, null,       false],  // 4 Silverskin
+    ];
+
+    const LABELS = [
+      // { layer, angle, side, name, sub }
+      { i: 0, ang: -0.15, side:  1, name: 'EXOCARPIO',  sub: 'piel exterior'       },
+      { i: 1, ang:  0.35, side:  1, name: 'MESOCARPIO', sub: 'pulpa carnosa'        },
+      { i: 2, ang:  0.65, side:  1, name: 'MUCÍLAGO',   sub: 'capa azucarada', taupe: true },
+      { i: 3, ang: Math.PI - 0.65, side: -1, name: 'PERGAMINO',  sub: 'cáscara protectora' },
+      { i: 4, ang: Math.PI - 0.35, side: -1, name: 'SILVERSKIN', sub: 'piel plateada'      },
+    ];
+
+    // ── Draw loop ──────────────────────────────────────────
+    let raf;
+    const draw = () => {
+      const t = performance.now() / 1000;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0); // reset to dpr scale each frame
+
+      ctx.fillStyle = '#f4f1ec';
+      ctx.fillRect(0, 0, W, H);
+      if (grainCanvas) ctx.drawImage(grainCanvas, 0, 0, W, H);
+
+      const cx = W / 2;
+      const cy = H / 2 + H * 0.02;
+
+      // Slow breath
+      const breathe = Math.sin(t * 0.38) * 0.016;
+      const sc = 1 + breathe;
+
+      // Base radii — cherry is wider than tall (SVG ratio: 220:160 ≈ 1.375)
+      const ryBase = Math.min(H * 0.30, W * 0.135) * sc;
+      const rxBase = ryBase * (220 / 160);
+
+      // ── Ellipse layers ───────────────────────────────────
+      LAYERS.forEach(([rfx, rfy, alpha, lw, dash, isTaupe]) => {
+        const rx = rxBase * rfx;
+        const ry = ryBase * rfy;
+        ctx.beginPath();
+        ctx.ellipse(cx, cy, rx, ry, 0, 0, Math.PI * 2);
+        if (dash) {
+          ctx.setLineDash(dash);
+          ctx.lineDashOffset = -t * 5;
+        } else {
+          ctx.setLineDash([]);
+          ctx.lineDashOffset = 0;
+        }
+        ctx.strokeStyle = isTaupe
+          ? `rgba(139,111,71,${alpha})`
+          : `rgba(42,28,14,${alpha})`;
+        ctx.lineWidth = lw;
+        ctx.stroke();
+      });
+      ctx.setLineDash([]);
+      ctx.lineDashOffset = 0;
+
+      // ── Beans (Grano) ────────────────────────────────────
+      const beanOff = rxBase * 0.145;
+      const beanRx  = rxBase * 0.262;
+      const beanRy  = ryBase * 0.472;
+
+      [-1, 1].forEach(side => {
+        ctx.beginPath();
+        ctx.ellipse(cx + side * beanOff, cy, beanRx, beanRy, 0, 0, Math.PI * 2);
+        ctx.fillStyle  = 'rgba(244,241,236,0.92)';
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(42,28,14,0.68)';
+        ctx.lineWidth   = 1.6;
+        ctx.stroke();
+      });
+
+      // Bean dividing line
+      ctx.beginPath();
+      ctx.moveTo(cx, cy - beanRy * 0.86);
+      ctx.lineTo(cx, cy + beanRy * 0.86);
+      ctx.strokeStyle = 'rgba(42,28,14,0.42)';
+      ctx.lineWidth   = 0.9;
+      ctx.stroke();
+
+      // ── Labels ───────────────────────────────────────────
+      const leaderEnd = rxBase * 1.12; // distance from cx to where leader line ends
+
+      const drawLabel = (px, py, ex, ey, name, sub, isTaupe, side) => {
+        const inkCol   = isTaupe ? 'rgba(139,111,71,' : 'rgba(42,28,14,';
+        const dotColor = isTaupe ? 'rgba(139,111,71,0.75)' : 'rgba(42,28,14,0.40)';
+
+        // Dot on ellipse
+        ctx.beginPath();
+        ctx.arc(px, py, 2.0, 0, Math.PI * 2);
+        ctx.fillStyle = dotColor;
+        ctx.fill();
+
+        // Leader line
+        ctx.beginPath();
+        ctx.moveTo(px, py);
+        ctx.lineTo(ex, ey);
+        ctx.strokeStyle = inkCol + '0.22)';
+        ctx.lineWidth = 0.5;
+        ctx.stroke();
+
+        // Text
+        const textX  = side === 1 ? ex + 9 : ex - 9;
+        const align  = side === 1 ? 'left' : 'right';
+        ctx.textAlign    = align;
+        ctx.textBaseline = 'middle';
+
+        ctx.font      = '500 9px "JetBrains Mono", ui-monospace, monospace';
+        ctx.fillStyle = inkCol + (isTaupe ? '0.85' : '0.58') + ')';
+        ctx.fillText(name, textX, ey - 6);
+
+        ctx.font      = '300 8px "JetBrains Mono", ui-monospace, monospace';
+        ctx.fillStyle = 'rgba(42,28,14,0.30)';
+        ctx.fillText(sub, textX, ey + 6);
+      };
+
+      LABELS.forEach(({ i, ang, side, name, sub, taupe }) => {
+        const [rfx, rfy] = LAYERS[i];
+        const rx = rxBase * rfx;
+        const ry = ryBase * rfy;
+
+        // Point on ellipse at this angle
+        const px = cx + rx * Math.cos(ang);
+        const py = cy + ry * Math.sin(ang);
+
+        // Leader end: horizontal, staggered vertically
+        const ex = cx + side * leaderEnd;
+        const ey = py; // align leader horizontally with dot
+
+        drawLabel(px, py, ex, ey, name, sub, !!taupe, side);
+      });
+
+      // ── Grano label (above) ──────────────────────────────
+      const topY = cy - beanRy * 0.86;
+      const lblY = cy - ryBase * 1.18;
+
+      ctx.beginPath();
+      ctx.arc(cx, topY, 2.0, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(42,28,14,0.40)';
+      ctx.fill();
+
+      ctx.beginPath();
+      ctx.moveTo(cx, topY);
+      ctx.lineTo(cx, lblY + 14);
+      ctx.strokeStyle = 'rgba(42,28,14,0.22)';
+      ctx.lineWidth = 0.5;
+      ctx.stroke();
+
+      ctx.textAlign    = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.font         = '500 9px "JetBrains Mono", ui-monospace, monospace';
+      ctx.fillStyle    = 'rgba(42,28,14,0.58)';
+      ctx.fillText('GRANO', cx, lblY + 6);
+      ctx.font         = '300 8px "JetBrains Mono", ui-monospace, monospace';
+      ctx.fillStyle    = 'rgba(42,28,14,0.30)';
+      ctx.fillText('dos granos enfrentados', cx, lblY + 18);
+
+      raf = requestAnimationFrame(draw);
+    };
+    draw();
+
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('resize', resize); };
+  }, []);
+
+  return (
+    <div style={{ position: 'relative', width: '100%', height: 560, marginTop: 40, marginBottom: -80 }}>
+      <canvas ref={canvasRef} style={{ position: 'absolute', inset: 0, width: '100%', height: '100%' }} />
+      <button
+        onClick={toggleAudio}
+        style={{
+          position: 'absolute', top: 20, right: 20,
+          fontFamily: '"JetBrains Mono", ui-monospace, monospace',
+          fontSize: 11, letterSpacing: '.2em', textTransform: 'uppercase',
+          background: on ? 'rgba(26,26,25,0.92)' : 'transparent',
+          color: on ? '#f0eee9' : '#8B6F47',
+          border: '1px solid #8B6F47',
+          padding: '10px 18px', borderRadius: 999, cursor: 'pointer',
+          fontWeight: 600,
+          transition: 'background .4s ease, color .4s ease',
+        }}>
+        <span style={{
+          display: 'inline-block', width: 7, height: 7, borderRadius: '50%',
+          background: on ? '#f0eee9' : '#8B6F47', marginRight: 10,
+          animation: on ? 'idm-amb-pulse 1.8s ease-in-out infinite' : 'none',
+          verticalAlign: 'middle',
+        }} />
+        {on ? 'ambient · on' : 'ambient · off'}
+      </button>
+      <style>{`
+        @keyframes idm-amb-pulse {
+          0%,100% { opacity:1; transform:scale(1); }
+          50% { opacity:.4; transform:scale(1.4); }
+        }
+      `}</style>
+    </div>
+  );
+}
+
+Object.assign(window, { AmbientVisualizer });
