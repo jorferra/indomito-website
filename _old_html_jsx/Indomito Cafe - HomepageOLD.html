@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<title>Indómito Café — Homepage</title>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<style>html,body{margin:0;padding:0;background:#f0eee9;font-family:-apple-system,BlinkMacSystemFont,system-ui,sans-serif}</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="shared.jsx"></script>
+<script type="text/babel" src="homepage-page.jsx"></script>
+<script type="text/babel" data-presets="react">
+const FONT_PAIRS = {
+  "figtree":             { label: "Figtree",                             display: '"Figtree", sans-serif',              body: '"Figtree", sans-serif',            mono: '"JetBrains Mono", monospace' },
+  "fraunces-instrument": { label: "Fraunces / Instrument Sans",          display: '"Fraunces", serif',                  body: '"Instrument Sans", sans-serif',    mono: '"DM Mono", monospace' },
+  "instrument-serif":    { label: "Instrument Serif / Figtree",          display: '"Instrument Serif", serif',          body: '"Figtree", sans-serif',            mono: '"JetBrains Mono", monospace' },
+  "syne-instrument":     { label: "Syne / Instrument Sans",              display: '"Syne", sans-serif',                 body: '"Instrument Sans", sans-serif',    mono: '"Space Mono", monospace' },
+  "noto-space":          { label: "Noto Serif Display / Space Grotesk",  display: '"Noto Serif Display", serif',        body: '"Space Grotesk", sans-serif',      mono: '"Space Mono", monospace' },
+  "space-pair":          { label: "Space Grotesk / Space Mono",          display: '"Space Grotesk", sans-serif',        body: '"Space Grotesk", sans-serif',      mono: '"Space Mono", monospace' },
+  "bricolage-spacemono": { label: "Bricolage Grotesque / Space Mono",    display: '"Bricolage Grotesque", sans-serif',  body: '"Space Mono", monospace',          mono: '"Space Mono", monospace' },
+  "bricolage-lora":      { label: "Bricolage Grotesque / Lora",          display: '"Bricolage Grotesque", sans-serif',  body: '"Lora", serif',                    mono: '"Space Mono", monospace' },
+  "spacegrotesk-lora":   { label: "Space Grotesk / Lora",                display: '"Space Grotesk", sans-serif',        body: '"Lora", serif',                    mono: '"Space Mono", monospace' },
+};
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{ "fontPair": "spacegrotesk-lora" }/*EDITMODE-END*/;
+function applyFontPair(key) {
+  const p = FONT_PAIRS[key] || FONT_PAIRS["figtree"];
+  const r = document.documentElement.style;
+  r.setProperty('--idm-display', p.display);
+  r.setProperty('--idm-body', p.body);
+  r.setProperty('--idm-mono', p.mono);
+}
+function TweaksPanel({ state, setState }) {
+  const [open, setOpen] = React.useState(true);
+  return (
+    <div style={{position:'fixed', bottom:20, right:20, zIndex:100000, background:'rgba(22,20,18,.96)', color:'#f4f1ec',
+      border:'1px solid rgba(244,241,236,.14)', borderRadius:10, padding: open ? '16px 18px' : '10px 14px', width: open ? 280 : 'auto',
+      fontFamily:'-apple-system,system-ui,sans-serif', fontSize:12, lineHeight:1.4, boxShadow:'0 20px 60px rgba(0,0,0,.4)', backdropFilter:'blur(12px)'}}>
+      <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom: open ? 14 : 0, cursor:'pointer'}} onClick={()=>setOpen(!open)}>
+        <span style={{fontSize:10, letterSpacing:'.18em', textTransform:'uppercase', opacity:.7}}>Tweaks</span>
+        <span style={{opacity:.6}}>{open ? '−' : '+'}</span>
+      </div>
+      {open && (
+        <div>
+          <div style={{fontSize:10, letterSpacing:'.16em', textTransform:'uppercase', opacity:.5, marginBottom:10}}>Font pairing</div>
+          <div style={{display:'grid', gap:4}}>
+            {Object.entries(FONT_PAIRS).map(([k, p]) => (
+              <label key={k} style={{display:'flex', alignItems:'center', gap:10, padding:'8px 10px', borderRadius:6,
+                background: state.fontPair===k ? 'rgba(244,241,236,.12)' : 'transparent', cursor:'pointer'}}>
+                <input type="radio" name="fp" checked={state.fontPair===k} onChange={()=>setState({...state, fontPair:k})} style={{accentColor:'#f4f1ec'}} />
+                <span style={{fontFamily:p.display, fontSize:14, letterSpacing:'-0.01em'}}>{p.label}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+function App() {
+  const [tweaks, setTweaks] = React.useState(TWEAK_DEFAULTS);
+  const [editMode, setEditMode] = React.useState(false);
+  React.useEffect(() => { applyFontPair(tweaks.fontPair); }, [tweaks.fontPair]);
+  React.useEffect(() => {
+    const onMsg = (e) => {
+      if (e.data?.type === '__activate_edit_mode') setEditMode(true);
+      if (e.data?.type === '__deactivate_edit_mode') setEditMode(false);
+    };
+    window.addEventListener('message', onMsg);
+    window.parent.postMessage({type:'__edit_mode_available'}, '*');
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
+  const updateTweaks = (next) => {
+    setTweaks(next);
+    window.parent.postMessage({type:'__edit_mode_set_keys', edits: next}, '*');
+  };
+  return (
+    <>
+      <DesignCanvas>
+        <DCSection id="home" title="Indómito Café — Homepage" subtitle="Chapbook definitivo · combina sistema Origen + Carta V1b · copy verbatim del sitio">
+          <DCArtboard id="home-v1" label="Homepage · Chapbook" width={1440} height={6850}>
+            <HomepagePage />
+          </DCArtboard>
+        </DCSection>
+      </DesignCanvas>
+      {editMode && <TweaksPanel state={tweaks} setState={updateTweaks} />}
+    </>
+  );
+}
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

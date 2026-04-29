@@ -1,0 +1,34 @@
+{
+  "name": "indomitoclaudedesign",
+  "version": "1.0.0",
+  "description": "Static HTML/JS prototype for the Indomito Café landing site.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://jorferra@github.com/jorferra/indomito-website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jorferra/indomito-website/issues"
+  },
+  "homepage": "https://github.com/jorferra/indomito-website#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "jsdom": "^29.1.0",
+    "puppeteer": "^24.42.0",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router-dom": "^7.14.2"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.0.1",
+    "vite": "^8.0.10"
+  }
+}

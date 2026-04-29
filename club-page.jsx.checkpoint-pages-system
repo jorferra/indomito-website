@@ -1,0 +1,335 @@
+// Club Sensorial — Chapbook vibe
+// Quiet cover. Asymmetric 1.4:1 columns. Taupe pull-quotes. No seal.
+// Copy is verbatim from indomitocafe.com/club.
+
+const TC = INDOMITO_TOKENS;
+
+// ── Atoms ──────────────────────────────────────────────────
+
+function ClubCover() {
+  return (
+    <header style={{margin:'0 48px', padding:'80px 0 120px',
+                    borderTop:`1px solid ${TC.ink}`, borderBottom:`1px solid ${TC.ink}`,
+                    textAlign:'center'}}>
+      <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.22em', marginBottom:28, fontSize:15}}>
+        Mmxxvi · Membresía privada
+      </div>
+      <h1 style={{fontFamily:TC.display, fontSize:'clamp(72px, 14vw, 220px)', fontWeight:300, margin:0,
+                  letterSpacing:'-0.05em', lineHeight:.82}}>
+        Club<br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em>
+      </h1>
+      <div style={{maxWidth:620, margin:'56px auto 0', fontFamily:TC.display, fontSize:18, lineHeight:1.65, color:'rgb(26, 26, 25)', whiteSpace:'pre-line'}}>
+        {`Una membresía íntima que celebra el café como experiencia cultural
+y el sonido como su extensión natural.`}
+      </div>
+      <div className="idm-mono" style={{fontFamily:'"JetBrains Mono", ui-monospace, monospace', color:'#8B6F47', fontWeight:600, fontSize:12, marginTop:36, letterSpacing:'.18em'}}>
+        Una comunidad que no sigue la corriente. La escucha.
+      </div>
+      <div style={{position:'relative', width:'100%', height:560, marginTop:40, marginBottom:-80, overflow:'hidden'}}>
+        <img
+          src="assets/fotos%20para%20Cafe/20260418_163204.jpg"
+          alt="Club Sensorial · Indómito Café"
+          style={{
+            position:'absolute', inset:0,
+            width:'100%', height:'100%',
+            objectFit:'cover', objectPosition:'center center',
+            display:'block',
+          }}
+        />
+      </div>
+    </header>
+  );
+}
+
+// Section head — asymmetric: tiny left, big right headline
+function ClubSectionHead({ num, label, title }) {
+  return (
+    <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:72,
+                 padding:'120px 0 48px',
+                 borderBottom:`1px solid ${TC.rule}`, marginBottom:48,
+                 alignItems:'end'}}>
+      <h2 style={{fontFamily:TC.display, fontSize:'clamp(48px, 6vw, 88px)', margin:0, fontWeight:400,
+                  letterSpacing:'-0.04em', lineHeight:.95}}>
+        {title}
+      </h2>
+      <div style={{paddingBottom:16}}>
+        <div className="idm-mono" style={{color:TC.inkMuted, letterSpacing:'.22em', marginBottom:10}}>
+          {num}
+        </div>
+        <div className="idm-mono" style={{color:TC.ink, letterSpacing:'.18em'}}>
+          {label}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Capa — one "chapter" inside a section. Left wide = prose, right narrow = meta
+function Capa({ title, tag, body, micro, idx }) {
+  return (
+    <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:72,
+                 padding:'56px 0',
+                 borderBottom:`1px dotted ${TC.rule}`,
+                 alignItems:'start'}}>
+      <div>
+        <div style={{display:'flex', alignItems:'baseline', gap:16, marginBottom:18}}>
+          <span className="idm-mono" style={{color:TC.inkMuted}}>{String(idx).padStart(2,'0')}</span>
+          <h3 style={{fontFamily:TC.display, fontSize:40, margin:0, fontWeight:500,
+                      letterSpacing:'-0.028em', lineHeight:1, textTransform:'none'}}>
+            {title}
+          </h3>
+          {tag && <span className="idm-mono" style={{color:TC.taupe, letterSpacing:'.14em'}}>{tag}</span>}
+        </div>
+        {body.map((para, i) => (
+          <p key={i} style={{fontSize:16, lineHeight:1.65, margin:i===0?'0 0 14px':'0 0 14px',
+                             color:TC.ink, maxWidth:620}}>
+            {para}
+          </p>
+        ))}
+      </div>
+      {micro && (
+        <div style={{paddingTop:12, borderTop:`1px solid ${TC.rule}`, maxWidth:320}}>
+          {micro.map((m,i)=>(
+            <div key={i} style={{marginBottom:14}}>
+              <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.14em', marginBottom:4}}>{m.k}</div>
+              <div style={{fontFamily:TC.display, fontSize:18, letterSpacing:'-0.018em', lineHeight:1.25}}>
+                {m.v}
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Quiet pull-quote, taupe first line
+function Intermission({ line1, line2, foot }) {
+  return (
+    <section style={{padding:'140px 48px'}}>
+      <div style={{maxWidth:860, margin:'0 auto', textAlign:'center'}}>
+        <p style={{fontFamily:TC.display, fontSize:'clamp(32px, 4vw, 52px)', fontWeight:400,
+                   letterSpacing:'-0.028em', lineHeight:1.15, margin:0}}>
+          <span style={{color:TC.taupe, fontStyle:'italic'}}>{line1}</span><br/>
+          {line2}
+        </p>
+        {foot && (
+          <div className="idm-mono" style={{color:'#8B6F47', fontWeight:600, fontSize:12, marginTop:28, letterSpacing:'.18em'}}>
+            {foot}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Page
+// ═══════════════════════════════════════════════════════════════
+
+function ClubPage() {
+  return (
+    <div className="idm-root" style={{width:'100%'}}>
+      <IndomitoNav/>
+
+      <ClubCover/>
+
+      {/* ── I · QUÉ INCLUYE ──────────────────────────────── */}
+      <section style={{padding:'0 48px'}}>
+        <ClubSectionHead num="I" label="Qué incluye" title="Lo que viene, mes a mes."/>
+
+        <Capa
+          idx={1}
+          title="Café del Mes"
+          tag="Edición limitada"
+          body={[
+            'Orígenes únicos, procesos excepcionales, perfiles que evolucionan con las estaciones.',
+            'Cada bolsa numerada, trazable, con notas de cata y contexto cultural. Curada por maestros tostadores.',
+          ]}
+          micro={[
+            {k:'Formato', v:'250 g · numerado'},
+            {k:'Cadencia', v:'Mensual · estacional'},
+          ]}
+        />
+
+        <Capa
+          idx={2}
+          title="Acceso Anticipado"
+          tag="Laboratorio Sensorial"
+          body={[
+            'Sesiones del Laboratorio Sensorial, eventos de escucha y lanzamientos exclusivos, con reserva antes que nadie.',
+          ]}
+          micro={[
+            {k:'Ventana', v:'72 hs antes'},
+            {k:'Cupo', v:'Reservado para miembros'},
+          ]}
+        />
+
+        <Capa
+          idx={3}
+          title="Drops Exclusivos"
+          body={[
+            'Objetos, colaboraciones, ediciones limitadas solo para miembros.',
+          ]}
+          micro={[
+            {k:'Canal', v:'Tienda privada'},
+            {k:'Ediciones', v:'Numeradas'},
+          ]}
+        />
+      </section>
+
+      {/* Intermission I */}
+      <Intermission
+        line1="Una membresía íntima"
+        line2="que celebra el café como experiencia cultural."
+        foot="Club Sensorial · Indómito Café"
+      />
+
+      {/* ── II · ECOSISTEMA ABIERTO ──────────────────────── */}
+      <section style={{padding:'0 48px', background:TC.bgAlt, margin:'0 -0'}}>
+        <div style={{padding:'0 0'}}>
+          <ClubSectionHead num="II" label="Ecosistema abierto" title="Parte de la curaduría es pública."/>
+
+          <p style={{maxWidth:720, fontSize:17, lineHeight:1.65, color:TC.inkSoft, margin:'0 0 16px'}}>
+            Música, sesiones y eventos que existen más allá del Club.<br/>
+            No necesitás ser miembro para habitarlos.
+          </p>
+
+          <Capa
+            idx={1}
+            title="Paisajes Sonoros"
+            body={[
+              'Playlists vivas en Spotify que expanden nuestro universo sonoro, renovadas periódicamente.',
+            ]}
+            micro={[
+              {k:'Canal', v:'Spotify · Indómito'},
+              {k:'Última', v:'Nathan Larson — Shudder To Think'},
+            ]}
+          />
+
+          <Capa
+            idx={2}
+            title="Streaming en Vivo"
+            tag="Sesiones de escucha"
+            body={[
+              'Sesiones de escucha transmitidas vía streaming.',
+              'Música curada sin interrupciones, sin algoritmo. Cuando tiene que pasar.',
+            ]}
+            micro={[
+              {k:'Formato', v:'Directo · sin cortes'},
+              {k:'Anuncio', v:'Anticipado a miembros'},
+            ]}
+          />
+        </div>
+        <div style={{height:120}}/>
+      </section>
+
+      {/* ── III · EXPERIENCIAS ──────────────────────────── */}
+      <section style={{padding:'0 48px'}}>
+        <ClubSectionHead num="III" label="Experiencias" title="Rituales, no degustaciones."/>
+
+        <Capa
+          idx={1}
+          title="Tostado & Girado"
+          tag="Ritual contemplativo"
+          body={[
+            'Ritual contemplativo de escucha: café + un disco completo, sin interrupciones.',
+          ]}
+          micro={[
+            {k:'Última edición', v:'Kind Of Blue — Miles Davis, 1959'},
+            {k:'Formato', v:'Disco entero · sin cortes'},
+          ]}
+        />
+
+        <Capa
+          idx={2}
+          title="Laboratorio Sensorial"
+          tag="90 minutos · inmersivo"
+          body={[
+            'No es degustación: es evento de escucha profunda, con todas las frecuencias activadas.',
+            'Sesiones inmersivas de 90 minutos, donde música, café y narrativa técnica corren en paralelo.',
+            'Cada sesión mapea una cultura musical completa sobre el proceso físico del café, desde cereza hasta taza.',
+          ]}
+          micro={[
+            {k:'Duración', v:'90 min · 6–8 estaciones'},
+            {k:'Formato', v:'Playlist cronológica'},
+            {k:'Próximo', v:'Jamaica: Pressure Bloom'},
+            {k:'Fecha', v:'2026 · CABA'},
+          ]}
+        />
+
+        <Capa
+          idx={3}
+          title="Encuentros fuera del mapa"
+          tag="Privados · no anunciados"
+          body={[
+            'Eventos privados que no se anuncian públicamente.',
+            'Colaboraciones inesperadas con artistas, cocineros, productores. Cenas, instalaciones, sesiones nocturnas.',
+          ]}
+          micro={[
+            {k:'Acceso', v:'Solo miembros'},
+            {k:'Aviso', v:'Invitación directa'},
+          ]}
+        />
+      </section>
+
+      {/* Intermission II */}
+      <Intermission
+        line1="Historia material,"
+        line2="no folklórica."
+      />
+
+      {/* ── IV · MEMBRESÍA (CTA) ─────────────────────────── */}
+      <section style={{padding:'0 48px 140px'}}>
+        <ClubSectionHead num="IV" label="Membresía" title="Se accede por invitación."/>
+
+        <div style={{display:'grid', gridTemplateColumns:'1.4fr 1fr', gap:72, alignItems:'start', padding:'24px 0 0'}}>
+          <div>
+            <p style={{fontFamily:TC.display, fontSize:36, fontWeight:400,
+                       letterSpacing:'-0.022em', lineHeight:1.25, margin:'0 0 32px', maxWidth:640}}>
+              <span style={{color:TC.taupe}}>El Club Sensorial no es abierto.</span>{' '}
+              Se accede por invitación o solicitud.
+            </p>
+            <p style={{fontSize:17, lineHeight:1.65, margin:'0 0 32px', maxWidth:560, color:TC.ink}}>
+              Comienza con una lista anticipada. Aperturas periódicas. Cupos limitados.
+            </p>
+            <div style={{display:'flex', gap:14, marginTop:40}}>
+              <button className="idm-btn idm-btn--solid" style={{padding:'18px 32px', fontSize:14}}>
+                Solicitar acceso →
+              </button>
+              <button className="idm-btn" style={{padding:'18px 32px', fontSize:14}}>
+                Sumarse a la lista
+              </button>
+            </div>
+          </div>
+
+          <div style={{border:`1px solid ${TC.rule}`, padding:'36px 32px', background:TC.bg}}>
+            <div className="idm-mono" style={{color:TC.inkMuted, letterSpacing:'.18em', marginBottom:22}}>
+              Forma de acceso
+            </div>
+            <div style={{display:'grid', gap:22}}>
+              {[
+                {n:'01', t:'Invitación directa', b:'De un miembro actual o del equipo.'},
+                {n:'02', t:'Solicitud abierta',  b:'Lista anticipada · apertura periódica.'},
+                {n:'03', t:'Aceptación',         b:'Cupos limitados · respuesta individual.'},
+              ].map(r=>(
+                <div key={r.n} style={{display:'grid', gridTemplateColumns:'auto 1fr', gap:14,
+                                        paddingBottom:18, borderBottom:`1px dotted ${TC.rule}`}}>
+                  <span className="idm-mono" style={{color:TC.inkMuted}}>{r.n}</span>
+                  <div>
+                    <div style={{fontFamily:TC.display, fontSize:20, letterSpacing:'-0.018em', marginBottom:4}}>{r.t}</div>
+                    <div style={{fontSize:13.5, color:TC.inkSoft, lineHeight:1.5}}>{r.b}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <IndomitoFooter/>
+    </div>
+  );
+}
+
+Object.assign(window, { ClubPage, ClubCover, ClubSectionHead, Capa, Intermission });
