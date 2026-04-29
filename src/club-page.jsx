@@ -1,0 +1,242 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { useIsMobile, INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
+// Club Sensorial — Chapbook vibe
+// Quiet cover. Asymmetric 1.4:1 columns. Taupe pull-quotes. No seal.
+// Copy is verbatim from indomitocafe.com/club.
+
+const TC = INDOMITO_TOKENS;
+
+// ── Atoms ──────────────────────────────────────────────────
+
+function ClubCover() {
+  const isMobile = useIsMobile();
+  return (
+    <header style={{margin: isMobile ? '0 16px' : '0 48px',
+                    padding: isMobile ? '48px 0 64px' : '80px 0 120px',
+                    borderTop:`1px solid ${TC.ink}`, borderBottom:`1px solid ${TC.ink}`,
+                    textAlign:'center'}}>
+      <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.22em', marginBottom:24, fontSize: isMobile ? 11 : 15}}>
+        Mmxxvi · Membresía privada
+      </div>
+      <h1 style={{fontFamily:TC.display, fontSize:'clamp(64px, 14vw, 220px)', fontWeight:300, margin:0,
+                  letterSpacing:'-0.05em', lineHeight:.82}}>
+        Club<br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em>
+      </h1>
+      <div style={{maxWidth:560, margin: isMobile ? '36px auto 0' : '56px auto 0',
+                   fontFamily:TC.display, fontSize: isMobile ? 16 : 18, lineHeight:1.65,
+                   color:'rgb(26, 26, 25)', whiteSpace:'pre-line'}}>
+        {`Nuestra comunidad vive el café como experiencia\ny el sonido como su extensión natural.`}
+      </div>
+      <div className="idm-mono" style={{fontFamily:'"JetBrains Mono", ui-monospace, monospace', color:'#8B6F47',
+                                         fontWeight:600, fontSize:11, marginTop: isMobile ? 24 : 36, letterSpacing:'.18em'}}>
+        Con gusto, oído y criterio propio.
+      </div>
+      <div style={{position:'relative', width:'100%', height: isMobile ? 280 : 560,
+                   marginTop: isMobile ? 32 : 40, marginBottom: isMobile ? -48 : -80, overflow:'hidden'}}>
+        <img src="assets/fotos%20para%20Cafe/20260418_163204.jpg"
+          alt="Club Sensorial · Indómito Café"
+          style={{position:'absolute', inset:0, width:'100%', height:'100%',
+                  objectFit:'cover', objectPosition:'center center', display:'block'}}/>
+      </div>
+    </header>
+  );
+}
+
+// Section head — asymmetric: tiny left, big right headline
+function ClubSectionHead({ num, label, title }) {
+  const isMobile = useIsMobile();
+  return (
+    <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
+                 gap: isMobile ? 8 : 72,
+                 padding: isMobile ? '56px 0 32px' : '120px 0 48px',
+                 borderBottom:`1px solid ${TC.rule}`, marginBottom: isMobile ? 32 : 48,
+                 alignItems:'end'}}>
+      <h2 style={{fontFamily:TC.display, fontSize:'clamp(36px, 6vw, 88px)', margin:0, fontWeight:400,
+                  letterSpacing:'-0.04em', lineHeight:.95, whiteSpace:'pre-line'}}>
+        {title}
+      </h2>
+      <div style={{paddingBottom: isMobile ? 0 : 16}}>
+        <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.22em', marginBottom:6}}>
+          {num}
+        </div>
+        <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.18em'}}>
+          {label}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Capa — one "chapter" inside a section. Left wide = prose, right narrow = meta
+function Capa({ title, tag, body, micro, idx }) {
+  const isMobile = useIsMobile();
+  return (
+    <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
+                 gap: isMobile ? 24 : 72,
+                 padding: isMobile ? '36px 0' : '56px 0',
+                 borderBottom:`1px dotted ${TC.rule}`,
+                 alignItems:'start'}}>
+      <div>
+        <div style={{display:'flex', alignItems:'baseline', gap:16, marginBottom:18}}>
+          <span className="idm-mono" style={{color:TC.inkMuted}}>{String(idx).padStart(2,'0')}</span>
+          <h3 style={{fontFamily:TC.display, fontSize:40, margin:0, fontWeight:500,
+                      letterSpacing:'-0.028em', lineHeight:1, textTransform:'none'}}>
+            {title}
+          </h3>
+          {tag && <span className="idm-mono" style={{color:TC.taupe, letterSpacing:'.14em'}}>{tag}</span>}
+        </div>
+        {body.map((para, i) => (
+          <p key={i} style={{fontFamily:TC.display, fontSize:17, lineHeight:1.65, margin:'0 0 14px',
+                             color:TC.ink, maxWidth:620}}>
+            {para}
+          </p>
+        ))}
+      </div>
+      {micro && (
+        <div style={{paddingTop:12, borderTop:`1px solid ${TC.rule}`, maxWidth:320}}>
+          {micro.map((m,i)=>(
+            <div key={i} style={{display:'grid', gridTemplateColumns:'1fr auto', gap:20,
+                                  padding:'12px 0', borderBottom:`1px dotted ${TC.rule}`,
+                                  alignItems:'baseline'}}>
+              <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.14em'}}>{m.k}</div>
+              <div style={{fontFamily:TC.display, fontSize:17, letterSpacing:'-0.018em'}}>{m.v}</div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+}
+
+// Quiet pull-quote, taupe first line
+function Intermission({ line1, line2, foot }) {
+  return (
+    <section style={{padding:'140px 48px'}}>
+      <div style={{maxWidth:860, margin:'0 auto', textAlign:'center'}}>
+        <p style={{fontFamily:TC.display, fontSize:'clamp(32px, 4vw, 52px)', fontWeight:400,
+                   letterSpacing:'-0.028em', lineHeight:1.15, margin:0}}>
+          <span style={{color:TC.taupe, fontStyle:'italic'}}>{line1}</span><br/>
+          {line2}
+        </p>
+        {foot && (
+          <div className="idm-mono" style={{color:'#8B6F47', fontWeight:600, fontSize:12, marginTop:28, letterSpacing:'.18em'}}>
+            {foot}
+          </div>
+        )}
+      </div>
+    </section>
+  );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// Page
+// ═══════════════════════════════════════════════════════════════
+
+function ClubPage() {
+  const isMobile = useIsMobile();
+  return (
+    <div className="idm-root" style={{width:'100%'}}>
+      <IndomitoNav/>
+
+      <ClubCover/>
+
+      {/* ── I · QUÉ INCLUYE ──────────────────────────────── */}
+      <section style={{padding: isMobile ? '0 20px' : '0 48px'}}>
+        <ClubSectionHead num="I" label="Qué incluye" title={"Lo que viene,\nmes a mes."}/>
+
+        <Capa
+          idx={1}
+          title="Café del Mes"
+          tag="Edición limitada"
+          body={[
+            'Orígenes únicos, procesos cuidados, perfiles que evolucionan con las estaciones. Cada bolsa numerada, trazable, con notas de cata y contexto cultural.',
+          ]}
+          micro={[
+            {k:'Formato', v:'250 g · numerado'},
+            {k:'Cadencia', v:'mensual · estacional'},
+          ]}
+        />
+
+        <Capa
+          idx={2}
+          title="Acceso Anticipado"
+          body={[
+            'Eventos, lanzamientos y experiencias con reserva antes que nadie.',
+          ]}
+          micro={[
+            {k:'Ventana', v:'72 hs antes'},
+            {k:'Cupo', v:'limitado por evento'},
+          ]}
+        />
+
+        <Capa
+          idx={3}
+          title="Drops Exclusivos"
+          body={[
+            'Objetos, ediciones limitadas y colaboraciones. Canal privado, sin anuncio público.',
+          ]}
+          micro={[
+            {k:'Canal', v:'tienda privada'},
+            {k:'Ediciones', v:'numeradas'},
+          ]}
+        />
+
+        <Capa
+          idx={4}
+          title="Descuento en Carta"
+          body={[
+            '15% en todo lo que pedís en la barra. Todos los días.',
+          ]}
+          micro={[
+            {k:'Descuento', v:'15%'},
+            {k:'Aplica',    v:'toda la carta · siempre'},
+          ]}
+        />
+
+        <Capa
+          idx={5}
+          title="TRAZA"
+          body={[
+            'Un newsletter escrito a máquina en una Olivetti de los 80. Llega impreso, por correo. Editoriales, notas, ideas — en papel, con error de tipeo incluido.',
+          ]}
+          micro={[
+            {k:'Formato', v:'impreso · correo físico'},
+            {k:'Cadencia', v:'mensual'},
+          ]}
+        />
+      </section>
+
+      {/* ── II · MEMBRESÍA (CTA) ─────────────────────────── */}
+      <section style={{padding: isMobile ? '0 20px 80px' : '0 48px 140px'}}>
+        <ClubSectionHead num="II" label="Membresía" title="Se accede por invitación."/>
+
+        <div style={{padding:'24px 0 0', maxWidth:400}}>
+          {[
+            {k:'Membresía', v:'$6.000 / mes'},
+            {k:'Cadencia',  v:'mensual · sin permanencia'},
+            {k:'Carta',     v:'15% de descuento'},
+          ].map((r,i) => (
+            <div key={i} style={{display:'grid', gridTemplateColumns:'1fr auto', gap:20,
+                                  padding:'14px 0', borderBottom:`1px dotted ${TC.rule}`,
+                                  alignItems:'baseline'}}>
+              <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.14em'}}>{r.k}</div>
+              <div style={{fontFamily:TC.display, fontSize:17, letterSpacing:'-0.018em'}}>{r.v}</div>
+            </div>
+          ))}
+          <div style={{marginTop:36}}>
+            <a href="https://wa.me/5491160463980" className="idm-hover-underline"
+               style={{fontFamily:TC.display, fontSize:22, fontWeight:500,
+                       color:TC.ink, textDecoration:'none', letterSpacing:'-0.018em'}}>
+              Escribinos →
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <IndomitoFooter/>
+    </div>
+  );
+}
+
+export default ClubPage;
