@@ -200,6 +200,16 @@ function HomeColophon() {
 function HomepagePageV2() {
   const isMobile = useIsMobile();
   const px = isMobile ? 20 : 48;
+  const refugeLedger = isMobile ? null : (
+    <Ledger
+      title="Desde"
+      rows={[
+        { k: 'Fundado', v: '2025 · BA' },
+        { k: 'Formato', v: 'café · música · eventos' },
+        { k: 'Tono', v: 'analógico · ritual' },
+      ]}
+    />
+  );
   return (
     <React.Fragment>
     <div className="idm-root" style={{ width: '100%', background: HT.bg }}>
@@ -254,13 +264,8 @@ function HomepagePageV2() {
         foot="Refugio · ritual · analógico"
         href="#/nosotros"
         linkLabel="Conocer nuestro origen"
-        right={
-        <Ledger title="Desde" rows={[
-        { k: 'Fundado', v: '2025 · BA' },
-        { k: 'Formato', v: 'café · música · eventos' },
-        { k: 'Tono', v: 'analógico · ritual' }]
-        } />
-        } />
+        right={refugeLedger}
+      />
       
 
       {/* II · Carta */}
