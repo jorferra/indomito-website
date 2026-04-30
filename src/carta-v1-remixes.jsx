@@ -62,6 +62,7 @@ function V1ColHeader({num, title, desc, rule='heavy'}) {
 // pages with an asymmetric 2-col split (wide bebidas / narrow sides).
 function CartaV1b() {
   const isMobile = useIsMobile();
+  const sidePad = isMobile ? 28 : 48;
   return (
     <div className="idm-root v1b-scope" style={{width:'100%'}}>
       <style>{`
@@ -73,7 +74,7 @@ function CartaV1b() {
       <IndomitoNav/>
 
       {/* Cover page */}
-      <header style={{margin: isMobile ? '0 16px' : '0 48px',
+      <header style={{margin: `0 ${sidePad}px`,
                       padding: isMobile ? '48px 0 64px' : '80px 0 120px',
                       borderTop:`1px solid ${TV1.ink}`, borderBottom:`1px solid ${TV1.ink}`,
                       textAlign:'center'}}>
@@ -105,7 +106,7 @@ function CartaV1b() {
       </header>
 
       {/* Spread 1 — Café / Fríos + Filtrados */}
-      <section style={{padding: isMobile ? '0 16px' : '0 48px'}}>
+      <section style={{padding: `0 ${sidePad}px`}}>
         {isMobile ? (
           <div>
             <V1ColHeader num="01" title="Café" desc="sobre la barra · en taza" rule="thin"/>
@@ -135,7 +136,7 @@ function CartaV1b() {
       </section>
 
       {/* Intermission */}
-      <section style={{padding: isMobile ? '72px 20px' : '140px 48px'}}>
+      <section style={{padding: isMobile ? '72px 28px' : '140px 48px'}}>
         <div style={{maxWidth:860, margin:'0 auto', textAlign:'center'}}>
           <p style={{fontFamily:TV1.display, fontSize:'clamp(24px, 4vw, 52px)', fontWeight:400,
                      letterSpacing:'-0.028em', lineHeight:1.15, margin:0}}>
@@ -146,7 +147,7 @@ function CartaV1b() {
       </section>
 
       {/* Spread 2 — Pastelería / Alcohol */}
-      <section style={{padding: isMobile ? '0 16px 64px' : '0 48px 140px'}}>
+      <section style={{padding: `0 ${sidePad}px ${isMobile ? 64 : 140}px`}}>
         {isMobile ? (
           <div>
             <V1ColHeader num="04" title="Pastelería" desc="del horno · del día" rule="thin"/>
