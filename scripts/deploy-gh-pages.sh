@@ -17,7 +17,7 @@ npm run build
 git worktree prune >/dev/null 2>&1 || true
 git worktree add --force -B gh-pages "$DEPLOY_DIR" origin/gh-pages
 
-rsync -a --delete --exclude '.git' --exclude '.DS_Store' dist/ "$DEPLOY_DIR"/
+rsync -a -c --delete --exclude '.git' --exclude '.DS_Store' dist/ "$DEPLOY_DIR"/
 touch "$DEPLOY_DIR/.nojekyll"
 
 cd "$DEPLOY_DIR"
