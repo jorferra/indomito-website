@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIsMobile, INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
+import { useIsMobile, INDOMITO_TOKENS, IndomitoNav, IndomitoFooter, PageCover } from './shared';
 import { CARTA_DATA } from './carta-data';
 // Carta V1b · Chapbook — cover page + quiet inner pages, no seal, 1-big/1-small column.
 
@@ -82,36 +82,23 @@ function CartaV1b() {
       <IndomitoNav/>
 
       {/* Cover page */}
-      <header style={{margin: `0 ${sidePad}px`,
-                      padding: isMobile ? '48px 0 64px' : '80px 0 120px',
-                      borderTop:`1px solid ${TV1.ink}`, borderBottom:`1px solid ${TV1.ink}`,
-                      textAlign:'center'}}>
-        <div className="idm-mono" style={{fontFamily:'"JetBrains Mono", ui-monospace, monospace',
-                                           color:'#8B6F47', letterSpacing:'.22em',
-                                           marginBottom: isMobile ? 20 : 28, fontSize: isMobile ? 11 : 15}}>
-          Mmxxvi · Nuestra carta
-        </div>
-        <h1 style={{fontFamily:TV1.display, fontSize: isMobile ? 'clamp(72px, 18vw, 160px)' : 'clamp(80px, 16vw, 240px)',
-                    fontWeight:300, margin:0, letterSpacing:'-0.05em', lineHeight:.85}}>
-          Carta
-        </h1>
-        <div style={{maxWidth:560, margin: isMobile ? '32px auto 0' : '56px auto 0',
-                     fontFamily:TV1.display, fontSize: isMobile ? 16 : 18,
-                     lineHeight:1.65, color:'rgb(26,26,25)', whiteSpace:'pre-line'}}>
-          {`Un cuadernillo con todo lo que pasa sobre la barra.\nElegí sin apuro. Miembros del Club, con descuento.`}
-        </div>
-        <div className="idm-mono" style={{fontFamily:'"JetBrains Mono", ui-monospace, monospace',
-                                           color:'#8B6F47', fontWeight:600, fontSize:11,
-                                           marginTop: isMobile ? 24 : 36, letterSpacing:'.18em'}}>
-          Carta · Indómito Café · Buenos Aires
-        </div>
-        <div style={{position:'relative', width:'100%', height: isMobile ? 240 : 560,
-                     marginTop: isMobile ? 32 : 40, marginBottom: isMobile ? -48 : -80, overflow:'hidden'}}>
-          <img src="assets/fotos%20para%20Carta/cayendo.jpg" alt="Indómito Café"
-            style={{position:'absolute', inset:0, width:'100%', height:'100%',
-                    objectFit:'cover', objectPosition:'center center', display:'block'}}/>
-        </div>
-      </header>
+      <PageCover
+        eyebrow="Mmxxvi · Nuestra carta"
+        title="Carta"
+        dek={{
+          content: (
+            <>
+              Todo lo que encontrás en la barra.
+              <br />
+              Elegí sin apuro.
+            </>
+          ),
+          maxWidth: 560,
+        }}
+        meta="Carta · Indómito Café · Buenos Aires"
+        imageSrc="assets/fotos%20para%20Carta/cayendo.jpg"
+        imageAlt="Indómito Café"
+      />
 
       {/* Spread 1 — Café / Fríos + Filtrados */}
       <section style={{padding: `0 ${sidePad}px`}}>

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useIsMobile, INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
+import { useIsMobile, INDOMITO_TOKENS, IndomitoNav, IndomitoFooter, PageCover, PageSectionHeader, PageSpread, PageLedger, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
 import AmbientVisualizer from './ambient-visualizer';
 // Homepage — Chapbook (definitive)
 // Combines the Origen masthead/stanza/colophon system with Carta V1b's
@@ -24,66 +24,36 @@ const monoColor = '#8B6F47';
 
 // ── Cover ──────────────────────────────────────────────────
 function HomeCover() {
-  const isMobile = useIsMobile();
   return (
-    <header style={{ margin: isMobile ? '0 16px' : '0 48px',
-      padding: isMobile ? '48px 0 72px' : '80px 0 120px',
-      borderTop: `1px solid ${HT.rule}`, borderBottom: `1px solid ${HT.rule}`,
-      textAlign: 'center' }}>
-      <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.22em', marginBottom: 28, fontSize: isMobile ? 11 : 15 }}>
-        Mmxxvi · Café de especialidad
-      </div>
-      <h1 style={{ fontFamily: HT.display, fontSize: isMobile ? 'clamp(72px, 20vw, 120px)' : 'clamp(80px, 16vw, 240px)',
-        fontWeight: 300, letterSpacing: '-0.05em', lineHeight: .82, margin: '32px 0 0' }}>
-        INDÓMITO
-      </h1>
-      <div style={{ maxWidth: 760, fontFamily: HT.display, fontWeight: 400, fontStyle: 'italic',
-        color: HT.taupe, letterSpacing: '-0.018em', lineHeight: 1.3,
-        margin: isMobile ? '32px auto 0' : '55px auto 0',
-        fontSize: isMobile ? 'clamp(26px, 6vw, 36px)' : '44px' }}>
-        Lo que se siente, no se discute.
-      </div>
-      <div style={{ maxWidth: 560, margin: '24px auto 0', fontFamily: HT.display,
-        fontSize: isMobile ? 16 : 18, lineHeight: 1.65, color: 'rgb(26,26,25)' }}>
-        Living de puertas adentro.<br/>Los fines de semana, la barra sale a la vereda.
-      </div>
-      <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, fontWeight: 600,
-        fontSize: 11, marginTop: isMobile ? 24 : 36, letterSpacing: '.18em' }}>
-        Un refugio sensorial · Caballito · Buenos Aires
-      </div>
+    <PageCover
+      eyebrow="Mmxxvi · Café de especialidad"
+      title="INDÓMITO"
+      dek={{
+        content: (
+          <>
+            <span style={{ color: HT.taupe, fontStyle: 'italic' }}>Lo que se siente, no se discute.</span>
+            <br />
+            Living de puertas adentro.
+            <br />
+            Los fines de semana, la barra sale a la vereda.
+          </>
+        ),
+        maxWidth: 760,
+      }}
+      meta={(
+        <>
+          Un refugio sensorial<br />Caballito, Buenos Aires
+        </>
+      )}
+    >
       <AmbientVisualizer />
-    </header>
+    </PageCover>
   );
 }
 
 // ── Section head (matches Origen/Stanza pattern) ───────────
 function HomeSectionHead({ num, label, meta }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
-        gap: isMobile ? 8 : 72,
-        padding: isMobile ? '64px 0 24px' : '120px 0 32px',
-        borderBottom: `1px solid ${HT.rule}`, marginBottom: isMobile ? 32 : 56, alignItems: 'end' }}>
-        <h2 style={{ fontFamily: HT.display, fontSize: 'clamp(36px, 6vw, 88px)', margin: 0, fontWeight: 400,
-          letterSpacing: '-0.04em', lineHeight: .95 }}>
-          {label}
-        </h2>
-        <div style={{ paddingBottom: isMobile ? 0 : 16, display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.22em' }}>
-            {num}
-          </div>
-          {meta && !isMobile &&
-            <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.14em', fontSize: 10 }}>
-              {meta}
-            </div>
-          }
-        </div>
-      </div>
-    </div>
-  );
+  return <PageSectionHeader num={num} label={meta || ''} title={label} />;
 }
 
 // ── Chapter break — back to top ───────────────────────────────────────
@@ -91,59 +61,22 @@ function ChapterBreak() { return null; }
 
 // ── Reusable: asymmetric 1.4:1 spread with quiet italic + loud + link ─
 function HomeSpread({ quiet, loud, foot, href, linkLabel, right, noBreak }) {
-  const isMobile = useIsMobile();
   return (
-    <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
-      <div style={{
-        display: 'grid',
-        gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
-        gap: isMobile ? 32 : 72,
-        paddingBottom: isMobile ? 56 : 80,
-      }}>
-        <div>
-          <p style={{ fontFamily: HT.display, fontSize: isMobile ? 'clamp(26px, 6vw, 36px)' : 44,
-            fontWeight: 400, letterSpacing: '-0.025em', lineHeight: 1.22,
-            margin: '0 0 24px', whiteSpace: 'pre-line' }}>
-            <span style={{ color: HT.taupe, fontStyle: 'italic' }}>{quiet}</span>{loud ? (noBreak ? ' ' : '\n') : ''}{loud}
-          </p>
-          {foot &&
-            <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.14em', marginBottom: 24 }}>
-              {foot}
-            </div>
-          }
-          {href &&
-            <a href={href} className="idm-hover-underline" style={{ fontFamily: HT.display,
-              fontSize: isMobile ? 18 : 22, fontWeight: 500, color: HT.ink,
-              textDecoration: 'none', letterSpacing: '-0.018em' }}>
-              {linkLabel} →
-            </a>
-          }
-        </div>
-        {!isMobile ? right : null}
-      </div>
-    </section>
+    <PageSpread
+      quiet={quiet}
+      loud={loud}
+      foot={foot}
+      href={href}
+      linkLabel={linkLabel}
+      right={right}
+      noBreak={noBreak}
+    />
   );
 }
 
 // ── Right-rail ledger (list of k/v rows) ───────────────────
 function Ledger({ rows, title }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={{ paddingTop: isMobile ? 0 : 8 }}>
-      {title &&
-        <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.2em', fontSize: 11, fontWeight: 600, marginBottom: 14 }}>
-          {title}
-        </div>
-      }
-      {rows.map((r, i) =>
-        <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto', gap: 20,
-          padding: '14px 0', borderBottom: `1px dotted ${HT.rule}`, alignItems: 'baseline' }}>
-          <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.14em' }}>{r.k}</div>
-          <div style={{ fontFamily: HT.display, fontSize: isMobile ? 15 : 17, letterSpacing: '-0.018em', textAlign: 'right' }}>{r.v}</div>
-        </div>
-      )}
-    </div>
-  );
+  return <PageLedger rows={rows} title={title} />;
 }
 
 // ── Intermission (matches Carta V1b) ───────────────────────
@@ -207,7 +140,7 @@ function HomepagePageV2() {
       <HomeCover />
 
       {/* EN TAZA · AHORA */}
-      <div style={{ margin: isMobile ? '0 16px' : '0 48px', border: `1px solid ${HT.rule}`, background: HT.bgAlt }}>
+      <div style={{ margin: isMobile ? '0 20px' : '0 48px', border: `1px solid ${HT.rule}`, background: HT.bgAlt }}>
         {/* Header row */}
         <div style={{ display: 'flex', alignItems: 'baseline', gap: 14, padding: isMobile ? '20px 20px 16px' : '32px 48px 24px', borderBottom: `1px solid ${HT.rule}` }}>
           <div className="idm-mono" style={{ fontFamily: mono, color: monoColor, letterSpacing: '.28em', fontSize: 11, opacity: 0.45 }}>◈</div>
@@ -246,7 +179,9 @@ function HomepagePageV2() {
       </div>
 
       {/* I · Refugio — manifesto pull-quote */}
-      <HomeSectionHead num="I" label="Refugio." meta="Qué es Indómito" />
+      <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+        <HomeSectionHead num="I" label="Refugio." meta="Qué es Indómito" />
+      </section>
       <HomeSpread
         quiet={'Café, vinilo, pausa. En ese orden.'}
         loud={'Un lugar para lo analógico, lo ritual y lo compartido.'}
@@ -258,7 +193,9 @@ function HomepagePageV2() {
       
 
       {/* II · Carta */}
-      <HomeSectionHead num="II" label="Carta." meta="21 referencias · 6 familias" />
+      <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+        <HomeSectionHead num="II" label="Carta." meta="21 referencias · 6 familias" />
+      </section>
       <HomeSpread
         quiet={'Todo lo que pasa sobre la barra.'}
         loud={'Bebidas, fríos, filtrados, alcohol, pastelería — un mismo pulso.'}
@@ -278,7 +215,9 @@ function HomepagePageV2() {
       <ChapterBreak />
 
       {/* III · Sistema Portátil */}
-      <HomeSectionHead num="III" label="Sistema Portátil." meta="Servicio para eventos" />
+      <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+        <HomeSectionHead num="III" label="Sistema Portátil." meta="Servicio para eventos" />
+      </section>
       <HomeSpread
         quiet={'Café que va donde estés.'}
         loud={'Especialidad, pastelería, música curada — Barra itinerante.'}
@@ -298,7 +237,9 @@ function HomepagePageV2() {
       <ChapterBreak />
 
       {/* IV · Club */}
-      <HomeSectionHead num="IV" label="Club." meta="Membresía privada" />
+      <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+        <HomeSectionHead num="IV" label="Club." meta="Membresía privada" />
+      </section>
       <HomeSpread
         quiet={'Nuestra membresía.'}
         loud={'Café del mes, newsletter, beneficios.'}
@@ -318,7 +259,9 @@ function HomepagePageV2() {
       <ChapterBreak />
 
       {/* V · Eventos */}
-      <HomeSectionHead num="V" label="Laboratorio." meta="Laboratorio Sensorial" />
+      <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+        <HomeSectionHead num="V" label="Laboratorio." meta="Laboratorio Sensorial" />
+      </section>
       <HomeSpread
         quiet={'El café cruzado con música, historia y proceso.'}
         loud={'Un recorrido sensorial inédito de 90 minutos.'}
@@ -344,7 +287,9 @@ function HomepagePageV2() {
       
 
       {/* VI · Tienda */}
-      <HomeSectionHead num="VI" label="Tienda." meta="Próximamente · 2026" />
+      <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+        <HomeSectionHead num="VI" label="Tienda." meta="Próximamente · 2026" />
+      </section>
       <HomeSpread
         quiet={'Objetos que acompañan la pausa.'}
         loud={'Remeras, totebags, piezas únicas. Criterio propio.'}

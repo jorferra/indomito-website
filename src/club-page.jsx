@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useIsMobile, INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
+import { useIsMobile, INDOMITO_TOKENS, IndomitoNav, IndomitoFooter, PageCover, PageSectionHeader } from './shared';
 // Club Sensorial — Chapbook vibe
 // Quiet cover. Asymmetric 1.4:1 columns. Taupe pull-quotes. No seal.
 // Copy is verbatim from indomitocafe.com/club.
@@ -10,62 +10,30 @@ const TC = INDOMITO_TOKENS;
 // ── Atoms ──────────────────────────────────────────────────
 
 function ClubCover() {
-  const isMobile = useIsMobile();
   return (
-    <header style={{margin: isMobile ? '0 16px' : '0 48px',
-                    padding: isMobile ? '48px 0 64px' : '80px 0 120px',
-                    borderTop:`1px solid ${TC.ink}`, borderBottom:`1px solid ${TC.ink}`,
-                    textAlign:'center'}}>
-      <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.22em', marginBottom:24, fontSize: isMobile ? 11 : 15}}>
-        Mmxxvi · Membresía privada
-      </div>
-      <h1 style={{fontFamily:TC.display, fontSize:'clamp(64px, 14vw, 220px)', fontWeight:300, margin:0,
-                  letterSpacing:'-0.05em', lineHeight:.82}}>
-        Club<br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em>
-      </h1>
-      <div style={{maxWidth:560, margin: isMobile ? '36px auto 0' : '56px auto 0',
-                   fontFamily:TC.display, fontSize: isMobile ? 16 : 18, lineHeight:1.65,
-                   color:'rgb(26, 26, 25)', whiteSpace:'pre-line'}}>
-        {`Nuestra comunidad vive el café como experiencia\ny el sonido como su extensión natural.`}
-      </div>
-      <div className="idm-mono" style={{fontFamily:'"JetBrains Mono", ui-monospace, monospace', color:'#8B6F47',
-                                         fontWeight:600, fontSize:11, marginTop: isMobile ? 24 : 36, letterSpacing:'.18em'}}>
-        Con gusto, oído y criterio propio.
-      </div>
-      <div style={{position:'relative', width:'100%', height: isMobile ? 280 : 560,
-                   marginTop: isMobile ? 32 : 40, marginBottom: isMobile ? -48 : -80, overflow:'hidden'}}>
-        <img src="assets/fotos%20para%20Cafe/20260418_163204.jpg"
-          alt="Club Sensorial · Indómito Café"
-          style={{position:'absolute', inset:0, width:'100%', height:'100%',
-                  objectFit:'cover', objectPosition:'center center', display:'block'}}/>
-      </div>
-    </header>
+    <PageCover
+      eyebrow="Mmxxvi · Membresía privada"
+      title={<><span>Club</span><br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em></>}
+      dek={{
+        content: (
+          <>
+            Nuestra comunidad vive el café como experiencia
+            <br />
+            y el sonido como su extensión natural.
+          </>
+        ),
+        maxWidth: 560,
+      }}
+      meta="Con gusto, oído y criterio propio."
+      imageSrc="assets/fotos%20para%20Cafe/20260418_163204.jpg"
+      imageAlt="Club Sensorial · Indómito Café"
+    />
   );
 }
 
 // Section head — asymmetric: tiny left, big right headline
 function ClubSectionHead({ num, label, title }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
-                 gap: isMobile ? 8 : 72,
-                 padding: isMobile ? '56px 0 32px' : '120px 0 48px',
-                 borderBottom:`1px solid ${TC.rule}`, marginBottom: isMobile ? 32 : 48,
-                 alignItems:'end'}}>
-      <h2 style={{fontFamily:TC.display, fontSize:'clamp(36px, 6vw, 88px)', margin:0, fontWeight:400,
-                  letterSpacing:'-0.04em', lineHeight:.95, whiteSpace:'pre-line'}}>
-        {title}
-      </h2>
-      <div style={{paddingBottom: isMobile ? 0 : 16}}>
-        <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.22em', marginBottom:6}}>
-          {num}
-        </div>
-        <div className="idm-mono" style={{color:'#8B6F47', letterSpacing:'.18em'}}>
-          {label}
-        </div>
-      </div>
-    </div>
-  );
+  return <PageSectionHeader num={num} label={label} title={title} />;
 }
 
 // Capa — one "chapter" inside a section. Left wide = prose, right narrow = meta

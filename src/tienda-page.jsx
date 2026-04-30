@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useIsMobile, INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
+import { useIsMobile, INDOMITO_TOKENS, IndomitoNav, IndomitoFooter, PageCover, PageSectionHeader } from './shared';
 // Tienda Sensorial — Chapbook
 // Objetos que acompañan la pausa. Ediciones limitadas.
 // cover → cápsulas → waitlist
@@ -11,49 +11,27 @@ const monoColor = '#8B6F47';
 
 // ── Cover ─────────────────────────────────────────────────────
 function TiendaCover() {
-  const isMobile = useIsMobile();
   return (
-    <header style={{margin: isMobile ? '0 16px' : '0 48px',
-                    padding: isMobile ? '48px 0 64px' : '80px 0 120px',
-                    borderTop:`1px solid ${TT.ink}`, borderBottom:`1px solid ${TT.ink}`,
-                    textAlign:'center'}}>
-      <div className="idm-mono" style={{fontFamily:mono, color:monoColor, letterSpacing:'.22em', marginBottom:28, fontSize:15}}>
-        Mmxxvi · Objetos
-      </div>
-      <h1 style={{fontFamily:TT.display, fontSize:'clamp(72px, 14vw, 220px)', fontWeight:300, margin:0,
-                  letterSpacing:'-0.05em', lineHeight:.82}}>
-        Tienda<br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em>
-      </h1>
-      <div style={{maxWidth:620, margin:'56px auto 0', fontFamily:TT.display, fontSize:18, lineHeight:1.65, color:'rgb(26,26,25)'}}>
-        Objetos que acompañan la pausa.<br/>Ediciones limitadas.
-      </div>
-      <div className="idm-mono" style={{fontFamily:mono, color:monoColor, fontWeight:600, fontSize:12, marginTop:36, letterSpacing:'.18em'}}>
-        Tienda · Indómito Café · Buenos Aires
-      </div>
-    </header>
+    <PageCover
+      eyebrow="Mmxxvi · Objetos"
+      title={<><span>Tienda</span><br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em></>}
+      dek={{
+        content: (
+          <>
+            Objetos que acompañan la pausa.
+            <br />
+            Ediciones limitadas.
+          </>
+        ),
+      }}
+      meta="Tienda · Indómito Café · Buenos Aires"
+    />
   );
 }
 
 // ── Section head ──────────────────────────────────────────────
 function TiendaSectionHead({ num, label, title }) {
-  const isMobile = useIsMobile();
-  return (
-    <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
-                 gap: isMobile ? 8 : 72,
-                 padding: isMobile ? '56px 0 28px' : '120px 0 48px',
-                 borderBottom:`1px solid ${TT.rule}`, marginBottom: isMobile ? 28 : 48,
-                 alignItems:'end'}}>
-      <h2 style={{fontFamily:TT.display, fontSize:'clamp(48px, 6vw, 88px)', margin:0, fontWeight:400,
-                  letterSpacing:'-0.04em', lineHeight:.95}}>
-        {title}
-      </h2>
-      <div style={{paddingBottom:16}}>
-        <div className="idm-mono" style={{fontFamily:mono, color:monoColor, letterSpacing:'.22em', marginBottom:10}}>
-          {num} · {label}
-        </div>
-      </div>
-    </div>
-  );
+  return <PageSectionHeader num={num} label={label} title={title} />;
 }
 
 // ── Capsule — hemisferio izq: emocional · hemisferio der: técnico ────
@@ -175,7 +153,7 @@ function Capsule({ idx, title, lede, caption, note, photo, edition, model, cta }
             </a>
             <div className="idm-mono" style={{fontFamily:mono, color:monoColor,
                                                letterSpacing:'.14em', fontSize:10, marginTop:10, opacity:.75}}>
-              · vía WhatsApp · cupos limitados
+              · cupos limitados
             </div>
           </div>
         )}
@@ -199,7 +177,7 @@ function Waitlist() {
           <a href="https://wa.me/5491160463980" className="idm-hover-underline"
              style={{fontFamily:TT.display, fontSize:22, fontWeight:500,
                      color:TT.ink, textDecoration:'none', letterSpacing:'-0.018em'}}>
-            Escribir por WhatsApp →
+            Sumarme →
           </a>
           <div className="idm-mono" style={{fontFamily:mono, color:monoColor, letterSpacing:'.14em', marginTop:14, fontSize:11}}>
             Lista silenciosa · un aviso único por apertura
@@ -208,11 +186,10 @@ function Waitlist() {
 
         <div style={{paddingTop:12, borderTop:`1px solid ${TT.rule}`}}>
           <div className="idm-mono" style={{fontFamily:mono, color:monoColor, letterSpacing:'.14em', marginBottom:16}}>
-            Canales
+            Aviso
           </div>
           <div className="idm-mono" style={{fontFamily:mono, color:TT.inkMuted, letterSpacing:'.14em', lineHeight:1.9}}>
-            WhatsApp · +54 9 11 60 46 39 80<br/>
-            Instagram · @indomito_cafe
+            Un único mensaje cuando abre cada lote.
           </div>
         </div>
       </div>

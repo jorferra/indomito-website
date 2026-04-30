@@ -186,10 +186,10 @@ const NAV_LINKS = [
   ['Servicio',    '#/servicio'],
   ['Agenda',      '#/agenda'],
   ['Laboratorio', '#/laboratorio'],
+  ['Media',       '#/media'],
   ['Club',        '#/club'],
   ['Tienda',      '#/tienda'],
   ['Nosotros',    '#/nosotros'],
-  ['Contacto',    '#/contacto'],
 ];
 
 function IndomitoNav({ inverse = false }) {
@@ -300,10 +300,10 @@ function IndomitoNav({ inverse = false }) {
         <IndomitoMark size={40} inverse={inverse} />
       </a>
       <div style={{display:'flex', gap:28, justifyContent:'flex-end', alignItems:'center'}}>
+        <a href="#/media" className="idm-hover-underline">Media</a>
         <a href="#/club" className="idm-hover-underline">Club</a>
         <a href="#/tienda" className="idm-hover-underline">Tienda</a>
         <a href="#/nosotros" className="idm-hover-underline">Nosotros</a>
-        <a href="#/contacto" className="idm-hover-underline">Contacto</a>
       </div>
     </nav>
   );
@@ -316,6 +316,7 @@ function IndomitoFooter() {
     {label:'Carta',       href:'#/carta'},
     {label:'Laboratorio', href:'#/laboratorio'},
     {label:'Agenda',      href:'#/agenda'},
+    {label:'Media',       href:'#/media'},
     {label:'Club',        href:'#/club'},
     {label:'Servicio',    href:'#/servicio'},
     {label:'Nosotros',    href:'#/nosotros'},
@@ -343,7 +344,7 @@ function IndomitoFooter() {
             <IndomitoMark size={isMobile ? 52 : 64} inverse />
           </div>
           <p style={{fontSize:14, lineHeight:1.65, maxWidth:300, color:'rgba(244,241,236,.65)', margin:0}}>
-            Café de especialidad, música<br/>y ciclos culturales.<br/>Caballito, Buenos Aires.
+            Cultura porteña.<br/>Caballito, Buenos Aires.
           </p>
         </div>
         {/* Nav */}
@@ -417,6 +418,213 @@ function SectionLabel({ num, children }) {
       <span>{num}</span>
       <span style={{width:24, height:1, background:'currentColor', opacity:.5}}/>
       <span>{children}</span>
+    </div>
+  );
+}
+
+function PageCover({
+  eyebrow,
+  title,
+  dek,
+  meta,
+  imageSrc,
+  imageAlt = '',
+  children,
+}) {
+  const isMobile = useIsMobile();
+  return (
+    <header style={{
+      margin: isMobile ? '0 16px' : '0 48px',
+      padding: isMobile ? '48px 0 64px' : '80px 0 120px',
+      borderTop: `1px solid ${INDOMITO_TOKENS.ink}`,
+      borderBottom: `1px solid ${INDOMITO_TOKENS.ink}`,
+      textAlign: 'center',
+    }}>
+      {eyebrow && (
+        <div className="idm-mono" style={{
+          fontFamily:INDOMITO_TOKENS.mono,
+          color:'#8B6F47',
+          letterSpacing:'.22em',
+          marginBottom:isMobile ? 20 : 28,
+          fontSize:isMobile ? 11 : 15,
+        }}>
+          {eyebrow}
+        </div>
+      )}
+      <h1 style={{
+        fontFamily:INDOMITO_TOKENS.display,
+        fontSize:'clamp(64px, 14vw, 220px)',
+        fontWeight:300,
+        margin:0,
+        letterSpacing:'-0.05em',
+        lineHeight:.82,
+      }}>
+        {title}
+      </h1>
+      {dek && (
+        <div style={{
+          maxWidth:dek.maxWidth || 560,
+          margin:isMobile ? `32px auto 0` : `56px auto 0`,
+          fontFamily:INDOMITO_TOKENS.display,
+          fontSize:isMobile ? 16 : 18,
+          lineHeight:1.65,
+          color:'rgb(26,26,25)',
+          opacity: dek.opacity ?? 1,
+          whiteSpace: dek.whiteSpace || 'normal',
+        }}>
+          {dek.content}
+        </div>
+      )}
+      {meta && (
+        <div className="idm-mono" style={{
+          fontFamily:INDOMITO_TOKENS.mono,
+          color:'#8B6F47',
+          fontWeight:600,
+          fontSize:11,
+          marginTop:isMobile ? 24 : 36,
+          letterSpacing:'.18em',
+        }}>
+          {meta}
+        </div>
+      )}
+      {imageSrc && (
+        <div style={{
+          position:'relative',
+          width:'100%',
+          height:isMobile ? 240 : 560,
+          marginTop:isMobile ? 32 : 56,
+          marginBottom:isMobile ? -48 : -80,
+          overflow:'hidden',
+        }}>
+          <img
+            src={imageSrc}
+            alt={imageAlt}
+            style={{
+              position:'absolute',
+              inset:0,
+              width:'100%',
+              height:'100%',
+              objectFit:'cover',
+              objectPosition:'center center',
+              display:'block',
+            }}
+          />
+        </div>
+      )}
+      {children}
+    </header>
+  );
+}
+
+function PageSectionHeader({ num, label, title }) {
+  const isMobile = useIsMobile();
+  return (
+    <div style={{
+      display:'grid',
+      gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
+      gap: isMobile ? 8 : 72,
+      padding: isMobile ? '56px 0 32px' : '120px 0 48px',
+      borderBottom:`1px solid ${INDOMITO_TOKENS.rule}`,
+      marginBottom: isMobile ? 32 : 48,
+      alignItems:'end',
+    }}>
+      <h2 style={{
+        fontFamily:INDOMITO_TOKENS.display,
+        fontSize:'clamp(32px, 6vw, 88px)',
+        margin:0,
+        fontWeight:400,
+        letterSpacing:'-0.04em',
+        lineHeight:.95,
+        whiteSpace:'pre-line',
+      }}>
+        {title}
+      </h2>
+      <div style={{paddingBottom: isMobile ? 0 : 16}}>
+        <div className="idm-mono" style={{fontFamily:INDOMITO_TOKENS.mono, color:'#8B6F47', letterSpacing:'.22em', marginBottom:6}}>
+          {num}
+        </div>
+        <div className="idm-mono" style={{fontFamily:INDOMITO_TOKENS.mono, color:'#8B6F47', letterSpacing:'.18em'}}>
+          {label}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function PageSpread({ quiet, loud, foot, href, linkLabel, right, noBreak }) {
+  const isMobile = useIsMobile();
+  return (
+    <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+      <div style={{
+        display: 'grid',
+        gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
+        gap: isMobile ? 24 : 72,
+        paddingBottom: isMobile ? 56 : 80,
+      }}>
+        <div>
+          <p style={{
+            fontFamily:INDOMITO_TOKENS.display,
+            fontSize:isMobile ? 'clamp(24px, 5.8vw, 32px)' : 36,
+            fontWeight:400,
+            letterSpacing:'-0.022em',
+            lineHeight:1.16,
+            margin:'0 0 24px',
+            maxWidth:680,
+            whiteSpace:'pre-line',
+          }}>
+            <span style={{ color:INDOMITO_TOKENS.taupe, fontStyle:'italic' }}>{quiet}</span>
+            {loud ? (noBreak ? ' ' : '\n') : ''}{loud}
+          </p>
+          {foot && (
+            <div className="idm-mono" style={{fontFamily:INDOMITO_TOKENS.mono, color:'#8B6F47', letterSpacing:'.14em', marginBottom:24, fontSize:10}}>
+              {foot}
+            </div>
+          )}
+          {href && (
+            <a href={href} className="idm-hover-underline" style={{
+              fontFamily:INDOMITO_TOKENS.display,
+              fontSize:20,
+              fontWeight:500,
+              color:INDOMITO_TOKENS.ink,
+              textDecoration:'none',
+              letterSpacing:'-0.018em',
+            }}>
+              {linkLabel} →
+            </a>
+          )}
+        </div>
+        {right}
+      </div>
+    </section>
+  );
+}
+
+function PageLedger({ rows, title, compact = false }) {
+  const isMobile = useIsMobile();
+  return (
+    <div style={{ paddingTop: 8 }}>
+      {title && (
+        <div className="idm-mono" style={{fontFamily:INDOMITO_TOKENS.mono, color:'#8B6F47', letterSpacing:'.2em', fontSize:11, fontWeight:600, marginBottom:14}}>
+          {title}
+        </div>
+      )}
+      {rows.map((r, i) => (
+        <div key={i} style={{
+          display:'grid',
+          gridTemplateColumns:'1fr auto',
+          gap:20,
+          padding: compact ? '10px 0' : '14px 0',
+          borderBottom:`1px dotted ${INDOMITO_TOKENS.rule}`,
+          alignItems:'baseline',
+        }}>
+          <div className="idm-mono" style={{fontFamily:INDOMITO_TOKENS.mono, color:'#8B6F47', letterSpacing:'.14em'}}>
+            {r.k}
+          </div>
+          <div style={{fontFamily:INDOMITO_TOKENS.display, fontSize:isMobile ? 15 : 17, letterSpacing:'-0.018em', textAlign:'right'}}>
+            {r.v}
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
@@ -698,6 +906,7 @@ function SectionNewsletter({ numeric='08' }) {
 export { 
   useIsMobile,
   INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel,
+  PageCover, PageSectionHeader, PageSpread, PageLedger,
   SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion,
   SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol,
  };

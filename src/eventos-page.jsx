@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useIsMobile, INDOMITO_TOKENS, IndomitoMark, IndomitoNav, IndomitoFooter, IdmPhoto, SectionLabel, SectionManifiesto, SectionCafe, SectionTienda, SectionSuscripcion, SectionEventos, SectionPortatil, SectionEquipo, SectionNewsletter, Pillar, FooterCol } from './shared';
+import { useIsMobile, INDOMITO_TOKENS, IndomitoNav, IndomitoFooter, PageCover, PageSectionHeader } from './shared';
 // Eventos — Laboratorio Sensorial
 // hero cover → foto → método → agenda activa → pasados → footer
 
@@ -10,34 +10,23 @@ const monoColor = '#8B6F47';
 
 // ── Cover ─────────────────────────────────────────────────────
 function EventosCover() {
-  const isMobile = useIsMobile();
   return (
-    <header style={{margin: isMobile ? '0 16px' : '0 48px',
-                    padding: isMobile ? '48px 0 64px' : '80px 0 120px',
-                    borderTop:`1px solid ${ET.ink}`, borderBottom:`1px solid ${ET.ink}`,
-                    textAlign:'center'}}>
-      <div className="idm-mono" style={{fontFamily:mono, color:monoColor, letterSpacing:'.22em', marginBottom:24, fontSize: isMobile ? 11 : 15}}>
-        Mmxxvi · Ciclo 02
-      </div>
-      <h1 style={{fontFamily:ET.display, fontSize:'clamp(56px, 12vw, 220px)', fontWeight:300, margin:0,
-                  letterSpacing:'-0.05em', lineHeight:.82}}>
-        Laboratorio<br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em>
-      </h1>
-      <div style={{maxWidth:560, margin: isMobile ? '32px auto 0' : '56px auto 0',
-                   fontFamily:ET.display, fontSize: isMobile ? 16 : 18, lineHeight:1.65, color:'rgb(26,26,25)'}}>
-        Noventa minutos de proceso. La taza espera al final.
-      </div>
-      <div className="idm-mono" style={{fontFamily:mono, color:monoColor, fontWeight:600, fontSize:11, marginTop: isMobile ? 24 : 36, letterSpacing:'.18em'}}>
-        Indómito Café · Buenos Aires
-      </div>
-      <div style={{position:'relative', width:'100%', height: isMobile ? 240 : 560,
-                   marginTop: isMobile ? 32 : 40, marginBottom: isMobile ? -48 : -80, overflow:'hidden'}}>
-        <img src="assets/fotos%20para%20Eventos/PjVYfV1QXt5ASD3LUV0sl0r1Y0Y.jpg.webp"
-          alt="Laboratorio Sensorial · Indómito Café"
-          style={{position:'absolute', inset:0, width:'100%', height:'100%',
-                  objectFit:'cover', objectPosition:'center center', display:'block'}}/>
-      </div>
-    </header>
+    <PageCover
+      eyebrow="Mmxxvi · Ciclo 02"
+      title={<><span>Laboratorio</span><br/><em style={{fontStyle:'italic', fontWeight:300}}>Sensorial</em></>}
+      dek={{
+        content: (
+          <>
+            Noventa minutos de proceso.
+            <br />
+            La taza espera al final.
+          </>
+        ),
+      }}
+      meta="Indómito Café · Buenos Aires"
+      imageSrc="assets/fotos%20para%20Eventos/PjVYfV1QXt5ASD3LUV0sl0r1Y0Y.jpg.webp"
+      imageAlt="Laboratorio Sensorial · Indómito Café"
+    />
   );
 }
 
@@ -45,22 +34,9 @@ function EventosCover() {
 function EvSectionHead({ num, label }) {
   const isMobile = useIsMobile();
   return (
-    <div style={{padding: isMobile ? '0 20px' : '0 48px'}}>
-      <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1.4fr 1fr',
-                   gap: isMobile ? 8 : 72,
-                   padding: isMobile ? '56px 0 24px' : '120px 0 32px',
-                   borderBottom:`1px solid ${ET.rule}`, marginBottom: isMobile ? 32 : 56, alignItems:'end'}}>
-        <h2 style={{fontFamily:ET.display, fontSize:'clamp(48px, 6vw, 88px)', margin:0, fontWeight:400,
-                    letterSpacing:'-0.04em', lineHeight:.95}}>
-          {label}
-        </h2>
-        <div style={{paddingBottom:16}}>
-          <div className="idm-mono" style={{fontFamily:mono, color:monoColor, letterSpacing:'.22em'}}>
-            {num}
-          </div>
-        </div>
-      </div>
-    </div>
+    <section style={{ padding: isMobile ? '0 20px' : '0 48px' }}>
+      <PageSectionHeader num={num} label={label} title={label} />
+    </section>
   );
 }
 
@@ -122,20 +98,13 @@ function EventSpread({ code, title, date, tagline, lede, strong, cta, price, cta
             </div>
             <a href="https://wa.me/5491160463980" className="idm-hover-underline"
                style={{fontFamily:ET.display, fontSize:20, fontWeight:500, color:ET.ink, textDecoration:'none', letterSpacing:'-0.015em'}}>
-              {isList ? 'Anotarme →' : 'Reservar →'}
+              {isList ? 'Anotarme →' : 'Pedir lugar →'}
             </a>
             <div className="idm-mono" style={{fontFamily:mono,
                                                color:isSoldOut ? '#a33' : monoColor,
                                                letterSpacing:'.14em', fontSize:11, marginTop:12}}>
               · {isSoldOut ? 'sold out' : isList ? 'fecha por confirmar' : price ? `$${price} · cupos limitados` : 'cupos limitados'}
             </div>
-            {!isSoldOut && (
-              <a href="#/club" className="idm-hover-underline"
-                 style={{fontFamily:mono, fontSize:11, color:monoColor, textDecoration:'none',
-                         letterSpacing:'.14em', marginTop:8, display:'block'}}>
-                · miembros del Club reservan 72hs antes →
-              </a>
-            )}
           </div>
         </div>
       </div>
@@ -185,7 +154,7 @@ function PastEvent() {
 function MetodologiaSpread() {
   const isMobile = useIsMobile();
   return (
-    <section style={{padding: isMobile ? '48px 20px' : '80px 48px'}}>
+    <section style={{padding: isMobile ? '56px 20px' : '80px 48px'}}>
       <div className="idm-mono" style={{fontFamily:mono, color:monoColor,
                                          letterSpacing:'.18em', fontSize:11, fontWeight:600, marginBottom:24}}>
         café · música · proceso
@@ -223,7 +192,7 @@ function EventosPage() {
           'El café y la música floreciendo bajo presión.',
         ]}
         strong="Burru → Ska → Rocksteady → Reggae → Dub → Dancehall"
-        cta="Reservas vía WhatsApp"
+        cta="Reservas"
         price="30.000"
       />
 
@@ -231,17 +200,19 @@ function EventosPage() {
         <hr style={{border:0, borderTop:`1px solid ${ET.rule}`, margin:0}}/>
       </div>
 
-      <EventSpread
-        code="Ev.03 · Fuelles & Fermento"
-        title="Fuelles & Fermento"
-        date="2026 · fecha por confirmar"
-        tagline="100 años de tango argentino mapeados sobre el proceso del café."
-        lede={[
-          'Desde la fricción social de los conventillos hasta Piazzolla.',
-        ]}
-        cta="Lista de espera"
-        ctaState="lista"
-      />
+      <div style={{paddingTop: isMobile ? 24 : 40}}>
+        <EventSpread
+          code="Ev.03 · Fuelles & Fermento"
+          title="Fuelles & Fermento"
+          date="2026 · fecha por confirmar"
+          tagline="100 años de tango argentino mapeados sobre el proceso del café."
+          lede={[
+            'Desde la fricción social de los conventillos hasta Piazzolla.',
+          ]}
+          cta="Lista de espera"
+          ctaState="lista"
+        />
+      </div>
 
       {/* II · Pasados */}
       <EvSectionHead num="II" label="Eventos pasados."/>

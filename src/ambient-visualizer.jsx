@@ -62,6 +62,7 @@ function GrainOverlay() {
 }
 
 function AmbientVisualizer() {
+  const videoRef = React.useRef(null);
   const VIDEOS = [
     'assets/853761-hd_1920_1080_25fps.mp4',
     'assets/2849945-uhd_3840_2160_24fps.mp4',
@@ -74,14 +75,28 @@ function AmbientVisualizer() {
     []
   );
 
+  React.useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const start = () => {
+      video.muted = true;
+      video.play().catch(() => {});
+    };
+    start();
+    video.addEventListener('canplay', start);
+    return () => video.removeEventListener('canplay', start);
+  }, [src]);
+
   return (
     <div style={{ position: 'relative', width: '100%', height: 560, marginTop: 40, marginBottom: -80, overflow: 'hidden' }}>
       <video
+        ref={videoRef}
         key={src}
         autoPlay
         loop
         muted
         playsInline
+        preload="auto"
         style={{
           position: 'absolute', inset: 0,
           width: '100%', height: '100%',

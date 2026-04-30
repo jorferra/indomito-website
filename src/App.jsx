@@ -9,7 +9,7 @@ import EventosPage from './eventos-page';
 import ClubPage from './club-page';
 import TiendaPage from './tienda-page';
 import OrigenPage from './origen-page';
-import ContactoPage from './contacto-page';
+import MediaPage from './media-page';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -32,7 +32,8 @@ export default function App() {
         <Route path="/club" element={<ClubPage />} />
         <Route path="/tienda" element={<TiendaPage />} />
         <Route path="/nosotros" element={<OrigenPage />} />
-        <Route path="/contacto" element={<ContactoPage />} />
+        <Route path="/contacto" element={<OrigenPage />} />
+        <Route path="/media" element={<MediaPage />} />
       </Routes>
     </>
   );
