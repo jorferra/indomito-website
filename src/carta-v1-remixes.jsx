@@ -46,7 +46,7 @@ function V1ColHeader({num, title, desc, rule='heavy'}) {
   return (
     <div style={{
       display:'flex', justifyContent:'space-between', alignItems:'baseline',
-      padding: isMobile ? '56px 0 16px' : '120px 0 20px', marginBottom:8,
+      padding: isMobile ? '28px 0 12px' : '120px 0 20px', marginBottom: isMobile ? 6 : 8,
       borderBottom: rule==='heavy' ? `2px solid ${TV1.ink}` : `1px solid ${TV1.rule}`,
     }}>
       <h2 style={{fontFamily:TV1.display, fontSize:'clamp(40px, 5vw, 72px)', margin:0,
@@ -105,20 +105,33 @@ function CartaV1b() {
       </header>
 
       {/* Spread 1 — Café / Fríos + Filtrados */}
-      <section style={{padding: isMobile ? '0 20px' : '0 48px'}}>
-        <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 0 : 72}}>
+      <section style={{padding: isMobile ? '0 16px' : '0 48px'}}>
+        {isMobile ? (
           <div>
             <V1ColHeader num="01" title="Café" desc="sobre la barra · en taza" rule="thin"/>
             {CARTA_DATA.bebidas.map((it,i)=><V1Item key={i} it={it}/>)}
-          </div>
-          <div>
+            <div style={{height: 14}}/>
             <V1ColHeader num="02" title="Fríos" desc="sobre hielo · temperatura baja" rule="thin"/>
             {CARTA_DATA.frios.map((it,i)=><V1Item key={i} it={it} dense/>)}
-            <div style={{height: isMobile ? 32 : 56}}/>
+            <div style={{height: 14}}/>
             <V1ColHeader num="03" title="Filtrados" desc="extracción lenta · claridad" rule="thin"/>
             {CARTA_DATA.filtrados.map((it,i)=><V1Item key={i} it={it} dense/>)}
           </div>
-        </div>
+        ) : (
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:72}}>
+            <div>
+              <V1ColHeader num="01" title="Café" desc="sobre la barra · en taza" rule="thin"/>
+              {CARTA_DATA.bebidas.map((it,i)=><V1Item key={i} it={it}/>)}
+            </div>
+            <div>
+              <V1ColHeader num="02" title="Fríos" desc="sobre hielo · temperatura baja" rule="thin"/>
+              {CARTA_DATA.frios.map((it,i)=><V1Item key={i} it={it} dense/>)}
+              <div style={{height: 56}}/>
+              <V1ColHeader num="03" title="Filtrados" desc="extracción lenta · claridad" rule="thin"/>
+              {CARTA_DATA.filtrados.map((it,i)=><V1Item key={i} it={it} dense/>)}
+            </div>
+          </div>
+        )}
       </section>
 
       {/* Intermission */}
@@ -133,17 +146,27 @@ function CartaV1b() {
       </section>
 
       {/* Spread 2 — Pastelería / Alcohol */}
-      <section style={{padding: isMobile ? '0 20px 72px' : '0 48px 140px'}}>
-        <div style={{display:'grid', gridTemplateColumns: isMobile ? '1fr' : '1fr 1fr', gap: isMobile ? 0 : 72}}>
+      <section style={{padding: isMobile ? '0 16px 64px' : '0 48px 140px'}}>
+        {isMobile ? (
           <div>
             <V1ColHeader num="04" title="Pastelería" desc="del horno · del día" rule="thin"/>
             {CARTA_DATA.pasteleria.map((it,i)=><V1Item key={i} it={it} showRecipe={false}/>)}
-          </div>
-          <div>
+            <div style={{height: 14}}/>
             <V1ColHeader num="05" title="Alcohol" desc="para quedarse un rato más" rule="thin"/>
             {CARTA_DATA.alcohol.map((it,i)=><V1Item key={i} it={it}/>)}
           </div>
-        </div>
+        ) : (
+          <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:72}}>
+            <div>
+              <V1ColHeader num="04" title="Pastelería" desc="del horno · del día" rule="thin"/>
+              {CARTA_DATA.pasteleria.map((it,i)=><V1Item key={i} it={it} showRecipe={false}/>)}
+            </div>
+            <div>
+              <V1ColHeader num="05" title="Alcohol" desc="para quedarse un rato más" rule="thin"/>
+              {CARTA_DATA.alcohol.map((it,i)=><V1Item key={i} it={it}/>)}
+            </div>
+          </div>
+        )}
       </section>
 
       <IndomitoFooter/>
