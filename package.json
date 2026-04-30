@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
-    "deploy": "bash scripts/deploy-gh-pages.sh"
+    "deploy": "npx vercel deploy --prod --yes"
   },
   "repository": {
     "type": "git",
