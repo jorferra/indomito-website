@@ -7,6 +7,7 @@ const TV1 = INDOMITO_TOKENS;
 
 // ── shared atoms ──────────────────────────────────────────────
 function V1Item({it, showRecipe=true, dense=false}) {
+  const isMobile = useIsMobile();
   return (
     <div style={{display:'grid', gridTemplateColumns:'1fr auto', gap:'0 24px',
                  alignItems:'baseline', padding: dense ? '12px 0' : '18px 0',
@@ -34,7 +35,14 @@ function V1Item({it, showRecipe=true, dense=false}) {
           </div>
         )}
       </div>
-      <div style={{fontFamily:TV1.mono, fontSize:13, letterSpacing:'.04em', alignSelf:'start', paddingTop:4}}>
+      <div style={{
+        fontFamily:TV1.mono,
+        fontSize:13,
+        letterSpacing:'.04em',
+        alignSelf:'start',
+        paddingTop:4,
+        paddingLeft: isMobile ? 8 : 0,
+      }}>
         {it.price}
       </div>
     </div>
@@ -62,7 +70,7 @@ function V1ColHeader({num, title, desc, rule='heavy'}) {
 // pages with an asymmetric 2-col split (wide bebidas / narrow sides).
 function CartaV1b() {
   const isMobile = useIsMobile();
-  const sidePad = isMobile ? 28 : 48;
+  const sidePad = isMobile ? 40 : 48;
   return (
     <div className="idm-root v1b-scope" style={{width:'100%'}}>
       <style>{`
