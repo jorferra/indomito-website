@@ -3,12 +3,18 @@ set -euo pipefail
 
 ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 TMP_DIR="$(mktemp -d)"
-trap 'rm -rf "$TMP_DIR"' EXIT
+DEPLOY_DIR="$TMP_DIR/gh-pages"
+
+cleanup() {
+  git worktree remove --force "$DEPLOY_DIR" >/dev/null 2>&1 || true
+  rm -rf "$TMP_DIR"
+}
+trap cleanup EXIT
 
 cd "$ROOT"
 npm run build
 
-DEPLOY_DIR="$TMP_DIR/gh-pages"
+git worktree prune >/dev/null 2>&1 || true
 git worktree add --force -B gh-pages "$DEPLOY_DIR" origin/gh-pages
 
 rsync -a --delete --exclude '.git' --exclude '.DS_Store' dist/ "$DEPLOY_DIR"/
