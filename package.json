@@ -1,35 +1,10 @@
 {
-  "name": "indomitoclaudedesign",
+  "name": "indomito-v2",
   "version": "1.0.0",
-  "description": "Static HTML/JS prototype for the Indomito Café landing site.",
-  "main": "index.js",
+  "private": true,
+  "description": "Indomito V2 static website.",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
+    "build": "rm -rf dist && mkdir -p dist && cp index.html home.html carta.html servicio.html agenda.html media.html club.html tienda.html nosotros.html laboratorio.html dist/",
     "deploy": "npx vercel deploy --prod --yes"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://jorferra@github.com/jorferra/indomito-website.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/jorferra/indomito-website/issues"
-  },
-  "homepage": "https://github.com/jorferra/indomito-website#readme",
-  "dependencies": {
-    "express": "^5.2.1",
-    "jsdom": "^29.1.0",
-    "puppeteer": "^24.42.0",
-    "react": "^19.2.5",
-    "react-dom": "^19.2.5",
-    "react-router-dom": "^7.14.2"
-  },
-  "devDependencies": {
-    "@vitejs/plugin-react": "^6.0.1",
-    "vite": "^8.0.10"
   }
 }

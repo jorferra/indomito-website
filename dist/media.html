@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indómito V2 - Media</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --rule: #e6e6e6;
+      --accent: #8b6f47;
+      --column: 720px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    .page {
+      max-width: var(--column);
+      margin: 0 auto;
+      padding: 46px 28px 84px;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: 40px;
+      line-height: 1.06;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+    .intro {
+      margin: 0 0 28px;
+      max-width: 38rem;
+      font-size: 13px;
+      line-height: 1.75;
+      color: #181818;
+    }
+    .hero {
+      padding: 10px 0 22px;
+      margin: 0 0 34px;
+    }
+    .hero .title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+    .hero .copy {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #222;
+      max-width: 40rem;
+    }
+    .hero-image {
+      margin-top: 16px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #fbfbfb, #f1f1f1);
+    }
+    .section {
+      padding: 24px 0 28px;
+    }
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+    .list {
+      display: grid;
+      gap: 14px;
+    }
+    .item {
+      padding: 0;
+    }
+    .item .num {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3px;
+    }
+    .item h3 {
+      margin: 0 0 4px;
+      font-size: 15px;
+      line-height: 1.2;
+      font-weight: 600;
+    }
+    .item p {
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.65;
+      color: #191919;
+    }
+    .embed {
+      margin-top: 18px;
+      aspect-ratio: 16 / 9;
+      border: 1px solid #ededed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fafafa;
+      text-align: center;
+      padding: 20px;
+    }
+    .embed .kicker {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+    .embed .copy {
+      font-size: 13px;
+      line-height: 1.55;
+      color: #111;
+      max-width: 20rem;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: baseline;
+      margin: 0 0 42px;
+      padding: 0 0 16px;
+      border-bottom: 1px solid var(--rule);
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav a:hover,
+    .nav a[aria-current="page"] {
+      color: var(--text);
+    }
+    .nav .brand {
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      margin-right: auto;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    @media (max-width: 720px) {
+      .page { padding: 28px 18px 56px; }
+      h1 { font-size: 40px; }
+      .intro { font-size: 12px; }
+      .footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="Navegación V2">
+      <a class="brand" href="./index.html">Indómito</a>
+      <a href="./home.html">Home</a>
+      <a href="./carta.html">Carta</a>
+      <a href="./servicio.html">Servicio</a>
+      <a href="./agenda.html">Agenda</a>
+      <a href="./media.html" aria-current="page">Media</a>
+      <a href="./club.html">Club</a>
+      <a href="./tienda.html">Tienda</a>
+      <a href="./nosotros.html">Nosotros</a>
+      <a href="./laboratorio.html">Laboratorio</a>
+    </nav>
+    <p class="eyebrow">Indómito V2 · media</p>
+    <h1>Sonidos, sesiones y transmisiones.</h1>
+    <p class="intro">Un archivo mínimo para paisajes sonoros y directos. Más escucha, menos tarjeta.</p>
+
+    <section class="hero">
+      <p class="title">Media</p>
+      <p class="copy">Paisajes sonoros, Twitch y sesiones. Todo en un solo lugar.</p>
+      <div class="hero-image" aria-hidden="true"></div>
+    </section>
+
+    <section class="section">
+      <h2>Paisajes sonoros</h2>
+      <div class="list">
+        <div class="item">
+          <div class="num">Paisaje Sonoro #01</div>
+          <h3>Andrés</h3>
+          <p>Playlist · curaduría de Andrés</p>
+        </div>
+        <div class="item">
+          <div class="num">Paisaje Sonoro #02</div>
+          <h3>Jor</h3>
+          <p>Playlist · curaduría de Jor</p>
+        </div>
+        <div class="item">
+          <div class="num">Paisaje Sonoro #03</div>
+          <h3>Nathan Larson</h3>
+          <p>Playlist · curaduría de Nathan Larson</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>En vivo</h2>
+      <div class="embed">
+        <div>
+          <div class="kicker">Twitch</div>
+          <div class="copy">Slot listo para livestreams o sesiones en directo.</div>
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>Cultura porteña.</div>
+      <div>Caballito, Buenos Aires.</div>
+    </div>
+  </main>
+</body>
+</html>

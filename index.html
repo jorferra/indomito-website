@@ -2,25 +2,89 @@
 <html lang="es">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Indómito Café — Especialidad y Cultura</title>
-  <meta name="description" content="Café de especialidad, vinilos y pausas. Living de puertas adentro en Caballito, Buenos Aires. Conocé nuestra carta, eventos y suscripciones." />
-  <meta property="og:title" content="Indómito Café" />
-  <meta property="og:description" content="Café de especialidad, vinilos y pausas. Living de puertas adentro en Caballito, Buenos Aires." />
-  <meta property="og:type" content="website" />
-  <!-- En el futuro, podés agregar una imagen para WhatsApp acá: -->
-  <!-- <meta property="og:image" content="https://tu-sitio.com/assets/share.jpg" /> -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indómito V2</title>
   <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      background: #f4f1ec;
-      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    :root { --bg:#ffffff; --text:#111111; --muted:#666666; --rule:#e6e6e6; --accent:#8b6f47; --column:720px; }
+    * { box-sizing: border-box; }
+    body { margin:0; background:var(--bg); color:var(--text); font-family:Inter,-apple-system,BlinkMacSystemFont,"Helvetica Neue",Helvetica,Arial,sans-serif; -webkit-font-smoothing:antialiased; text-rendering:geometricPrecision; }
+    .page { max-width:var(--column); margin:0 auto; padding:46px 28px 84px; }
+    .eyebrow { margin:0 0 14px; font-size:11px; letter-spacing:.16em; text-transform:uppercase; color:var(--accent); }
+    h1 { margin:0 0 14px; font-size: 40px; line-height:1.06; font-weight:600; letter-spacing:-.03em; }
+    .intro { margin:0 0 28px; max-width:38rem; font-size:13px; line-height:1.75; color:#181818; }
+    .section { padding:24px 0 26px; border-top:1px solid var(--rule); }
+    .section h2 { margin:0 0 12px; font-size:16px; line-height:1.15; font-weight:600; }
+    .grid { display:grid; gap:10px; }
+    a.row { display:grid; grid-template-columns:110px 1fr auto; gap:12px; align-items:baseline; padding:10px 0; border-bottom:1px solid var(--rule); text-decoration:none; color:inherit; }
+    a.row:hover .cta { color:var(--accent); }
+    .k { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+    .v { font-size:13px; line-height:1.6; color:#111; }
+    .cta { font-size:11px; letter-spacing:.08em; text-transform:uppercase; color:var(--muted); white-space:nowrap; }
+
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: baseline;
+      margin: 0 0 42px;
+      padding: 0 0 16px;
+      border-bottom: 1px solid var(--rule);
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav a:hover,
+    .nav a[aria-current="page"] {
+      color: var(--text);
+    }
+    .nav .brand {
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      margin-right: auto;
+    }
+
+    .footer { margin-top:40px; padding-top:16px; border-top:1px solid var(--rule); display:flex; justify-content:space-between; gap:18px; font-size:11px; line-height:1.5; color:var(--muted); }
+    @media (max-width:720px) { .page{padding:28px 18px 56px;} h1 {font-size: 40px;} .intro{font-size:12px;} a.row{grid-template-columns:1fr;gap:4px;} .footer{flex-direction:column;} }
   </style>
-  <script type="module" src="./src/main.jsx"></script>
 </head>
 <body>
-  <div id="root"></div>
+  <main class="page">
+    <nav class="nav" aria-label="Navegación V2">
+      <a class="brand" href="./index.html">Indómito</a>
+      <a href="./home.html" aria-current="page">Home</a>
+      <a href="./carta.html">Carta</a>
+      <a href="./servicio.html">Servicio</a>
+      <a href="./agenda.html">Agenda</a>
+      <a href="./media.html">Media</a>
+      <a href="./club.html">Club</a>
+      <a href="./tienda.html">Tienda</a>
+      <a href="./nosotros.html">Nosotros</a>
+      <a href="./laboratorio.html">Laboratorio</a>
+    </nav>
+    <p class="eyebrow">Indómito V2</p>
+    <h1>Una versión más seca.</h1>
+    <p class="intro">Sistema en una columna, blanco puro, Inter y menos ornamento. Entrá a cada página para ver la dirección completa.</p>
+    <section class="section">
+      <h2>Páginas</h2>
+      <div class="grid">
+        <a class="row" href="./home.html"><div class="k">Home</div><div class="v">Entrada mínima del sitio y mapa general.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./carta.html"><div class="k">Carta</div><div class="v">Menú limpio, una sola columna, precios claros.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./servicio.html"><div class="k">Servicio</div><div class="v">Sistema portátil para eventos y encuentros.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./agenda.html"><div class="k">Agenda</div><div class="v">Lo que pasó y lo que va a pasar.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./media.html"><div class="k">Media</div><div class="v">Paisajes sonoros y transmisiones.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./club.html"><div class="k">Club</div><div class="v">TRAZA, membresía y archivo.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./tienda.html"><div class="k">Tienda</div><div class="v">Piezas puntuales, stock corto.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./nosotros.html"><div class="k">Nosotros</div><div class="v">Origen y contacto en una sola página.</div><div class="cta">Abrir</div></a>
+        <a class="row" href="./laboratorio.html"><div class="k">Laboratorio</div><div class="v">Eventos de escucha, café y proceso.</div><div class="cta">Abrir</div></a>
+      </div>
+    </section>
+    <div class="footer"><div>Cultura porteña.</div><div>Caballito, Buenos Aires.</div></div>
+  </main>
 </body>
 </html>

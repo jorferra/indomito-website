@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Indómito V2 - Nosotros</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --text: #111111;
+      --muted: #666666;
+      --rule: #e6e6e6;
+      --accent: #8b6f47;
+      --column: 720px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: Inter, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
+    }
+    .page {
+      max-width: var(--column);
+      margin: 0 auto;
+      padding: 46px 28px 84px;
+    }
+    .eyebrow {
+      margin: 0 0 14px;
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+    h1 {
+      margin: 0 0 14px;
+      font-size: 40px;
+      line-height: 1.06;
+      font-weight: 600;
+      letter-spacing: -0.03em;
+    }
+    .intro {
+      margin: 0 0 28px;
+      max-width: 38rem;
+      font-size: 13px;
+      line-height: 1.75;
+      color: #181818;
+    }
+    .hero {
+      padding: 10px 0 22px;
+      margin: 0 0 34px;
+    }
+    .hero .title {
+      margin: 0 0 8px;
+      font-size: 18px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+    .hero .copy {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #222;
+      max-width: 40rem;
+    }
+    .hero-image {
+      margin-top: 16px;
+      aspect-ratio: 16 / 10;
+      background: linear-gradient(135deg, #fbfbfb, #f1f1f1);
+    }
+    .section {
+      padding: 24px 0 28px;
+    }
+    .section h2 {
+      margin: 0 0 12px;
+      font-size: 16px;
+      line-height: 1.15;
+      font-weight: 600;
+    }
+    .stack {
+      display: grid;
+      gap: 14px;
+    }
+    .item .k {
+      font-size: 10px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin: 0 0 4px;
+    }
+    .item .v {
+      font-size: 13px;
+      line-height: 1.6;
+      color: #111;
+    }
+    .panel {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--rule);
+    }
+    .panel p {
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.75;
+      color: #181818;
+      max-width: 40rem;
+    }
+    .contact {
+      margin-top: 18px;
+      font-size: 13px;
+      line-height: 1.7;
+      color: #111;
+    }
+    .contact .muted {
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 10px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      align-items: baseline;
+      margin: 0 0 42px;
+      padding: 0 0 16px;
+      border-bottom: 1px solid var(--rule);
+      font-size: 11px;
+      line-height: 1.4;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .nav a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+    .nav a:hover,
+    .nav a[aria-current="page"] {
+      color: var(--text);
+    }
+    .nav .brand {
+      color: var(--text);
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      margin-right: auto;
+    }
+
+    .footer {
+      margin-top: 40px;
+      padding-top: 16px;
+      border-top: 1px solid var(--rule);
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+    @media (max-width: 720px) {
+      .page { padding: 28px 18px 56px; }
+      h1 { font-size: 40px; }
+      .intro { font-size: 12px; }
+      .footer { flex-direction: column; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <nav class="nav" aria-label="Navegación V2">
+      <a class="brand" href="./index.html">Indómito</a>
+      <a href="./home.html">Home</a>
+      <a href="./carta.html">Carta</a>
+      <a href="./servicio.html">Servicio</a>
+      <a href="./agenda.html">Agenda</a>
+      <a href="./media.html">Media</a>
+      <a href="./club.html">Club</a>
+      <a href="./tienda.html">Tienda</a>
+      <a href="./nosotros.html" aria-current="page">Nosotros</a>
+      <a href="./laboratorio.html">Laboratorio</a>
+    </nav>
+    <p class="eyebrow">Indómito V2 · nosotros</p>
+    <h1>Indómito nació en un living.</h1>
+    <p class="intro">Una página final simple: origen, contexto y contacto en un solo bloque.</p>
+
+    <section class="hero">
+      <p class="title">Nosotros</p>
+      <p class="copy">Café, vinilo y Buenos Aires. El punto de partida sigue siendo el mismo: tiempo alrededor de la taza.</p>
+      <div class="hero-image" aria-hidden="true"></div>
+    </section>
+
+    <section class="section">
+      <h2>Origen</h2>
+      <div class="stack">
+        <div class="item">
+          <div class="v">Empezó con vinilos y café equivocado.</div>
+        </div>
+        <div class="item">
+          <div class="v">Después vinieron origen, proceso y trazabilidad.</div>
+        </div>
+        <div class="item">
+          <div class="v">Lo que sigue es comunidad, sin ruido.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Contacto</h2>
+      <div class="panel">
+        <p>Respondemos nosotros, con tiempo.</p>
+        <div class="contact">
+          <span class="muted">WhatsApp</span>
+          +54 9 11 60 46 39 80
+        </div>
+        <div class="contact">
+          <span class="muted">Instagram</span>
+          @indomito_cafe
+        </div>
+      </div>
+    </section>
+
+    <div class="footer">
+      <div>Cultura porteña.</div>
+      <div>Caballito, Buenos Aires.</div>
+    </div>
+  </main>
+</body>
+</html>
