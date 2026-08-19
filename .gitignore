@@ -11,3 +11,16 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .vercel
+
+# snapshot
+.DS_Store
+.build/
+.swiftpm/
+DerivedData/
+*.xcuserstate
+xcuserdata/
+node_modules/
+__pycache__/
+*.pyc
+.venv/
+.env
