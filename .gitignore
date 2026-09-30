@@ -24,3 +24,10 @@ __pycache__/
 *.pyc
 .venv/
 .env
+
+# Claves locales (Umami API key, etc.)
+v3/.secrets/
+
+# Generados por build (HANDOFF: no editar a mano)
+v3/dist/
+v3/preview/

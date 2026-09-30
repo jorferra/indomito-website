@@ -1,0 +1,313 @@
+{
+  "site": {
+    "name": "Indómito Café",
+    "url": "https://www.indomitocafe.com",
+    "zona": "Caballito Norte · Buenos Aires",
+    "whatsapp": "5491160463980",
+    "whatsappLabel": "+54 9 11 6046 3980",
+    "instagram": "indomito_cafe",
+    "instagramLS": "labsensorial",
+    "year": 2026,
+    "umami": { "src": "https://cloud.umami.is/script.js", "id": "d9b52916-5fd1-485f-b252-c7f46d04156d" },
+    "gscVerification": "1ZgyO5-WeyJQ8Abdgj2tfcy3DNNHvPn0Pa6J2GVYDUQ",
+    "googleAds": { "_nota": "Vacío = no se carga nada de Google. Completar id (AW-XXXXXXXXXX) y las etiquetas de conversión de la cuenta; el build suma los dominios de Google a la CSP.", "id": "AW-666439793", "labels": { "form": "qFnlCPv3j4cdEPGg5L0C", "whatsapp": "pw9xCP73j4cdEPGg5L0C" } },
+    "_umami": "Completar con {src, id} cuando Umami esté instalado; el script se agrega solo."
+  },
+  "carta": {
+    "vigencia": "Septiembre 2026",
+    "mostrarPrecios": false,
+    "destacados": [
+      "Espresso",
+      "Flat White",
+      "Chemex / Origami"
+    ],
+    "pie": "Extraemos todo nuestro café a 90 °C.",
+    "notas": [
+      "Disponible en encuentros y servicios de Sistema Portátil.",
+      "Consultá por opciones vegetales.",
+      "La selección de café puede variar según origen y disponibilidad.",
+      "Informanos si tenés alergias o restricciones alimentarias."
+    ],
+    "categorias": [
+      {
+        "nombre": "Café",
+        "items": [
+          {
+            "nombre": "Espresso",
+            "precio": 4300,
+            "receta": "40 ml · 90 °C · 25–30 s",
+            "nota": "Intenso y directo. Sin concesiones."
+          },
+          {
+            "nombre": "Doble espresso",
+            "precio": 4300,
+            "receta": "2 × 40 ml · 90 °C",
+            "nota": "Profundo, aromático. Para ir más lejos."
+          },
+          {
+            "nombre": "Long black",
+            "precio": 4300,
+            "receta": "40 ml de espresso + 90 ml de agua",
+            "nota": "Suavizado, no diluido. Cuerpo intacto."
+          },
+          {
+            "nombre": "Magic",
+            "precio": 4800,
+            "receta": "40 ml de espresso + 80 ml de leche texturizada",
+            "nota": "Balance preciso. Presencia silenciosa."
+          },
+          {
+            "nombre": "Flat White",
+            "precio": 5000,
+            "receta": "40 ml de espresso + 120 ml de leche texturizada",
+            "nota": "Cremoso y firme. Clásico sin exceso."
+          },
+          {
+            "nombre": "Latte",
+            "precio": 5000,
+            "receta": "30 ml de espresso + 180 ml de leche texturizada",
+            "nota": "Abierto, suave. Café en calma."
+          }
+        ],
+        "meta": "En taza de cerámica"
+      },
+      {
+        "nombre": "Filtrados",
+        "items": [
+          {
+            "nombre": "Chemex / Origami",
+            "precio": 5600,
+            "receta": "Filtro de papel · vertido manual",
+            "nota": "Claridad y pausa."
+          }
+        ],
+        "meta": "Extracción lenta"
+      },
+      {
+        "nombre": "Fríos",
+        "items": [
+          {
+            "nombre": "Ice flat",
+            "precio": 5200,
+            "receta": "40 ml de espresso · 120 ml de leche fría",
+            "nota": "Espresso frío, leche sedosa. Preciso. Seco."
+          },
+          {
+            "nombre": "Ice latte",
+            "precio": 5200,
+            "receta": "30 ml de espresso · 180 ml de leche fría",
+            "nota": "Más leche, menos gesto. Frío. Suave."
+          },
+          {
+            "nombre": "Ice americano",
+            "precio": 5000,
+            "receta": "40 ml de espresso · agua fría",
+            "nota": "Claro. Directo."
+          },
+          {
+            "nombre": "Espresso tonic",
+            "precio": 5500,
+            "receta": "40 ml de espresso · tónica fría",
+            "nota": "Café y burbuja. Amargo tenso."
+          },
+          {
+            "nombre": "Cold brew / naranja",
+            "precio": 5500,
+            "receta": "Infusión en frío · extracción lenta",
+            "nota": "Tiempo, no presión. Frío. Continuo."
+          }
+        ],
+        "meta": "Sobre hielo"
+      },
+      {
+        "nombre": "Aperitivo y cerveza",
+        "items": [
+          {
+            "nombre": "Carpano / naranja",
+            "precio": 6000,
+            "receta": "",
+            "nota": "Amargo clásico. Cítrico seco."
+          },
+          {
+            "nombre": "Cerveza",
+            "precio": 3500,
+            "receta": "",
+            "nota": "Fría. Directa."
+          }
+        ],
+        "meta": "Para quedarse un rato más"
+      },
+      {
+        "nombre": "Pastelería",
+        "items": [
+          {
+            "nombre": "Medialunas",
+            "precio": 1500,
+            "receta": "",
+            "nota": "Manteca, hojaldre. Clásico porteño."
+          },
+          {
+            "nombre": "Lemon muffin",
+            "precio": 1600,
+            "receta": "",
+            "nota": "Ácido leve. Final fresco."
+          },
+          {
+            "nombre": "Scones de queso",
+            "precio": 1800,
+            "receta": "",
+            "nota": "Salino, denso. Acompaña bien."
+          },
+          {
+            "nombre": "Cookies veganas",
+            "precio": 1800,
+            "receta": "",
+            "nota": "Textura firme. Dulzor contenido."
+          },
+          {
+            "nombre": "Palmeritas",
+            "precio": 2000,
+            "receta": "",
+            "nota": "Crujientes. Azúcar justo."
+          },
+          {
+            "nombre": "Rolls de canela",
+            "precio": 2000,
+            "receta": "",
+            "nota": "Especiado suave. Calor lento."
+          }
+        ],
+        "meta": "Dulce y salada"
+      }
+    ]
+  },
+  "living": {
+    "estado": "sin-fecha",
+    "proxima": {
+      "dia": "",
+      "horario": "",
+      "cupo": "Cupo limitado · reserva previa"
+    },
+    "archivo": [
+      {
+        "titulo": "Kind of Blue",
+        "nota": "Un disco completo, sin interrupciones. Tres tramos: filtro y escucha, espresso y movimiento, sobremesa.",
+        "cafe": "Granos de @marginal.ar",
+        "musica": "Miles Davis, 1959",
+        "fechaReal": "28 jun 2025",
+        "serie": "Tostado & Girado · Edición 001"
+      }
+    ],
+    "frase": "Lo que se siente, no se discute."
+  },
+  "encuentros": [
+    {
+      "id": "ls02",
+      "estado": "convocatoria",
+      "codigo": "LS02",
+      "titulo": "Edición Jamaica",
+      "ls": true,
+      "fecha": "Laboratorio Sensorial · 2026 · fecha a confirmar",
+      "bajada": "Burru, ska, rocksteady, reggae, dub, dancehall. Noventa minutos de presencia.",
+      "cta": {
+        "label": "Postularme →",
+        "href": "https://tally.so/r/9qDQbE"
+      },
+      "pagina": true,
+      "nombreCompleto": "Laboratorio Sensorial: Edición Jamaica",
+      "subtitulo": "Pressure Bloom"
+    },
+    {
+      "id": "living-proxima",
+      "estado": "preparacion",
+      "codigo": "Living",
+      "titulo": "Próxima apertura",
+      "ls": false,
+      "fecha": "Fecha a confirmar",
+      "bajada": "Recibí la convocatoria antes que nadie.",
+      "cta": {
+        "label": "Anotarme por WhatsApp →",
+        "wa": "Hola Indómito, quiero entrar a la lista del living."
+      }
+    },
+    {
+      "id": "ls03",
+      "estado": "preparacion",
+      "codigo": "LS03",
+      "titulo": "Edición Tango",
+      "ls": true,
+      "fecha": "Laboratorio Sensorial · fecha a confirmar",
+      "bajada": "Bandoneón y fermentación. Dos procesos lentos.",
+      "cta": {
+        "label": "Anotarme por WhatsApp →",
+        "wa": "Hola, quiero sumarme a la lista de Laboratorio Sensorial: Edición Tango."
+      },
+      "subtitulo": "Fuelles & Fermento",
+      "nombreCompleto": "Laboratorio Sensorial: Edición Tango"
+    },
+    {
+      "id": "ls01",
+      "estado": "archivo",
+      "codigo": "LS01",
+      "titulo": "Edición Electrónica",
+      "ls": true,
+      "fecha": "Laboratorio Sensorial · Edición 01",
+      "bajada": "Café y electrónica.",
+      "nota": "Cupos completos",
+      "fechaReal": "10 ago 2025",
+      "subtitulo": "Entreverde",
+      "nombreCompleto": "Laboratorio Sensorial: Edición Electrónica"
+    },
+    {
+      "id": "tg001",
+      "estado": "archivo",
+      "codigo": "T&G",
+      "titulo": "Tostado & Girado",
+      "ls": false,
+      "fecha": "Edición 001",
+      "bajada": "Kind of Blue, de Miles Davis, completo y sin cortes.",
+      "nota": "Living",
+      "fechaReal": "28 jun 2025"
+    }
+  ],
+  "ls02": {
+    "estaciones": [
+      "Burru",
+      "Ska",
+      "Rocksteady",
+      "Reggae",
+      "Dub",
+      "Dancehall"
+    ],
+    "formato": [
+      "90 minutos",
+      "Cupo: 12 personas",
+      "Café de Etiopía, preparado en vivo",
+      "Bitácora impresa con la playlist"
+    ],
+    "fechaNota": "La fecha y el lugar se confirman directamente con las personas seleccionadas.",
+    "creditos": [
+      {
+        "rol": "Curaduría musical, narrativa y diseño de experiencia",
+        "nombre": "Jor Ferraro"
+      },
+      {
+        "rol": "Dirección sensorial, café, narrativa y operación material",
+        "nombre": "Andrés Mainetti"
+      }
+    ],
+    "lead2": "Noventa minutos de proceso. La taza espera al final.",
+    "descripcion": [
+      "Pressure Bloom recorre la música jamaiquina en seis estaciones, del burru al dancehall.",
+      "Cada estación se cruza con una etapa del proceso del café, de la cereza a la taza. Café y música responden a las mismas fuerzas: temperatura, presión, tiempo y comunidad.",
+      "El nombre sale de ahí. En el café, el bloom es el primer contacto del agua con la molienda: el grano libera gas y se abre. En Jamaica, es la música que floreció bajo presión.",
+      "Andrés Mainetti guía desde la barra y cuenta el costado del café. Jor Ferraro lleva la parte musical e histórica."
+    ]
+  },
+  "tienda": {
+    "estado": "lista",
+    "estadoLabel": "Primera edición en preparación",
+    "productos": []
+  },
+  "_nota": "fechaReal: fecha verdadera de cada edición, para registro interno. El sitio muestra la serie y el número, no la fecha."
+}

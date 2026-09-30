@@ -1,0 +1,17 @@
+{
+  "_nota": "Correcciones verificadas sobre el export del Diario Sensorial. Se aplican después de normalizar y ganan sobre el dato original.",
+  "nils-frahm-ambre": {
+    "año": 2009,
+    "fuente": "Sonic Pieces 004 (sonicpieces.com/release/wintermusik) · Discogs"
+  },
+  "bing-ruth-starwood-choker": {
+    "año": 2017,
+    "disco": "No Home of the Mind",
+    "nota": "De No Home of the Mind (4AD, 2017), primer disco de Bing & Ruth en 4AD, centrado en el piano de David Moore.",
+    "fuente": "4ad.com/releases/832 · Discogs r10563896. El export decía City Lake / 2020 / RVNG 2015."
+  },
+  "ryuichi-sakamoto-bibo-no-aozora-instrumental": {
+    "nota": "Versión instrumental de una composición de Sakamoto editada por primera vez en Smoochy (1995), construida sobre piano y cuerdas. Años después sonó en Babel (2006).",
+    "fuente": "Discogs r165306 (Smoochy, 1995) · Wikipedia, 1996 y Babel (soundtrack). El export decía 'para Babel (1996)': la película es de 2006."
+  }
+}

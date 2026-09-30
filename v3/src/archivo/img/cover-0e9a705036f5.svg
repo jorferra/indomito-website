@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 1200" role="img" aria-labelledby="title desc">
+  <title id="title">Rodolfo Alchourron - Parabola</title>
+  <desc id="desc">Original Archivo Sonoro cover for Stadium.</desc>
+  <rect width="1200" height="1200" fill="#d9d4ca"/>
+  <path d="M120 980C282 452 572 187 1080 142" fill="none" stroke="#171615" stroke-width="18"/>
+  <path d="M120 1040C364 608 624 357 1080 302" fill="none" stroke="#b14125" stroke-width="5"/>
+  <circle cx="665" cy="483" r="18" fill="#171615"/>
+  <text x="82" y="93" fill="#171615" font-family="Georgia, serif" font-size="49">RODOLFO</text>
+  <text x="82" y="145" fill="#171615" font-family="Georgia, serif" font-size="49">ALCHOURRON</text>
+  <text x="82" y="1116" fill="#171615" font-family="monospace" font-size="24" letter-spacing="5">PARABOLA · 1980</text>
+</svg>

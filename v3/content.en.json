@@ -1,0 +1,125 @@
+{
+  "_nota": "Capa en inglés sobre content.json. Solo textos: precios, estados, fechas reales, links y números salen siempre de content.json. Los arrays se combinan por posición: el ítem 3 de acá traduce el ítem 3 de allá. Si agregás un ítem en content.json, agregá su traducción en la misma posición.",
+  "carta": {
+    "vigencia": "September 2026",
+    "pie": "We brew all our coffee at 90 °C.",
+    "notas": [
+      "Available at gatherings and Sistema Portátil services.",
+      "Ask about plant-based options.",
+      "Coffee selection may vary with origin and availability.",
+      "Let us know about any allergies or dietary restrictions."
+    ],
+    "categorias": [
+      {
+        "nombre": "Coffee",
+        "meta": "In ceramic cups",
+        "items": [
+          { "nombre": "Espresso", "nota": "Intense and direct. No concessions." },
+          { "nombre": "Double espresso", "nota": "Deep, aromatic. For going further." },
+          { "nombre": "Long black", "receta": "40 ml espresso + 90 ml water", "nota": "Softened, not diluted. Body intact." },
+          { "nombre": "Magic", "receta": "40 ml espresso + 80 ml textured milk", "nota": "Precise balance. Quiet presence." },
+          { "nombre": "Flat White", "receta": "40 ml espresso + 120 ml textured milk", "nota": "Creamy and firm. A classic, no excess." },
+          { "nombre": "Latte", "receta": "30 ml espresso + 180 ml textured milk", "nota": "Open, smooth. Coffee at ease." }
+        ]
+      },
+      {
+        "nombre": "Filter",
+        "meta": "Slow extraction",
+        "items": [
+          { "nombre": "Chemex / Origami", "receta": "Paper filter · hand pour", "nota": "Clarity and pause." }
+        ]
+      },
+      {
+        "nombre": "Iced",
+        "meta": "Over ice",
+        "items": [
+          { "nombre": "Ice flat", "receta": "40 ml espresso · 120 ml cold milk", "nota": "Cold espresso, silky milk. Precise. Dry." },
+          { "nombre": "Ice latte", "receta": "30 ml espresso · 180 ml cold milk", "nota": "More milk, less gesture. Cold. Smooth." },
+          { "nombre": "Ice americano", "receta": "40 ml espresso · cold water", "nota": "Clear. Direct." },
+          { "nombre": "Espresso tonic", "receta": "40 ml espresso · cold tonic", "nota": "Coffee and bubbles. Tense bitterness." },
+          { "nombre": "Cold brew / orange", "receta": "Cold infusion · slow extraction", "nota": "Time, not pressure. Cold. Continuous." }
+        ]
+      },
+      {
+        "nombre": "Aperitivo & beer",
+        "meta": "To stay a little longer",
+        "items": [
+          { "nombre": "Carpano / orange", "nota": "Classic bitter. Dry citrus." },
+          { "nombre": "Beer", "nota": "Cold. Direct." }
+        ]
+      },
+      {
+        "nombre": "Pastries",
+        "meta": "Sweet and savory",
+        "items": [
+          { "nombre": "Medialunas", "nota": "Butter, flaky layers. A Buenos Aires classic." },
+          { "nombre": "Lemon muffin", "nota": "Light acidity. Fresh finish." },
+          { "nombre": "Cheese scones", "nota": "Savory, dense. Pairs well." },
+          { "nombre": "Vegan cookies", "nota": "Firm texture. Restrained sweetness." },
+          { "nombre": "Palmiers", "nota": "Crisp. Just enough sugar." },
+          { "nombre": "Cinnamon rolls", "nota": "Gently spiced. Slow warmth." }
+        ]
+      }
+    ]
+  },
+  "living": {
+    "proxima": { "cupo": "Limited seats · booking required" },
+    "archivo": [
+      {
+        "nota": "One full record, no interruptions. Three movements: filter and listening, espresso and motion, lingering at the table.",
+        "cafe": "Beans from @marginal.ar"
+      }
+    ]
+  },
+  "encuentros": [
+    {
+      "titulo": "Jamaica Edition",
+      "fecha": "Laboratorio Sensorial · 2026 · date to be confirmed",
+      "bajada": "Burru, ska, rocksteady, reggae, dub, dancehall. Ninety minutes of presence.",
+      "cta": { "label": "Apply →" },
+      "nombreCompleto": "Laboratorio Sensorial: Jamaica Edition"
+    },
+    {
+      "titulo": "Next opening",
+      "fecha": "Date to be confirmed",
+      "bajada": "Get the call before anyone else.",
+      "cta": { "label": "Join via WhatsApp →", "wa": "Hi Indómito, I'd like to join the living room list." }
+    },
+    {
+      "titulo": "Tango Edition",
+      "fecha": "Laboratorio Sensorial · date to be confirmed",
+      "bajada": "Bandoneón and fermentation. Two slow processes.",
+      "cta": { "label": "Join via WhatsApp →", "wa": "Hi, I'd like to join the list for Laboratorio Sensorial: Tango Edition." },
+      "nombreCompleto": "Laboratorio Sensorial: Tango Edition"
+    },
+    {
+      "titulo": "Electronic Edition",
+      "fecha": "Laboratorio Sensorial · Edition 01",
+      "bajada": "Coffee and electronic music.",
+      "nota": "Sold out",
+      "nombreCompleto": "Laboratorio Sensorial: Electronic Edition"
+    },
+    {
+      "fecha": "Edition 001",
+      "bajada": "Kind of Blue, by Miles Davis, complete and uncut."
+    }
+  ],
+  "ls02": {
+    "formato": ["90 minutes", "Capacity: 12 people", "Ethiopian coffee, brewed live", "Printed logbook with the playlist"],
+    "fechaNota": "Date and venue are confirmed directly with the selected participants.",
+    "creditos": [
+      { "rol": "Music curation, narrative and experience design" },
+      { "rol": "Sensory direction, coffee, narrative and hands-on operation" }
+    ],
+    "lead2": "Ninety minutes of process. The cup waits until the end.",
+    "descripcion": [
+      "Pressure Bloom walks through Jamaican music in six stations, from burru to dancehall.",
+      "Each station meets a stage of the coffee process, from cherry to cup. Coffee and music answer to the same forces: temperature, pressure, time and community.",
+      "That's where the name comes from. In coffee, the bloom is the water's first contact with the grounds: the coffee releases gas and opens up. In Jamaica, it's the music that flourished under pressure.",
+      "Andrés Mainetti guides from the bar and tells the coffee side. Jor Ferraro carries the music and its history."
+    ]
+  },
+  "tienda": {
+    "estadoLabel": "First edition in the works"
+  }
+}
