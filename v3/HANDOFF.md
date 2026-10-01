@@ -234,6 +234,8 @@ Todo esto está en el `CLAUDE.md` y en `src/shared.jsx` de la V1 (ver sección 1
 
 ## 8. Analítica
 
+**1 oct 2026 — acciones en GA4:** `click_postulacion` (salida a Tally), `click_lista_encuentros` (listas de Living/Encuentros), `click_lista_tienda` (interés por WhatsApp), `click_whatsapp_sistema` (botón fijo o confirmación), `click_whatsapp` (footer) y `consulta_sistema` (formulario válido que prepara el mensaje). Parámetros: `origen`, `idioma`; el formulario suma `tipo_evento`. No se envían nombre, teléfono, fecha, zona ni mensaje. Las salidas esperan callback o hasta 600 ms. Umami y Ads conservan sus eventos. Estos eventos miden intención: no confirman envío en WhatsApp, postulación completada en Tally, alta efectiva ni venta.
+
 **1 oct 2026:** GA4 configurado con `site.googleAnalytics.id = G-8NHQC1ET9Q` (flujo `indomito cafe web stream`, ID 10490179823). Comparte una única carga de gtag con Google Ads, conserva Umami y habilita los endpoints de Analytics en la CSP. Mide páginas y los eventos de medición mejorada que estén activos en el flujo; las acciones propias siguen en Umami. La instalación no recupera datos anteriores.
 
 **Estado (26 sep 2026): Umami Cloud activo** (plan Hobby gratis: 100k eventos/mes, 6 meses de historial). `site.umami` en `content.json` tiene `src` e `id`. Verificado en vivo: pageviews y eventos (`escucha-al-azar`, `whatsapp` con `origen`) llegan a `gateway.umami.is/api/send`. Los eventos que navegan con JS (escucha al azar, consulta de Sistema Portátil) esperan hasta 600 ms a que Umami confirme antes de salir. Search Console: propiedad `https://www.indomitocafe.com/` verificada por meta tag (`site.gscVerification`), sitemap enviado.
