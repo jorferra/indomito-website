@@ -518,3 +518,7 @@ Search Console, consulta del 1 oct 2026: propiedad https://www.indomitocafe.com/
 Validación: 92 páginas generadas; 72 fichas con imagen resoluble y enlace de escucha; 16 placas, 19 tapas y 1 imagen general por idioma. Revisión visual ES escritorio y EN móvil; prueba de evento `click_escucha` dirigido solo a GA4, sin conversión Ads. Producción ES/EN verificada. Deploy Cloudflare `363d1fc1-b094-4c68-9b87-ab25b98a0340`.
 
 Actualización Spotify (1 oct 2026): enlaces unificados en las 72 fichas ES/EN; imágenes para compartir y eventos de medición conservados.
+
+## 25. Menú móvil (1 oct 2026)
+
+El desplegable usa fondo `--soft` (crema) y borde inferior `--mute` para distinguirlo de la página blanca. Conserva estructura, enlaces y comportamiento; aplica a ES/EN.
