@@ -382,10 +382,12 @@ const SITES = Object.fromEntries(LANGS.map((l) => [l, makeSite(l)]));
 // ---------- scripts ----------
 // Formulario de Sistema Portátil: sirve para los dos idiomas; los rótulos del mensaje vienen en data-t.
 const GADS = S.googleAds && S.googleAds.id ? S.googleAds : null;
+const GA4 = S.googleAnalytics && S.googleAnalytics.id ? S.googleAnalytics : null;
+const GOOGLE_TAG_ID = GA4?.id || GADS?.id;
 const FORM_JS = `
 var ADS=(function(){var k='ind-ads',q=location.search,on=/[?&](gclid|gbraid|wbraid)=|[?&]utm_source=google(&|$)/.test(q);try{if(on)sessionStorage.setItem(k,'1');else on=sessionStorage.getItem(k)==='1'}catch(e){}return function(){return on}})();
 var CONV=function(){};
-${GADS ? `(function(){var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GADS.id}';document.head.appendChild(s);window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());gtag('config','${GADS.id}');var L=${JSON.stringify(GADS.labels || {})};CONV=function(k){if(L[k])gtag('event','conversion',{send_to:'${GADS.id}/'+L[k]})}})();` : ""}
+${GOOGLE_TAG_ID ? `(function(){window.dataLayer=window.dataLayer||[];window.gtag=function(){dataLayer.push(arguments)};gtag('js',new Date());${GA4 ? `gtag('config',${JSON.stringify(GA4.id)});` : ""}${GADS ? `gtag('config',${JSON.stringify(GADS.id)});var L=${JSON.stringify(GADS.labels || {})};CONV=function(k){if(L[k])gtag('event','conversion',{send_to:'${GADS.id}/'+L[k]})};` : ""}var s=document.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${GOOGLE_TAG_ID}';document.head.appendChild(s)})();` : ""}
 (function(){document.querySelectorAll('a[data-wa-via]').forEach(function(a){if(ADS())a.href=a.href+encodeURIComponent('\\n'+a.dataset.waVia);a.addEventListener('click',function(){CONV('whatsapp')})})})();
 (function(){document.querySelectorAll('form[data-sp]').forEach(function(f){var L=JSON.parse(f.dataset.t||'{}');f.addEventListener('submit',function(e){e.preventDefault();
 var v=function(n){var el=f.elements[n];return el?String(el.value).trim():''};
@@ -452,11 +454,16 @@ function buildDist() {
   // archivos que van tal cual a la raíz del sitio (verificación de Search Console, etc.)
   if (fs.existsSync("src/root")) fs.cpSync("src/root", "dist", { recursive: true });
   // Cabeceras de seguridad (Cloudflare las aplica a todos los archivos estáticos)
-  // Dominios de Google Ads: solo entran a la CSP cuando site.googleAds.id está cargado (guía oficial de CSP de Google Tag)
+  // Google Ads y GA4 comparten la etiqueta; sus conexiones se habilitan por configuración.
   const G = GADS ? {
     script: "https://www.googletagmanager.com https://www.googleadservices.com https://www.google.com https://googleads.g.doubleclick.net",
     connect: "https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.ar https://ad.doubleclick.net",
     img: "https://www.googletagmanager.com https://www.googleadservices.com https://googleads.g.doubleclick.net https://pagead2.googlesyndication.com https://www.google.com https://www.google.com.ar",
+  } : null;
+  const GA = GA4 ? {
+    script: "https://www.googletagmanager.com",
+    connect: "https://www.googletagmanager.com https://*.google-analytics.com https://*.analytics.google.com https://*.google.com",
+    img: "https://www.googletagmanager.com https://*.google-analytics.com",
   } : null;
   write("dist/_headers", [
     "/*",
@@ -465,7 +472,7 @@ function buildDist() {
     "  X-Frame-Options: DENY",
     "  Referrer-Policy: strict-origin-when-cross-origin",
     "  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()",
-    `  Content-Security-Policy: default-src 'self'; script-src 'self' https://cloud.umami.is https://static.cloudflareinsights.com${G ? " " + G.script : ""}; connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev${G ? " " + G.connect : ""}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:${G ? " " + G.img : ""};${G ? " frame-src https://www.googletagmanager.com;" : ""} frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`,
+    `  Content-Security-Policy: default-src 'self'; script-src 'self' https://cloud.umami.is https://static.cloudflareinsights.com${G ? " " + G.script : ""}${GA ? " " + GA.script : ""}; connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev${G ? " " + G.connect : ""}${GA ? " " + GA.connect : ""}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:${G ? " " + G.img : ""}${GA ? " " + GA.img : ""};${G || GA ? " frame-src https://www.googletagmanager.com;" : ""} frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`,
     "",
   ].join("\n"));
   write("dist/robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${S.url}/sitemap.xml\n`);

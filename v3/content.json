@@ -9,8 +9,9 @@
     "instagramLS": "labsensorial",
     "year": 2026,
     "umami": { "src": "https://cloud.umami.is/script.js", "id": "d9b52916-5fd1-485f-b252-c7f46d04156d" },
+    "googleAnalytics": { "id": "G-8NHQC1ET9Q" },
     "gscVerification": "1ZgyO5-WeyJQ8Abdgj2tfcy3DNNHvPn0Pa6J2GVYDUQ",
-    "googleAds": { "_nota": "Vacío = no se carga nada de Google. Completar id (AW-XXXXXXXXXX) y las etiquetas de conversión de la cuenta; el build suma los dominios de Google a la CSP.", "id": "AW-666439793", "labels": { "form": "qFnlCPv3j4cdEPGg5L0C", "whatsapp": "pw9xCP73j4cdEPGg5L0C" } },
+    "googleAds": { "_nota": "ID vacío = no se cargan conversiones de Google Ads. Completar id (AW-XXXXXXXXXX) y las etiquetas de conversión de la cuenta; el build suma los dominios de Google a la CSP.", "id": "AW-666439793", "labels": { "form": "qFnlCPv3j4cdEPGg5L0C", "whatsapp": "pw9xCP73j4cdEPGg5L0C" } },
     "_umami": "Completar con {src, id} cuando Umami esté instalado; el script se agrega solo."
   },
   "carta": {
