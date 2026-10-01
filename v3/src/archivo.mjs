@@ -33,7 +33,7 @@ export function loadArchivo(file = "src/archivo/archive.json") {
     const slide = it.slide_path ? `diario-${it.slide_path.split("/").pop().replace(/\.[a-z]+$/, "")}.webp` : "";
     return {
       slug, fecha: { y, m, d }, artista: it.artist, tema: it.track, disco: it.album || "", año, fechaLabel, exacta, orden,
-      nota, cover, coverTipo: it.cover_kind, coverLabel: it.cover_label || "", slide,
+      nota, cover, coverTipo: it.cover_kind, coverLabel: it.cover_label || "", coverCredit: String(it.cover_credit || "").replace(/^Foto:\s*/i, ""), slide,
     };
   });
   // correcciones verificadas a mano: ganan sobre el export y sacan la entrada de "revisar"
@@ -170,7 +170,7 @@ export function archivoPieces({ S, lang = "es" }) {
 <div class="wrap">
   <header class="ph intro"><p class="k"><a href="${idxHref(x)}">${t.h1}</a> · ${esc(e.exacta ? e.fechaLabel : `${e.fechaLabel} (${t.mesUso})`)}</p><h1>${esc(e.tema)}</h1><p class="lead">${esc(e.artista)}</p></header>
   <section class="sec as-detail">
-    <div>${coverTag(x, e, "l", true)}${e.coverTipo === "artist" ? `<p class="k mute" style="margin-top:10px">${t.fotoArtista}</p>` : ""}</div>
+    <div>${coverTag(x, e, "l", true)}${e.coverTipo === "artist" ? `<p class="k mute" style="margin-top:10px">${t.fotoArtista}${e.coverCredit ? ` · ${esc(e.coverCredit)}` : ""}</p>` : ""}</div>
     <div class="stack">
       <dl class="ficha">
         ${e.disco ? `<dt>${t.disco}</dt><dd>${esc(e.disco)}</dd>` : ""}
