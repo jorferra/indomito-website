@@ -121,5 +121,9 @@
   },
   "tienda": {
     "estadoLabel": "First edition in the works"
+  },
+  "sistemaCoordinacion": {
+    "minimo": "From 50 coffees.",
+    "anticipacion": "Get in touch 2 or 3 weeks ahead."
   }
 }

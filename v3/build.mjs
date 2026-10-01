@@ -265,6 +265,7 @@ ${AS.homeBlock(x)}
   <section class="sec" id="consulta">
     <h2 class="k">${s.formK}</h2>
     <p class="big" style="margin-bottom:32px">${s.formBig}</p>
+    <p style="margin-bottom:32px"><strong>${esc(C.sistemaCoordinacion.minimo)}</strong><br>${esc(C.sistemaCoordinacion.anticipacion)}</p>
     <form class="form" data-sp data-t="${esc(JSON.stringify({ ...s.waMsg, via: s.via }))}" novalidate>
       <label>${f.nombre}<input name="nombre" autocomplete="name" required aria-describedby="${p}sp-err"><span id="${p}sp-err" class="err" hidden>${f.err}</span></label>
       <label>${f.wa}<input name="whatsapp" inputmode="tel" autocomplete="tel"></label>

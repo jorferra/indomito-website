@@ -497,3 +497,10 @@ Título ES aprobado: "Indómito Café — Café de especialidad y curaduría mus
 ## 22. Entidad del negocio (1 oct 2026)
 
 La home ES identifica a Indómito Café como `Organization`, con ID estable `https://www.indomitocafe.com/#organization`, URL, imagen, teléfono e Instagram. Se retiran la clasificación `CafeOrCoffeeShop`, `PostalAddress` y `servesCuisine`. Sistema Portátil ES/EN sigue siendo `Service`, con ID estable `https://www.indomitocafe.com/sistema-portatil/#service`, URL por idioma, cobertura CABA/GBA y `provider` enlazado al mismo ID de organización. No cambia contenido visible ni la ficha de Google Business.
+
+
+## 23. Sistema Portátil: condiciones y opciones (1 oct 2026)
+
+Datos confirmados por Jor: mínimo de 50 cafés (no personas); cantidad superior a coordinar, sin máximo confirmado. Consulta sugerida con 2 o 3 semanas de anticipación. Se publican ambas líneas antes del formulario, ES/EN desde `sistemaCoordinacion` en content.json/content.en.json. Pastelería artesanal y equipo de sonido son opcionales, a coordinar; música se coordina según el evento. La bajada ya no promete música incluida siempre.
+
+Coordinación por WhatsApp, sin publicar un bloque técnico: espacio en heladera para las leches, conexión eléctrica y pileta/lavamanos para descartar agua. Los requisitos eléctricos específicos quedan a confirmar con Andrés. No se publica un máximo de 70 cafés ni se presenta el sonido como servicio ya contratado en eventos anteriores.

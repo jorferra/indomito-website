@@ -310,5 +310,9 @@
     "estadoLabel": "Primera edición en preparación",
     "productos": []
   },
-  "_nota": "fechaReal: fecha verdadera de cada edición, para registro interno. El sitio muestra la serie y el número, no la fecha."
+  "_nota": "fechaReal: fecha verdadera de cada edición, para registro interno. El sitio muestra la serie y el número, no la fecha.",
+  "sistemaCoordinacion": {
+    "minimo": "Desde 50 cafés.",
+    "anticipacion": "Consultanos con 2 o 3 semanas de anticipación."
+  }
 }
