@@ -355,7 +355,6 @@ ${AS.homeBlock(x)}
     <div></div>
     <div class="stack" style="font-size:var(--fs-lead);line-height:1.55;max-width:40ch">${t.origen.p.map((p) => `<p>${p}</p>`).join("")}</div>
   </section>
-  <section class="sec">${firma("Un café no se toma. Se habita.")}</section>
 </div>`,
   };
 

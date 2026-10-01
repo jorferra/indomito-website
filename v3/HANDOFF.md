@@ -91,7 +91,6 @@ Todo esto está en el `CLAUDE.md` y en `src/shared.jsx` de la V1 (ver sección 1
 
 | Frase | Ubicación única |
 |---|---|
-| Un café no se toma. Se habita. | Origen (lema de cierre) |
 | Lo que se siente, no se discute. | Cierre de la página Living |
 | Extraemos todo nuestro café a 90 °C. | Carta (dato técnico) y línea chica en la carta de la home |
 | Tiempo alrededor de la taza. | Origen |
@@ -305,7 +304,7 @@ Todo esto está en el `CLAUDE.md` y en `src/shared.jsx` de la V1 (ver sección 1
   - Sonido "Equipo propio." (sin modelo ni potencia);
   - sin "Rodajes".
 - Origen:
-  > Indómito nació en un living de Caballito Norte. / Entre vinilos, cafés, silencios y conversaciones que pedían más tiempo que likes. / Después vino el oficio: moler, medir, esperar. / El punto de partida sigue siendo el mismo: tiempo alrededor de la taza. Lo analógico, lo ritual, lo compartido. / **Un café no se toma. Se habita.**
+  > Indómito nació en un living de Caballito Norte. / Entre vinilos, cafés, silencios y conversaciones que pedían otra vuelta. / Después vino el oficio: moler, medir, esperar. / El punto de partida sigue siendo el mismo: tiempo alrededor de la taza.
 
 ---
 
@@ -366,7 +365,7 @@ El sitio sale en dos idiomas desde el mismo build: español en `/`, inglés en `
 
 **Reglas editoriales en inglés:**
 - No es traducción literal: misma voz, corta y seca.
-- Quedan en español en los dos idiomas: "Sistema Portátil", "Living", "Laboratorio Sensorial", "Diario Sensorial", "Tostado & Girado", los subtítulos (Pressure Bloom, Fuelles & Fermento, Entreverde), "Medialunas" y las dos frases de firma ("Lo que se siente, no se discute." y "Un café no se toma. Se habita.", marcadas `lang="es"`).
+- Quedan en español en los dos idiomas: "Sistema Portátil", "Living", "Laboratorio Sensorial", "Diario Sensorial", "Tostado & Girado", los subtítulos (Pressure Bloom, Fuelles & Fermento, Entreverde), "Medialunas" y la frase de firma "Lo que se siente, no se discute." (marcada `lang="es"`).
 - Fórmula de LS en inglés: "A Laboratorio Sensorial experience, in collaboration with Indómito Café."
 - Living, Encuentros y la Edición Jamaica avisan "Hosted in Spanish": las experiencias son en castellano. No prometer atención en inglés en ningún lado mientras eso no sea cierto.
 - Precios en inglés: formato "ARS 4,300" (sin uso mientras `mostrarPrecios` sea `false`; la nota "Prices in Argentine pesos" se quitó).

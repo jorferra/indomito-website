@@ -1,6 +1,6 @@
 // Textos fijos del sitio, por idioma. Lo que cambia seguido (precios, fechas, estados) vive en content.json / content.en.json.
 // Regla: el inglés no es traducción literal. Misma voz: corta, seca, sin adornos.
-// Las frases de firma ("Lo que se siente, no se discute.", "Un café no se toma. Se habita.") quedan en español en los dos idiomas.
+// La frase de firma ("Lo que se siente, no se discute.") queda en español en los dos idiomas.
 
 export const ROUTES = {
   es: {
@@ -103,7 +103,7 @@ export const T = {
       desc: "Indómito nació en un living de Caballito Norte: café de especialidad, vinilos, hospitalidad y encuentros que piden tiempo.",
       kicker: "El proyecto", h1: "Origen", lead: "Indómito nació en un living de Caballito Norte.",
       alt: "Mano preparando un espresso: el café molido en el portafiltro.",
-      p: ["Entre vinilos, cafés, silencios y conversaciones que pedían más tiempo que likes.", "Después vino el oficio: moler, medir, esperar.", "El punto de partida sigue siendo el mismo: tiempo alrededor de la taza. Lo analógico, lo ritual, lo compartido."],
+      p: ["Entre vinilos, cafés, silencios y conversaciones que pedían otra vuelta.", "Después vino el oficio: moler, medir, esperar.", "El punto de partida sigue siendo el mismo: tiempo alrededor de la taza."],
     },
     terminos: {
       title: "Términos y privacidad — Indómito", desc: "Términos de uso y tratamiento de datos del sitio de Indómito Café.",
@@ -189,7 +189,7 @@ export const T = {
       desc: "Indómito started in a living room in Caballito Norte: specialty coffee, vinyl, hospitality and gatherings that ask for time.",
       kicker: "The project", h1: "Origin", lead: "Indómito started in a living room in Caballito Norte.",
       alt: "A hand preparing an espresso: ground coffee in the portafilter.",
-      p: ["Among records, coffees, silences and conversations that asked for more time than likes.", "Then came the craft: grind, measure, wait.", "The starting point hasn't changed: time around the cup. The analog, the ritual, the shared."],
+      p: ["Among records, coffees, silences and conversations that called for another round.", "Then came the craft: grind, measure, wait.", "The starting point hasn't changed: time around the cup."],
     },
     terminos: {
       title: "Terms & privacy — Indómito", desc: "Terms of use and data handling for the Indómito Café website.",
