@@ -11,6 +11,8 @@ const esc = (s = "") => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").r
 export function loadArchivo(file = "src/archivo/archive.json") {
   const raw = JSON.parse(fs.readFileSync(file, "utf8"));
   const revisar = [];
+  const listenFile = file.replace(/archive\.json$/, "escuchas.json");
+  const listens = fs.existsSync(listenFile) ? JSON.parse(fs.readFileSync(listenFile, "utf8")) : {};
   const used = new Set();
   const entries = raw.items.map((it) => {
     // fecha: editorial exacta; si falta, mes de uso (used_at) marcado como aproximado
@@ -33,6 +35,7 @@ export function loadArchivo(file = "src/archivo/archive.json") {
     const slide = it.slide_path ? `diario-${it.slide_path.split("/").pop().replace(/\.[a-z]+$/, "")}.webp` : "";
     return {
       slug, fecha: { y, m, d }, artista: it.artist, tema: it.track, disco: it.album || "", año, fechaLabel, exacta, orden,
+      escucha: listens[slug] || null,
       nota, cover, coverTipo: it.cover_kind, coverLabel: it.cover_label || "", slide,
     };
   });
@@ -57,6 +60,7 @@ const TX = {
     explorar: "Explorar el archivo →", mesUso: "mes de uso", disco: "Disco", año: "Año", diario: "Diario",
     fotoArtista: "Foto del artista", altFoto: "Foto de ", altTapa: "Tapa de ", original: "Publicación original",
     placa: "Placa del Diario Sensorial: ", seguir: "Seguí por acá", mismo: "Mismo artista", discoDe: "Disco de ",
+    escuchar: "Escuchar en Apple Music →", buscarTema: "Buscar en Spotify →",
     title: "Archivo Sonoro — Indómito", suffix: " · Archivo Sonoro — Indómito",
     desc: (n) => `Las escuchas del Diario Sensorial de Indómito: ${n} temas con su disco, año y fecha de publicación.`,
     descE: (e, f) => `${e.artista}, "${e.tema}"${e.disco ? ` (${e.disco}${e.año ? `, ${e.año}` : ""})` : ""}. Escucha del Diario Sensorial de Indómito, ${f}.`,
@@ -71,6 +75,7 @@ const TX = {
     explorar: "Browse the archive →", mesUso: "month used", disco: "Album", año: "Year", diario: "Posted",
     fotoArtista: "Artist photo", altFoto: "Photo of ", altTapa: "Cover of ", original: "Original post, in Spanish",
     placa: "Diario Sensorial card: ", seguir: "Keep listening", mismo: "Same artist", discoDe: "Record from ",
+    escuchar: "Listen on Apple Music →", buscarTema: "Search on Spotify →",
     title: "Sound Archive — Indómito", suffix: " · Sound Archive — Indómito",
     desc: (n) => `Every track from Indómito's Diario Sensorial: ${n} listens with album, year and post date.`,
     descE: (e, f) => `${e.artista}, "${e.tema}"${e.disco ? ` (${e.disco}${e.año ? `, ${e.año}` : ""})` : ""}. A listen from Indómito's Diario Sensorial, ${f}.`,
@@ -159,6 +164,8 @@ export function archivoPieces({ S, lang = "es" }) {
     title: `${e.tema} — ${e.artista}${t.suffix}`,
     desc: e.nota || t.descE(e, e.fechaLabel),
     path: pathOf(e),
+    image: e.slide ? `/img/archivo/${e.slide}` : e.cover?.l ? `/img/archivo/${e.cover.l}` : "/img/og.jpg",
+    imageAlt: e.slide ? t.placa + e.artista + ", " + e.tema : e.cover?.l ? (e.coverTipo === "artist" ? t.altFoto + e.artista : t.altTapa + (e.disco || e.tema)) : S.name,
     ld: { "@context": "https://schema.org", "@type": "MusicRecording", name: e.tema, byArtist: { "@type": "MusicGroup", name: e.artista }, ...(e.disco ? { inAlbum: { "@type": "MusicAlbum", name: e.disco } } : {}), url: `${S.url}${pathOf(e)}` },
     body: (x) => {
       const rel = related(e);
@@ -173,6 +180,7 @@ export function archivoPieces({ S, lang = "es" }) {
         ${e.año ? `<dt>${t.año}</dt><dd>${e.año}</dd>` : ""}
         <dt>${t.diario}</dt><dd>${esc(e.fechaLabel)}${e.exacta ? "" : ` · ${t.mesUso}`}</dd>
       </dl>
+      <p><a class="cta" href="${esc(e.escucha?.url || `https://open.spotify.com/search/${encodeURIComponent(e.artista + " " + e.tema)}`)}" target="_blank" rel="noopener" data-umami-event="escucha" data-umami-event-origen="${esc(e.slug)}" data-umami-event-destino="${e.escucha ? "apple-music" : "spotify-search"}">${e.escucha ? t.escuchar : t.buscarTema}</a></p>
       ${e.nota ? `<p class="prose">${esc(e.nota)}</p>` : ""}
     </div>
   </section>
