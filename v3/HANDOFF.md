@@ -487,3 +487,8 @@ Los textos de una placa por destacada se revisaron el 27/9/2026:
 
 - **27/9:** la lista de ocasiones de Sistema Portátil quedó en 6: Celebraciones · Lanzamientos · Activaciones de marca · Eventos de empresa · Cenas · Espacios culturales. Casamiento, Cumpleaños y Coffee break siguen solo en el desplegable del formulario (por las búsquedas de Ads).
 - **27/9:** home, bloque living: "Abrimos cuando hay fecha. Cada encuentro tiene su momento." (EN: "Each gathering has its moment.")
+
+
+## 21. Metadata de la home (1 oct 2026)
+
+Título ES aprobado: "Indómito Café — Café de especialidad y curaduría musical". Descripción ES: "Living a puertas cerradas en Caballito, con encuentros por convocatoria. Sistema Portátil lleva café de especialidad y curaduría musical a eventos en Buenos Aires." Versión EN equivalente en `src/i18n.mjs`. Aplica al título de pestaña, meta description, Open Graph y Twitter mediante el template existente. Se conserva todo el texto visible de la home y la metadata de las páginas internas.

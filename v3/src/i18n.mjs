@@ -41,8 +41,8 @@ export const T = {
     footer: { reply: "Respondemos nosotros, con tiempo.", tienda: "Tienda", terms: "Términos y privacidad", waHello: "Hola Indómito" },
     verEdicion: "Ver edición →",
     home: {
-      title: "Indómito — Café de especialidad en Caballito Norte",
-      desc: "Un living a puertas cerradas en Caballito Norte. Café de especialidad, vinilos y encuentros con agenda. Barra de café portátil para eventos en CABA y GBA.",
+      title: "Indómito Café — Café de especialidad y curaduría musical",
+      desc: "Living a puertas cerradas en Caballito, con encuentros por convocatoria. Sistema Portátil lleva café de especialidad y curaduría musical a eventos en Buenos Aires.",
       kicker: "Café de especialidad · Buenos Aires",
       lead: "Un living a puertas cerradas en Caballito Norte. Café, vinilos y encuentros.",
       ctaEnc: "Ver encuentros →", ctaSis: "Sistema Portátil →",
@@ -127,8 +127,8 @@ export const T = {
     footer: { reply: "Real people reply. Give us a moment.", tienda: "Shop", terms: "Terms & privacy", waHello: "Hi Indómito" },
     verEdicion: "See the edition →",
     home: {
-      title: "Indómito — Specialty coffee in Buenos Aires",
-      desc: "A closed-door living room in Caballito Norte, Buenos Aires. Specialty coffee, vinyl and gatherings by date. Portable coffee bar for events in Buenos Aires.",
+      title: "Indómito Café — Specialty coffee and curated music",
+      desc: "A closed-door living room in Caballito, with gatherings by invitation. Sistema Portátil brings specialty coffee and curated music to events in Buenos Aires.",
       kicker: "Specialty coffee · Buenos Aires",
       lead: "A closed-door living room in Caballito Norte. Coffee, vinyl and gatherings.",
       ctaEnc: "See gatherings →", ctaSis: "Sistema Portátil →",
