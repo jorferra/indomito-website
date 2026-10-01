@@ -137,8 +137,11 @@ ${aviso(x)}
   <div class="intro">
     <p class="k">${h.kicker}</p>
     <h1 class="wm"><span class="sr">Indómito</span>${WORDMARK}</h1>
-    <p class="lead">${h.lead}</p>
-    <div class="row"><a class="cta" href="${x.link("encuentros")}">${h.ctaEnc}</a><a class="cta" href="${x.link("sistema")}">${h.ctaSis}</a></div>
+    <div class="hero-split">
+      <div><p class="lead">${h.lead}</p>
+      <div class="row"><a class="cta" href="${x.link("encuentros")}">${h.ctaEnc}</a><a class="cta" href="${x.link("sistema")}">${h.ctaSis}</a></div></div>
+      ${fig(x, "home-maquina", h.fotoAlt, "rfoto", true)}
+    </div>
   </div>
 </section>
 

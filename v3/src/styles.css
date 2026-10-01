@@ -263,3 +263,4 @@ p{margin:0}
   .wa-fijo{display:flex;align-items:center;justify-content:center;position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;min-height:52px;background:var(--ink);color:var(--bg);font-weight:500;font-size:var(--fs-body);border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.18)}
   body:has(.wa-fijo){padding-bottom:88px}
 }
+.rfoto img{aspect-ratio:4/5;object-fit:cover;object-position:50% 45%}.hero-split .fig{margin-top:40px}@media (min-width:861px){.hero-split{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:start}.hero-split .fig{margin-top:0}}
