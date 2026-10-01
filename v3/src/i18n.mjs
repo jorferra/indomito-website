@@ -60,7 +60,7 @@ export const T = {
       proxH: "Próxima apertura", sinFecha: "Estamos armando la próxima. Dejanos tu contacto y te avisamos.",
       anotarme: "Anotarme por WhatsApp →", waLista: "Hola Indómito, quiero recibir la convocatoria del living.",
       reservar: "Reservar lugar →", waReserva: "Hola Indómito, quiero reservar lugar para ",
-      archK: "Archivo", archBig: "Lo que ya pasó.", cafe: "Café", disco: "Disco",
+      alt: "Tazas de cerámica sobre la máquina de espresso del living.", archK: "Archivo", archBig: "Lo que ya pasó.", cafe: "Café", disco: "Disco",
     },
     carta: {
       title: "Carta de café de especialidad — Indómito",
@@ -146,7 +146,7 @@ export const T = {
       proxH: "Next opening", sinFecha: "We're putting the next one together. Leave your contact and we'll let you know.",
       anotarme: "Join via WhatsApp →", waLista: "Hi Indómito, I'd like to hear about the next living room opening.",
       reservar: "Book a seat →", waReserva: "Hi Indómito, I'd like to book a seat for ",
-      archK: "Archive", archBig: "What already happened.", cafe: "Coffee", disco: "Record",
+      alt: "Ceramic cups on top of the espresso machine in the living room.", archK: "Archive", archBig: "What already happened.", cafe: "Coffee", disco: "Record",
     },
     carta: {
       title: "Specialty coffee menu — Indómito",

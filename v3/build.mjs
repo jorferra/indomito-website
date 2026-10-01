@@ -199,6 +199,7 @@ ${AS.homeBlock(x)}
       return `
 <div class="wrap">
   <header class="ph intro"><p class="k">${l.kicker}</p><h1>Living</h1><p class="lead">${l.lead}</p>${idioma(l.idioma)}</header>
+  <div class="bleed">${fig(x, "living-maquina", l.alt, "r219", true)}</div>
   <section class="sec split">
     <div><h2 class="k">${l.queK}</h2></div>
     <p class="big" style="max-width:34ch">${l.que}</p>
