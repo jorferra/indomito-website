@@ -257,6 +257,7 @@ ${AS.homeBlock(x)}
   <section class="sec">
     <h2 class="k">${s.sysK}</h2>
     <dl class="ficha">${s.ficha.map(([a, b]) => `<dt>${a}</dt><dd>${b}</dd>`).join("")}</dl>
+    ${s.fichaNota ? `<p class="mute" style="margin-top:16px">${s.fichaNota}</p>` : ""}
   </section>
   <section class="sec split">
     <div class="stack"><h2 class="k">${s.ocK}</h2><p class="big">${s.ocBig}</p></div>

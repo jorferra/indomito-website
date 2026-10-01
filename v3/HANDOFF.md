@@ -78,7 +78,7 @@ Todo esto está en el `CLAUDE.md` y en `src/shared.jsx` de la V1 (ver sección 1
 - "El café va donde vos estés."
 - "Intenso y directo. Sin concesiones."
 - "Lo que pasó y lo que va a pasar."
-- "Nos escribís con fecha y formato. Te respondemos, cerramos y vamos."
+- "Nos escribís con fecha y formato. Te respondemos y armamos el sistema."
 
 **Fórmula de redacción:** sustantivo concreto + acción simple + dato útil.
 
