@@ -244,7 +244,7 @@ ${AS.homeBlock(x)}
 
   P.sistema = {
     title: t.sistema.title, desc: t.sistema.desc,
-    ld: { "@context": "https://schema.org", "@type": "Service", name: "Sistema Portátil", serviceType: t.sistema.title.split(" — ")[0], description: t.sistema.desc, provider: { "@type": "CafeOrCoffeeShop", name: S.name, url: S.url + "/", telephone: "+" + S.whatsapp }, areaServed: ["Ciudad Autónoma de Buenos Aires", "Gran Buenos Aires"], image: S.url + "/img/sistema-barra-1600.webp" },
+    ld: { "@context": "https://schema.org", "@type": "Service", name: "Sistema Portátil", serviceType: t.sistema.title.split(" — ")[0], description: t.sistema.desc, "@id": S.url + "/sistema-portatil/#service", url: S.url + ROUTES[lang].sistema.path, provider: { "@type": "Organization", "@id": S.url + "/#organization", name: S.name, url: S.url + "/", telephone: "+" + S.whatsapp }, areaServed: ["Ciudad Autónoma de Buenos Aires", "Gran Buenos Aires"], image: S.url + "/img/sistema-barra-1600.webp" },
     body: (x) => {
       const s = t.sistema, f = s.f, p = es ? "" : "en-";
       return `
@@ -404,7 +404,7 @@ f.hidden=true;d.hidden=false;a.focus();CONV('form');var waits=[];${GA4 ? `waits.
 const head = (site, k, pg, alts) => {
   const { t } = site;
   const url = S.url + pg.path;
-  const ld = k === "home" && site.lang === "es" ? `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "CafeOrCoffeeShop", name: S.name, url: S.url + "/", image: S.url + "/img/og.jpg", telephone: "+" + S.whatsapp, address: { "@type": "PostalAddress", addressLocality: "Caballito", addressRegion: "CABA", addressCountry: "AR" }, areaServed: "Buenos Aires", servesCuisine: "Café de especialidad", sameAs: [ig(S.instagram)] })}</script>` : "";
+  const ld = k === "home" && site.lang === "es" ? `<script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Organization", "@id": S.url + "/#organization", name: S.name, url: S.url + "/", image: S.url + "/img/og.jpg", telephone: "+" + S.whatsapp, sameAs: [ig(S.instagram)] })}</script>` : "";
   const hreflang = alts ? `<link rel="alternate" hreflang="es-AR" href="${S.url}${alts.es}"><link rel="alternate" hreflang="en" href="${S.url}${alts.en}"><link rel="alternate" hreflang="x-default" href="${S.url}${alts.es}">` : "";
   return `<!doctype html>
 <html lang="${t.htmlLang}" data-theme="light">

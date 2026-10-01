@@ -492,3 +492,8 @@ Los textos de una placa por destacada se revisaron el 27/9/2026:
 ## 21. Metadata de la home (1 oct 2026)
 
 Título ES aprobado: "Indómito Café — Café de especialidad y curaduría musical". Descripción ES: "Living a puertas cerradas en Caballito, con encuentros por convocatoria. Sistema Portátil lleva café de especialidad y curaduría musical a eventos en Buenos Aires." Versión EN equivalente en `src/i18n.mjs`. Aplica al título de pestaña, meta description, Open Graph y Twitter mediante el template existente. Se conserva todo el texto visible de la home y la metadata de las páginas internas.
+
+
+## 22. Entidad del negocio (1 oct 2026)
+
+La home ES identifica a Indómito Café como `Organization`, con ID estable `https://www.indomitocafe.com/#organization`, URL, imagen, teléfono e Instagram. Se retiran la clasificación `CafeOrCoffeeShop`, `PostalAddress` y `servesCuisine`. Sistema Portátil ES/EN sigue siendo `Service`, con ID estable `https://www.indomitocafe.com/sistema-portatil/#service`, URL por idioma, cobertura CABA/GBA y `provider` enlazado al mismo ID de organización. No cambia contenido visible ni la ficha de Google Business.
