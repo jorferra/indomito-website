@@ -509,12 +509,12 @@ Coordinación por WhatsApp, sin publicar un bloque técnico: espacio en heladera
 
 Las 72 fichas ES/EN declaran imagen propia en Open Graph y Twitter: placa del Diario si existe, tapa en su defecto y OG general como último recurso. Se conserva el archivo original sin recortarlo. Los servicios externos pueden cachear previews anteriores.
 
-Cada ficha ofrece un enlace de escucha: 19 coincidencias exactas de artista, tema y álbum comprobadas en el catálogo Apple Music AR, registradas en `src/archivo/escuchas.json`. Las otras 17 ofrecen explícitamente «Buscar en Spotify», con artista y tema, sin afirmar una grabación exacta. Mismo comportamiento en inglés. No hay reproductores ni cargas de terceros adicionales.
-
-Al actualizar el export del archivo, ejecutar `python3 scripts/resolve-archivo-listens.py` para resolver nuevas coincidencias y luego `node build.mjs`. El resolver conserva los enlaces previos si una búsqueda falla; el build funciona offline y genera automáticamente la búsqueda para cualquier entrada sin enlace verificado. Revisar los cambios de `escuchas.json` antes de publicar. No elegir una interpretación de Satie sin confirmar la grabación de referencia.
+Por decisión de Jor, las 36 escuchas enlazan a Spotify en ambos idiomas mediante búsquedas por artista y tema. Rótulos «Buscar en Spotify» / «Search on Spotify»: no se presentan como enlaces directos a una grabación verificada. El build genera los enlaces automáticamente para futuras entradas, sin consultas de red ni mantenimiento de un catálogo externo. Se retiraron el mapa de Apple Music y su script de resolución. No hay reproductores ni cargas de terceros adicionales.
 
 Los clics llevan evento Umami `escucha` (origen = slug, destino = proveedor) y GA4 `click_escucha` (origen = slug, idioma). No es evento clave ni prueba de reproducción: solo salida al servicio musical. Se conservan canonical propio, hreflang y MusicRecording.
 
 Search Console, consulta del 1 oct 2026: propiedad https://www.indomitocafe.com/, filtro 3 meses pero datos visibles solo 25–28 sep. 3 clics, 135 impresiones, CTR 2,2 %, posición media 5,9. Home: 1 clic/61 impresiones. Fichas EN de Stars of the Lid y Helios: un clic cada una. Sistema Portátil: 0 clics/1 impresión. Muestra insuficiente para evaluar conversiones o efectos de los cambios de hoy; contiene URLs antiguas de Framer. Mantener fichas EN indexables y dejar acumular datos de GA4 desde su instalación del 1 oct.
 
 Validación: 92 páginas generadas; 72 fichas con imagen resoluble y enlace de escucha; 16 placas, 19 tapas y 1 imagen general por idioma. Revisión visual ES escritorio y EN móvil; prueba de evento `click_escucha` dirigido solo a GA4, sin conversión Ads. Producción ES/EN verificada. Deploy Cloudflare `363d1fc1-b094-4c68-9b87-ab25b98a0340`.
+
+Actualización Spotify (1 oct 2026): enlaces unificados en las 72 fichas ES/EN; imágenes para compartir y eventos de medición conservados.
