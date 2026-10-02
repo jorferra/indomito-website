@@ -251,7 +251,7 @@ ${AS.homeBlock(x)}
       return `
 <div class="wrap">
   <header class="ph intro"><p class="k">${s.kicker}</p><h1>Sistema Portátil</h1><p class="lead">${s.lead}</p></header>
-  <div class="bleed">${fig(x, "sistema-barra", s.alt, "r32", true)}</div>
+  <div class="bleed">${fig(x, "sistema-barra", s.alt, "r219", true)}</div>
   <section class="sec">
     <p class="big">${s.big}</p>
   </section>
@@ -351,7 +351,7 @@ ${AS.homeBlock(x)}
     body: (x) => `
 <div class="wrap">
   <header class="ph intro"><p class="k">${t.origen.kicker}</p><h1>${t.origen.h1}</h1><p class="lead">${t.origen.lead}</p></header>
-  <div class="bleed">${fig(x, "origen-mano", t.origen.alt, "r32", true)}</div>
+  <div class="bleed">${fig(x, "origen-mano", t.origen.alt, "r219", true)}</div>
   <section class="sec split">
     <div></div>
     <div class="stack" style="font-size:var(--fs-lead);line-height:1.55;max-width:40ch">${t.origen.p.map((p) => `<p>${p}</p>`).join("")}</div>
