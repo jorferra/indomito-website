@@ -568,3 +568,11 @@ Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deplo
 3. `node build.mjs && npx wrangler deploy`. Probar una postulación real y verla en Airtable.
 4. Exportar respuestas de Tally de LS02 a `Postulantes` y dar de baja el formulario.
 5. Facebook (botón) e Instagram (bio): link a `https://www.indomitocafe.com/convocatoria/`.
+
+### 26.3 Panel de postulantes (3 oct 2026)
+
+- `v3/admin/postulantes.html`: panel interno para ver y gestionar postulaciones sin entrar a Airtable. **No es parte del sitio** (el build no lo copia a `dist/`).
+- Se publica como artifact privado de claude.ai con capability `mcp` → conector `Airtable`, tools `list_records_for_table` y `update_records_for_table`. Lee con las credenciales de quien lo abre: cada persona necesita su propio conector de Airtable con acceso a la base `appNmepcR3NLbZtCH`.
+- Muestra una pestaña por convocatoria, cupo asignado (aceptado + confirmado + asistió sobre `Cupo`), conteo por estado y una ficha por persona con WhatsApp, email, Instagram, motivo y selector de estado que escribe en Airtable.
+- Si se agregan campos a `Postulantes`, actualizar los IDs `F`/`C` al principio del script.
+- Prueba end-to-end del 3 oct: postulación "Prueba Jor" llegó a Airtable con todos los campos (borrarla a mano antes de abrir la convocatoria).
