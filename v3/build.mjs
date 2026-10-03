@@ -406,6 +406,12 @@ ${AS.homeBlock(x)}
     <p class="big" style="margin-bottom:32px">${c.listaBig}</p>
     ${formConv(x, "lista-espera", opciones, {})}
   </section>`;
+      // Con una convocatoria abierta, la lista de espera queda plegada en una línea (se abre sola si se llega con #lista).
+      const listaPlegada = `
+  <section class="sec" id="lista">
+    <details class="conv-lista"><summary>${c.listaBig.split("?")[0]}? <span>${c.anotarme}</span></summary>
+    <div style="margin-top:28px">${formConv(x, "lista-espera", opciones, {})}</div></details>
+  </section>`;
       if (!e) return `
 <div class="wrap">
   <header class="ph intro"><p class="k">${c.kicker}</p><h1>${c.h1Sin}</h1><p class="lead">${c.leadSin}</p></header>
@@ -414,7 +420,7 @@ ${AS.homeBlock(x)}
       const cupo = CES.encuentros.find((y) => y.id === e.id)?.cupo;
       return `
 <div class="wrap">
-  <header class="ph intro"><p class="k">${c.kicker}${e.ls ? " · Laboratorio Sensorial" : ""}</p><h1>${esc(e.titulo)}</h1><p class="lead">${esc(e.subtitulo ? e.subtitulo + ". " : "")}${esc(e.bajada)}</p></header>
+  <header class="ph intro"><p class="k">${c.kicker}${e.ls ? " · Laboratorio Sensorial" : ""}</p><h1 class="conv-h1">${esc(es ? e.titulo.replace(/^Edición /, "Edición: ") : e.titulo)}</h1>${e.subtitulo ? `<p class="conv-sub">${esc(e.subtitulo)}</p>` : ""}<p class="lead">${esc(e.bajada)}</p></header>
   <section class="sec split">
     <div class="stack">${pill(e.estado)}<p class="k mute">${esc(e.fecha.replace(/^Laboratorio Sensorial · /, ""))}</p>${cupo ? `<p class="mute">${c.cupo(cupo)}</p>` : ""}</div>
     <div class="stack">${e.pagina ? `<a class="cta" href="${x.link(e.id)}">${c.verEdicion}</a>` : ""}</div>
@@ -423,7 +429,7 @@ ${AS.homeBlock(x)}
     <h2 class="k">${c.formK}</h2>
     ${formConv(x, e.id, null, { motivo: e.formulario?.motivo })}
   </section>
-  ${lista}
+  ${listaPlegada}
 </div>`;
     },
   };
@@ -469,6 +475,7 @@ b.disabled=true;b.textContent=L.enviando;
 fetch('/api/postulacion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){if(!r.ok)throw 0;
 var d=f.nextElementSibling;f.hidden=true;d.hidden=false;d.focus();GA_EVENT('postulacion_enviada',{origen:data.convocatoria});if(window.umami)try{umami.track('postulacion',{convocatoria:data.convocatoria})}catch(x){}})
 .catch(function(){b.disabled=false;b.textContent=bl;show(L.errRed);if(window.turnstile)try{turnstile.reset()}catch(x){}})})})})();
+(function(){var d=document.querySelector('details.conv-lista');if(d&&location.hash==='#lista')d.open=true})();
 (function(){document.querySelectorAll('.mob .sheet a').forEach(function(a){a.addEventListener('click',function(){var d=a.closest('details');if(d)d.open=false})})})();`;
 
 // ---------- salida ----------

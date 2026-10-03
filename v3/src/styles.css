@@ -268,3 +268,9 @@ p{margin:0}
 .form .consent input{width:auto;margin-top:3px;accent-color:var(--ink)}
 .form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 .form button:disabled{opacity:.5;cursor:default}
+.ph .conv-sub{font-size:var(--fs-h3);font-weight:500;letter-spacing:-.02em;margin:-8px 0 18px}
+.conv-lista summary{cursor:pointer;list-style:none;font-size:var(--fs-bl);line-height:1.4}
+.conv-lista summary::-webkit-details-marker{display:none}
+.conv-lista summary span{border-bottom:1px solid currentColor;margin-left:6px;white-space:nowrap}
+.conv-lista[open] summary span{display:none}
+@media (min-width:860px){.ph h1.conv-h1{white-space:nowrap;max-width:none}.intro:has(.conv-h1){max-width:none}}
