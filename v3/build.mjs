@@ -563,7 +563,7 @@ function buildDist() {
     `  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://cloud.umami.is https://static.cloudflareinsights.com${G ? " " + G.script : ""}${GA ? " " + GA.script : ""}; connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev${G ? " " + G.connect : ""}${GA ? " " + GA.connect : ""}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:${G ? " " + G.img : ""}${GA ? " " + GA.img : ""};${G || GA ? " frame-src https://challenges.cloudflare.com https://www.googletagmanager.com;" : " frame-src https://challenges.cloudflare.com;"} frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`,
     "",
   ].join("\n"));
-  write("dist/robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${S.url}/sitemap.xml\n`);
+  write("dist/robots.txt", `User-agent: *\nAllow: /\nDisallow: /postulantes\n\nSitemap: ${S.url}/sitemap.xml\n`);
   write("dist/sitemap.xml", `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls.map((u) => `  <url><loc>${S.url}${u}</loc></url>`).join("\n")}\n</urlset>\n`);
   write("dist/_redirects", [
     "# URLs del sitio en Framer → V3",
@@ -571,6 +571,8 @@ function buildDist() {
     "/objetos /tienda/ 301",
     "/club /encuentros/ 301",
     "/postular /convocatoria/ 301",
+    "# Atajo interno al panel de postulantes (artifact privado de claude.ai; solo lo abre quien tiene acceso).",
+    "/postulantes https://claude.ai/artifact/LELuXPJFJi6JPJV26RsZGv 302",
     "/club/tg1 /living/ 301",
     "/club/playlists /origen/ 301",
     "/terms /terminos/ 301",

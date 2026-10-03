@@ -575,6 +575,7 @@ Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deplo
 - Se publica como artifact privado de claude.ai con capability `mcp` → conector `Airtable`, tools `list_records_for_table` y `update_records_for_table`. Lee con las credenciales de quien lo abre: cada persona necesita su propio conector de Airtable con acceso a la base `appNmepcR3NLbZtCH`.
 - Muestra una pestaña por convocatoria, cupo asignado (aceptado + confirmado + asistió sobre `Cupo`), conteo por estado y una ficha por persona con WhatsApp, email, Instagram, motivo y selector de estado que escribe en Airtable.
 - Si se agregan campos a `Postulantes`, actualizar los IDs `F`/`C` al principio del script.
+- Atajo: `indomitocafe.com/postulantes` redirige (302) al artifact del panel, vía `_redirects`; excluido en robots.txt.
 - Prueba end-to-end del 3 oct: postulación "Prueba Jor" llegó a Airtable con todos los campos (borrarla a mano antes de abrir la convocatoria).
 
 Deploy — 3 oct 2026 (Codex): publicado el cambio `2ca567f`; CTA de Sistema Portátil en home ES/EN lleva al inicio de la página sin `#consulta` (navegación verificada, foto cargada y descripción, scroll 0). Turnstile visible en `/convocatoria/`, GET `/api/postulacion` devuelve 405 y `dist/admin/` no existe. ID de versión del deploy: `14cfb862-b065-4d04-bf26-29ef9fcde944`.
