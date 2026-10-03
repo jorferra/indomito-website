@@ -102,7 +102,7 @@ Todo esto está en el `CLAUDE.md` y en `src/shared.jsx` de la V1 (ver sección 1
 - "Caballito Norte" aparece solo en el footer, la bajada del hero, la bajada de Origen y junto a una fecha confirmada del living.
 - Sin números romanos ni numeraciones decorativas (01/02/03) salvo que el contenido sea una secuencia real (pasos, estaciones).
 - **Archivo de encuentros:** se muestra por serie y número ("Tostado & Girado · Edición 001"), no por fecha. La fecha real queda en `fechaReal` para registro interno.
-- **Ediciones de LS:** "Edición {Tema}" como título y nombre propio como subtítulo. Nombre completo: "Laboratorio Sensorial: Edición {Tema}".
+- **Ediciones de LS (actualizado 2 oct 2026):** el título es solo el tema ("Jamaica"). Arriba, en línea propia gris a tamaño de subtítulo, la serie: "Laboratorio Sensorial · Edición 02" (el número sale del `codigo`). Abajo, el nombre propio como subtítulo ("Pressure Bloom"). En las tarjetas de Encuentros el título también es el tema; el código LS0X ya va a la izquierda. Nunca la serie en la etiqueta mono de 11 px: se pierde. En textos corridos el nombre completo sigue siendo "Laboratorio Sensorial: Edición {Tema}".
   - LS01 Edición Electrónica / Entreverde (archivo).
   - LS02 Edición Jamaica / Pressure Bloom (convocatoria abierta).
   - LS03 Edición Tango / Fuelles & Fermento (en preparación).
