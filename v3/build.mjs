@@ -67,6 +67,9 @@ function makeSite(lang) {
   <img src="${x.src(name + "-1600.webp")}" srcset="${x.src(name + "-800.webp")} 800w, ${x.src(name + "-1600.webp")} 1600w" sizes="(max-width:860px) 100vw, 60vw" alt="${esc(alt)}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'} decoding="async">
 </figure>`;
 
+  // Ediciones de LS: el título es el tema ("Jamaica"); la serie va en una línea propia arriba.
+  const tema = (e) => (e.ls ? e.titulo.replace(/^Edición /, "").replace(/ Edition$/, "") : e.titulo);
+  const serie = (e) => (e.ls ? `Laboratorio Sensorial · ${es ? "Edición" : "Edition"} ${e.codigo.replace(/\D/g, "")}` : "");
   const pill = (estado) => {
     const cls = { preparacion: "hollow", agotado: "off", archivo: "off", lista: "hollow" }[estado] || "";
     return `<span class="pill ${cls}">${t.pill[estado] || estado}</span>`;
@@ -113,7 +116,7 @@ function makeSite(lang) {
 <article class="card">
   <p class="code">${esc(e.codigo)}</p>
   <div class="body">
-    <h3>${esc(e.titulo)}</h3>${e.subtitulo ? `<p class="sub">${esc(e.subtitulo)}</p>` : ""}
+    <h3>${esc(tema(e))}</h3>${e.subtitulo ? `<p class="sub">${esc(e.subtitulo)}</p>` : ""}
     <p class="meta">${esc(e.fecha.replace(/^Laboratorio Sensorial · /, ""))}${e.nota ? " · " + esc(e.nota) : ""}</p>
     <p>${esc(e.bajada)}</p>
   </div>
@@ -315,7 +318,7 @@ ${AS.homeBlock(x)}
       const L = C.ls02, l = t.ls02;
       return `
 <div class="wrap">
-  <header class="ph intro"><p class="k"><a href="${x.link("encuentros")}">${l.kicker}</a> · Laboratorio Sensorial</p><h1>${esc(e.titulo)}</h1><p class="lead">${esc(e.subtitulo)}. ${l.formula}</p>${idioma(l.idioma)}</header>
+  <header class="ph intro"><p class="k"><a href="${x.link("encuentros")}">${l.kicker}</a></p><p class="conv-serie">${serie(e)}</p><h1 class="conv-h1">${esc(tema(e))}</h1><p class="conv-sub">${esc(e.subtitulo)}</p><p class="lead">${l.formula}</p>${idioma(l.idioma)}</header>
   <section class="sec split">
     <div class="stack">${pill(e.estado)}<p class="k mute">${esc(e.fecha.replace("Laboratorio Sensorial · ", ""))}</p></div>
     <div class="stack"><p class="big">${esc(L.lead2)}</p><p class="mute">${esc(L.fechaNota)}</p><a class="cta" href="${ctaHref(x, e)}"${trk("postulacion", "pagina-edicion")}>${e.cta.label}</a></div>
@@ -420,7 +423,7 @@ ${AS.homeBlock(x)}
       const cupo = CES.encuentros.find((y) => y.id === e.id)?.cupo;
       return `
 <div class="wrap">
-  <header class="ph intro"><p class="k">${c.kicker}${e.ls ? " · Laboratorio Sensorial" : ""}</p><h1 class="conv-h1">${esc(es ? e.titulo.replace(/^Edición /, "Edición: ") : e.titulo)}</h1>${e.subtitulo ? `<p class="conv-sub">${esc(e.subtitulo)}</p>` : ""}<p class="lead">${esc(e.bajada)}</p></header>
+  <header class="ph intro"><p class="k">${c.kicker}</p>${e.ls ? `<p class="conv-serie">${serie(e)}</p>` : ""}<h1 class="conv-h1">${esc(tema(e))}</h1>${e.subtitulo ? `<p class="conv-sub">${esc(e.subtitulo)}</p>` : ""}<p class="lead">${esc(e.bajada)}</p></header>
   <section class="sec split">
     <div class="stack">${pill(e.estado)}<p class="k mute">${esc(e.fecha.replace(/^Laboratorio Sensorial · /, ""))}</p>${cupo ? `<p class="mute">${c.cupo(cupo)}</p>` : ""}</div>
     <div class="stack">${e.pagina ? `<a class="cta" href="${x.link(e.id)}">${c.verEdicion}</a>` : ""}</div>
