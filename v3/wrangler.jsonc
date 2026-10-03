@@ -24,7 +24,7 @@
     // ACCESS_TEAM_DOMAIN: https://<equipo>.cloudflareaccess.com · ACCESS_AUD: "Application Audience (AUD) Tag" de la app de Access.
     "ACCESS_TEAM_DOMAIN": "https://curly-scene-6dbf.cloudflareaccess.com",
     "ACCESS_AUD": "b44529ca0928674c3c4dfd23c9720eac7331347ed667da3c13297b89d74d383d",
-    "ADMIN_EMAILS": "soyjorferraro@gmail.com"
+    "ADMIN_EMAILS": "soyjorferraro@gmail.com,andresmai35@gmail.com"
   },
   "observability": { "enabled": true }
 }
