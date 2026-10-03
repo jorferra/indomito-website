@@ -50,7 +50,7 @@ export const T = {
       ctaEnc: "Ver encuentros →", ctaSis: "Sistema Portátil →",
       livK: "Por convocatoria", livP: "Abrimos cuando hay fecha. Cada encuentro tiene su momento.", livCta: "Conocer el living →",
       carK: "Carta vigente", carH: "Carta", carP: "Café de especialidad y pastelería artesanal.", carCta: "Ver carta completa →",
-      sisK: "Para eventos", sisP: "Espresso de especialidad en tu evento, con pastelería y música curada si las sumás.", sisCta: "Consultar fecha →",
+      sisK: "Para eventos", sisP: "Espresso de especialidad en tu evento, con pastelería y música curada si las sumás.", sisCta: "Conocer el sistema →",
       encK: "Agenda", encH: "Encuentros", encP: "Lo que pasó y lo que va a pasar.", encLiving: "Próxima apertura del living", encCta: "Ver encuentros →",
     },
     living: {
@@ -148,7 +148,7 @@ export const T = {
       ctaEnc: "See gatherings →", ctaSis: "Sistema Portátil →",
       livK: "By invitation", livP: "We open when there's a date. Each gathering has its moment.", livCta: "About the living room →",
       carK: "Current menu", carH: "Menu", carP: "Specialty coffee and artisan pastries.", carCta: "Full menu →",
-      sisK: "For events", sisP: "Specialty espresso at your event, with pastries and curated music if you add them.", sisCta: "Check a date →",
+      sisK: "For events", sisP: "Specialty espresso at your event, with pastries and curated music if you add them.", sisCta: "About the portable bar →",
       encK: "Calendar", encH: "Gatherings", encP: "What happened, and what's next.", encLiving: "Next living room opening", encCta: "See gatherings →",
     },
     living: {

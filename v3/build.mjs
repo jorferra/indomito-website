@@ -174,7 +174,7 @@ ${aviso(x)}
   <div class="body">
     <h2>Sistema Portátil</h2>
     <p>${h.sisP}</p>
-    <a class="cta" href="${x.link("sistema")}${x.preview ? "" : "#consulta"}">${h.sisCta}</a>
+    <a class="cta" href="${x.link("sistema")}">${h.sisCta}</a>
   </div>
 </section>
 
