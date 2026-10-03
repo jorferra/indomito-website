@@ -12,7 +12,8 @@
     "googleAnalytics": { "id": "G-8NHQC1ET9Q" },
     "gscVerification": "1ZgyO5-WeyJQ8Abdgj2tfcy3DNNHvPn0Pa6J2GVYDUQ",
     "googleAds": { "_nota": "ID vacío = no se cargan conversiones de Google Ads. Completar id (AW-XXXXXXXXXX) y las etiquetas de conversión de la cuenta; el build suma los dominios de Google a la CSP.", "id": "AW-666439793", "labels": { "form": "qFnlCPv3j4cdEPGg5L0C", "whatsapp": "pw9xCP73j4cdEPGg5L0C" } },
-    "_umami": "Completar con {src, id} cuando Umami esté instalado; el script se agrega solo."
+    "_umami": "Completar con {src, id} cuando Umami esté instalado; el script se agrega solo.",
+    "turnstileSiteKey": null
   },
   "carta": {
     "vigencia": "Septiembre 2026",
@@ -211,12 +212,13 @@
       "fecha": "Laboratorio Sensorial · 2026 · fecha a confirmar",
       "bajada": "Burru, ska, rocksteady, reggae, dub, dancehall. Noventa minutos de presencia.",
       "cta": {
-        "label": "Postularme →",
-        "href": "https://tally.so/r/9qDQbE"
+        "label": "Postularme →"
       },
       "pagina": true,
       "nombreCompleto": "Laboratorio Sensorial: Edición Jamaica",
-      "subtitulo": "Pressure Bloom"
+      "subtitulo": "Pressure Bloom",
+      "cupo": 12,
+      "formulario": { "motivo": "¿Qué te trae a esta edición?" }
     },
     {
       "id": "living-proxima",

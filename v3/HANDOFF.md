@@ -543,3 +543,20 @@ El desplegable usa fondo `--soft` (crema) y borde inferior `--mute` para disting
 **Al abrir una convocatoria nueva:** poner `estado: "convocatoria"` en el encuentro, definir sus campos si cambian, crear la fila en `Convocatorias` de Airtable con el mismo id, build y deploy. Al cerrarla: pasar el encuentro a `proximo` o `archivo`.
 
 **Tally:** el formulario de LS02 (`tally.so/r/9qDQbE`) queda activo hasta exportar sus respuestas a Airtable. Después se da de baja.
+
+### 26.1 Implementado (2 oct 2026)
+
+- `/convocatoria/` y `/en/call/` en `build.mjs` (`P.convocatoria`), textos en `src/i18n.mjs` (`convocatoria`). Formulario de postulación del encuentro abierto + lista de espera con selector ("Cualquier convocatoria" o cada encuentro en preparación/próximo).
+- Todos los CTA de encuentros, el aviso de la home, la página de LS02 y el "Anotarme" del living apuntan a `/convocatoria/` (o `#lista`). Ya no se usan `cta.href` (Tally) ni `cta.wa` para anotar; quedan en content.json solo como texto histórico.
+- Por encuentro: `cupo` (se muestra "12 lugares. Por postulación.") y `formulario.motivo` (pregunta propia; EN en content.en.json).
+- `worker.js` + `wrangler.jsonc` (`main`, binding `ASSETS`, `run_worker_first: ["/api/*"]`). Valida origen, honeypot `web`, consentimiento, contacto; verifica Turnstile si hay `TURNSTILE_SECRET`; escribe en Airtable con `typecast`.
+- Airtable: base **Indómito — Convocatorias** (`appNmepcR3NLbZtCH`), tablas `Convocatorias` (filas `ls02` y `lista-espera`) y `Postulantes`.
+- CSP: suma `challenges.cloudflare.com` (script y frame). Redirect `/postular → /convocatoria/`. Evento GA4 `postulacion_enviada`, Umami `postulacion`.
+
+### 26.2 Pendiente para publicar (en este orden)
+
+1. Crear token de Airtable (scopes `data.records:write` sobre esa base) → `npx wrangler secret put AIRTABLE_TOKEN`.
+2. Crear widget de Turnstile para indomitocafe.com → site key en `content.json` `site.turnstileSiteKey`, secret con `npx wrangler secret put TURNSTILE_SECRET`. Sin esto el formulario funciona solo con honeypot.
+3. `node build.mjs && npx wrangler deploy`. Probar una postulación real y verla en Airtable.
+4. Exportar respuestas de Tally de LS02 a `Postulantes` y dar de baja el formulario.
+5. Facebook (botón) e Instagram (bio): link a `https://www.indomitocafe.com/convocatoria/`.

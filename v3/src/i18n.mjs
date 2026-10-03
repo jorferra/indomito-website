@@ -14,6 +14,7 @@ export const ROUTES = {
     archivo: { path: "/archivo-sonoro/", hash: "archivo-sonoro" },
     origen: { path: "/origen/", hash: "origen" },
     terminos: { path: "/terminos/", hash: "terminos" },
+    convocatoria: { path: "/convocatoria/", hash: "convocatoria" },
   },
   en: {
     home: { path: "/en/", hash: "en" },
@@ -26,6 +27,7 @@ export const ROUTES = {
     archivo: { path: "/en/sound-archive/", hash: "en-sound-archive" },
     origen: { path: "/en/origin/", hash: "en-origin" },
     terminos: { path: "/en/terms/", hash: "en-terms" },
+    convocatoria: { path: "/en/call/", hash: "en-call" },
   },
 };
 
@@ -108,7 +110,19 @@ export const T = {
     terminos: {
       title: "Términos y privacidad — Indómito", desc: "Términos de uso y tratamiento de datos del sitio de Indómito Café.",
       kicker: "Legal", h1: "Términos y privacidad",
-      p: ["Este sitio tiene fines informativos y culturales. Los textos, imágenes y playlists publicados reflejan la identidad de Indómito y no pueden reproducirse sin autorización.", "No compartimos tus datos personales con terceros. Si nos escribís por WhatsApp o te anotás en una lista, usamos esa información solo para responderte o avisarte de nuevas fechas.", "El uso de este sitio implica la aceptación de estos términos. Podemos actualizarlos cuando haga falta."],
+      p: ["Este sitio tiene fines informativos y culturales. Los textos, imágenes y playlists publicados reflejan la identidad de Indómito y no pueden reproducirse sin autorización.", "No compartimos tus datos personales con terceros. Si nos escribís por WhatsApp o te anotás en una lista, usamos esa información solo para responderte o avisarte de nuevas fechas. Para darte de baja, escribinos por WhatsApp.", "El uso de este sitio implica la aceptación de estos términos. Podemos actualizarlos cuando haga falta."],
+    },
+    convocatoria: {
+      title: "Convocatoria abierta — Indómito", desc: "Postulate a la convocatoria vigente de Indómito o anotate para recibir la próxima.",
+      kicker: "Convocatoria", h1Sin: "Próxima convocatoria", leadSin: "Ahora no hay una abierta. Dejá tus datos y te avisamos primero.",
+      verEdicion: "Ver la edición →", cupo: (n) => `${n} lugares. Por postulación.`,
+      formK: "Postularme", listaK: "Lista de espera", listaBig: "¿Esperás otra fecha? Anotate y te avisamos cuando abra.",
+      anotarme: "Anotarme →",
+      f: { nombre: "Nombre", email: "Email", wa: "WhatsApp", ig: "Instagram (opcional)", motivo: "¿Por qué querés venir?", interes: "Me interesa",
+        cualquiera: "Cualquier convocatoria", consent: "Acepto que Indómito use estos datos solo para avisarme de sus convocatorias. Puedo pedir la baja cuando quiera.",
+        enviar: "Enviar postulación", enviarLista: "Anotarme", enviando: "Enviando…",
+        errNombre: "Falta tu nombre.", errContacto: "Dejanos un email o un WhatsApp.", errConsent: "Necesitamos tu OK para guardar los datos.", errRed: "No se pudo enviar. Probá de nuevo en un rato o escribinos por WhatsApp." },
+      done1: "Listo, te anotamos.", done2: "Revisamos cada postulación con tiempo. Si quedás, te escribimos con la confirmación y la dirección.", doneLista: "Te avisamos cuando abra la próxima.",
     },
     p404: {
       title: "Página no encontrada — Indómito", desc: "Esta página no existe.", kicker: "Error 404", h1: "Página no encontrada",
@@ -194,7 +208,19 @@ export const T = {
     terminos: {
       title: "Terms & privacy — Indómito", desc: "Terms of use and data handling for the Indómito Café website.",
       kicker: "Legal", h1: "Terms & privacy",
-      p: ["This site is informational and cultural. The texts, images and playlists published here reflect Indómito's identity and may not be reproduced without permission.", "We don't share your personal data with third parties. If you message us on WhatsApp or join a list, we only use that information to reply or to let you know about new dates.", "Using this site means you accept these terms. We may update them when needed."],
+      p: ["This site is informational and cultural. The texts, images and playlists published here reflect Indómito's identity and may not be reproduced without permission.", "We don't share your personal data with third parties. If you message us on WhatsApp or join a list, we only use that information to reply or to let you know about new dates. To be removed, message us on WhatsApp.", "Using this site means you accept these terms. We may update them when needed."],
+    },
+    convocatoria: {
+      title: "Open call — Indómito", desc: "Apply to Indómito's current call, or join the list for the next one.",
+      kicker: "Open call", h1Sin: "Next call", leadSin: "Nothing open right now. Leave your details and you'll hear first.",
+      verEdicion: "See the edition →", cupo: (n) => `${n} spots. By application.`,
+      formK: "Apply", listaK: "Waiting list", listaBig: "Waiting for another date? Join and we'll let you know when it opens.",
+      anotarme: "Join the list →",
+      f: { nombre: "Name", email: "Email", wa: "WhatsApp", ig: "Instagram (optional)", motivo: "Why do you want to come?", interes: "I'm interested in",
+        cualquiera: "Any call", consent: "I agree that Indómito uses this data only to tell me about its calls. I can ask to be removed anytime.",
+        enviar: "Send application", enviarLista: "Join", enviando: "Sending…",
+        errNombre: "Your name is missing.", errContacto: "Leave an email or a WhatsApp number.", errConsent: "We need your OK to keep your data.", errRed: "It didn't go through. Try again later or message us on WhatsApp." },
+      done1: "Done, you're in.", done2: "We read every application carefully. If you get a spot, we'll write with the confirmation and the address.", doneLista: "We'll let you know when the next one opens.",
     },
     p404: {
       title: "Page not found — Indómito", desc: "This page doesn't exist.", kicker: "Error 404", h1: "Page not found",

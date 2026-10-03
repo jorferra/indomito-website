@@ -103,8 +103,11 @@ function makeSite(lang) {
     return null;
   }).filter(Boolean);
 
+  // Postulaciones y listas van siempre a la página propia /convocatoria/ (§26 del handoff).
+  const ctaHref = (x, e) => (e.estado === "convocatoria" ? x.link("convocatoria") : x.link("convocatoria") + "#lista");
+  const ctaLabel = (e) => (e.estado === "convocatoria" ? e.cta.label : t.convocatoria.anotarme);
   const encCard = (x, e) => {
-    const cta = e.cta ? `<a class="cta" href="${e.cta.href || wa(e.cta.wa)}" rel="noopener"${trk(e.cta.href ? "postulacion" : "lista", e.id)}>${e.cta.label}</a>` : "";
+    const cta = e.cta ? `<a class="cta" href="${ctaHref(x, e)}"${trk(e.estado === "convocatoria" ? "postulacion" : "lista", e.id)}>${ctaLabel(e)}</a>` : "";
     const more = e.pagina ? `<a class="cta" href="${x.link(e.id)}">${t.verEdicion}</a>` : "";
     return `
 <article class="card">
@@ -121,7 +124,7 @@ function makeSite(lang) {
   const aviso = (x) => {
     const e = C.encuentros.find((y) => y.estado === "convocatoria");
     if (!e) return "";
-    return `<div class="aviso"><div class="wrap aviso-in">${pill(e.estado)}<a class="aviso-t" href="${x.link(e.id)}">${esc(e.nombreCompleto || e.titulo)}</a><a class="cta" href="${e.cta.href}" rel="noopener"${trk("postulacion", "aviso-home")}>${e.cta.label}</a></div></div>`;
+    return `<div class="aviso"><div class="wrap aviso-in">${pill(e.estado)}<a class="aviso-t" href="${x.link(e.id)}">${esc(e.nombreCompleto || e.titulo)}</a><a class="cta" href="${ctaHref(x, e)}"${trk("postulacion", "aviso-home")}>${e.cta.label}</a></div></div>`;
   };
 
   const P = {};
@@ -194,7 +197,7 @@ ${AS.homeBlock(x)}
     body: (x) => {
       const L = C.living, l = t.living;
       const prox = L.estado === "sin-fecha"
-        ? `<h3 style="margin-bottom:10px">${l.proxH}</h3><p>${l.sinFecha}</p><a class="cta" style="margin-top:20px" href="${wa(l.waLista)}" rel="noopener"${trk("lista", "living")}>${l.anotarme}</a>`
+        ? `<h3 style="margin-bottom:10px">${l.proxH}</h3><p>${l.sinFecha}</p><a class="cta" style="margin-top:20px" href="${x.link("convocatoria")}#lista"${trk("lista", "living")}>${t.convocatoria.anotarme}</a>`
         : `<h3 style="margin-bottom:10px">${l.proxH}</h3><p class="big">${esc(L.proxima.dia)}</p><p class="mute">Caballito Norte · ${esc(L.proxima.horario)}</p><p class="mute">${esc(L.proxima.cupo)}</p><a class="cta" style="margin-top:20px" href="${wa(l.waReserva + L.proxima.dia)}" rel="noopener">${l.reservar}</a>`;
       return `
 <div class="wrap">
@@ -315,7 +318,7 @@ ${AS.homeBlock(x)}
   <header class="ph intro"><p class="k"><a href="${x.link("encuentros")}">${l.kicker}</a> · Laboratorio Sensorial</p><h1>${esc(e.titulo)}</h1><p class="lead">${esc(e.subtitulo)}. ${l.formula}</p>${idioma(l.idioma)}</header>
   <section class="sec split">
     <div class="stack">${pill(e.estado)}<p class="k mute">${esc(e.fecha.replace("Laboratorio Sensorial · ", ""))}</p></div>
-    <div class="stack"><p class="big">${esc(L.lead2)}</p><p class="mute">${esc(L.fechaNota)}</p><a class="cta" href="${e.cta.href}" rel="noopener"${trk("postulacion", "pagina-edicion")}>${e.cta.label}</a></div>
+    <div class="stack"><p class="big">${esc(L.lead2)}</p><p class="mute">${esc(L.fechaNota)}</p><a class="cta" href="${ctaHref(x, e)}"${trk("postulacion", "pagina-edicion")}>${e.cta.label}</a></div>
   </section>
   <section class="sec split">
     <div><h2 class="k">${l.edicionK}</h2></div>
@@ -368,6 +371,63 @@ ${AS.homeBlock(x)}
 </div>`,
   };
 
+
+  // ---------- convocatoria: página fija con formulario propio (§26) ----------
+  const formConv = (x, id, opciones, done) => {
+    const f = t.convocatoria.f, p = es ? "c-" : "en-c-", lista = !!opciones;
+    const sel = lista ? `<label class="full">${f.interes}<select name="convocatoria">${opciones.map(([v, n]) => `<option value="${esc(v)}">${esc(n)}</option>`).join("")}</select></label>` : `<input type="hidden" name="convocatoria" value="${esc(id)}">`;
+    return `
+    <form class="form" data-conv data-t="${esc(JSON.stringify({ ...f, done: done }))}" novalidate>
+      ${sel}
+      <label>${f.nombre}<input name="nombre" autocomplete="name" required></label>
+      <label>${f.email}<input name="email" type="email" autocomplete="email"></label>
+      <label>${f.wa}<input name="whatsapp" inputmode="tel" autocomplete="tel"></label>
+      <label>${f.ig}<input name="instagram" autocapitalize="off"></label>
+      ${lista ? "" : `<label class="full">${esc(done.motivo || f.motivo)}<textarea name="motivo"></textarea></label>`}
+      <label class="full consent"><span><input type="checkbox" name="consent" value="1"> ${f.consent}</span></label>
+      <input class="hp" name="web" tabindex="-1" autocomplete="off" aria-hidden="true">
+      ${S.turnstileSiteKey ? `<div class="full cf-turnstile" data-sitekey="${esc(S.turnstileSiteKey)}" data-language="${es ? "es" : "en"}"></div>` : ""}
+      <p class="err full" role="alert" hidden></p>
+      <button type="submit">${lista ? f.enviarLista : f.enviar}</button>
+    </form>
+    <div class="done" hidden tabindex="-1"><p><strong>${t.convocatoria.done1}</strong></p><p>${lista ? t.convocatoria.doneLista : t.convocatoria.done2}</p></div>`;
+  };
+
+  P.convocatoria = {
+    title: t.convocatoria.title, desc: t.convocatoria.desc,
+    body: (x) => {
+      const c = t.convocatoria;
+      const e = C.encuentros.find((y) => y.estado === "convocatoria");
+      const espera = C.encuentros.filter((y) => y.estado === "preparacion" || y.estado === "proximo");
+      const opciones = [["lista-espera", c.f.cualquiera], ...espera.map((y) => [y.id, y.nombreCompleto || (y.codigo + " · " + y.titulo)])];
+      const lista = `
+  <section class="sec" id="lista">
+    <h2 class="k">${c.listaK}</h2>
+    <p class="big" style="margin-bottom:32px">${c.listaBig}</p>
+    ${formConv(x, "lista-espera", opciones, {})}
+  </section>`;
+      if (!e) return `
+<div class="wrap">
+  <header class="ph intro"><p class="k">${c.kicker}</p><h1>${c.h1Sin}</h1><p class="lead">${c.leadSin}</p></header>
+  ${lista}
+</div>`;
+      const cupo = CES.encuentros.find((y) => y.id === e.id)?.cupo;
+      return `
+<div class="wrap">
+  <header class="ph intro"><p class="k">${c.kicker}${e.ls ? " · Laboratorio Sensorial" : ""}</p><h1>${esc(e.titulo)}</h1><p class="lead">${esc(e.subtitulo ? e.subtitulo + ". " : "")}${esc(e.bajada)}</p></header>
+  <section class="sec split">
+    <div class="stack">${pill(e.estado)}<p class="k mute">${esc(e.fecha.replace(/^Laboratorio Sensorial · /, ""))}</p>${cupo ? `<p class="mute">${c.cupo(cupo)}</p>` : ""}</div>
+    <div class="stack">${e.pagina ? `<a class="cta" href="${x.link(e.id)}">${c.verEdicion}</a>` : ""}</div>
+  </section>
+  <section class="sec" id="postular">
+    <h2 class="k">${c.formK}</h2>
+    ${formConv(x, e.id, null, { motivo: e.formulario?.motivo })}
+  </section>
+  ${lista}
+</div>`;
+    },
+  };
+
   P.archivo = AS.indexPage;
 
   const P404 = {
@@ -400,6 +460,15 @@ var nombre=v('nombre');var er=f.querySelector('.err');if(!nombre){er.hidden=fals
 var t=L.intro+'\\n'+L.nombre+': '+nombre+(v('whatsapp')?'\\n'+L.wa+': '+v('whatsapp'):'')+(v('fecha')?'\\n'+L.fecha+': '+v('fecha'):'')+'\\n'+L.tipo+': '+v('tipo')+(v('personas')?'\\n'+L.personas+': '+v('personas'):'')+(v('zona')?'\\n'+L.zona+': '+v('zona'):'')+(v('mensaje')?'\\n'+v('mensaje'):'')+(ADS()?'\\n'+L.via:'');
 var d=f.nextElementSibling,a=d.querySelector('a');a.href='https://wa.me/${S.whatsapp}?text='+encodeURIComponent(t);
 f.hidden=true;d.hidden=false;a.focus();CONV('form');var waits=[];${GA4 ? `waits.push(new Promise(function(resolve){var timer=setTimeout(resolve,600);GA_EVENT('consulta_sistema',{origen:'formulario',tipo_evento:v('tipo')},function(){clearTimeout(timer);resolve()})}));` : ""}if(window.umami){waits.push(Promise.resolve().then(function(){return umami.track('consulta-sistema',{tipo:v('tipo'),personas:v('personas'),idioma:document.documentElement.lang||'',fuente:ADS()?'google-ads':''})}).catch(function(){}))}var go=function(){if(window.top===window.self){window.location.href=a.href}};Promise.race([Promise.all(waits),new Promise(function(r){setTimeout(r,600)})]).then(go,go)})});})();
+(function(){document.querySelectorAll('form[data-conv]').forEach(function(f){var L=JSON.parse(f.dataset.t||'{}');var er=f.querySelector('.err'),b=f.querySelector('button'),bl=b.textContent;
+var show=function(m){er.textContent=m;er.hidden=false;er.focus&&er.focus()};
+f.addEventListener('submit',function(e){e.preventDefault();var v=function(n){var el=f.elements[n];return el?String(el.value).trim():''};
+if(!v('nombre'))return show(L.errNombre);if(!v('email')&&!v('whatsapp'))return show(L.errContacto);if(!f.elements.consent.checked)return show(L.errConsent);er.hidden=true;
+var tk=f.querySelector('[name="cf-turnstile-response"]');var data={convocatoria:v('convocatoria'),nombre:v('nombre'),email:v('email'),whatsapp:v('whatsapp'),instagram:v('instagram'),motivo:v('motivo'),consent:true,web:v('web'),idioma:(document.documentElement.lang||'es').slice(0,2),origen:location.pathname+location.search,token:tk?tk.value:''};
+b.disabled=true;b.textContent=L.enviando;
+fetch('/api/postulacion',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(data)}).then(function(r){if(!r.ok)throw 0;
+var d=f.nextElementSibling;f.hidden=true;d.hidden=false;d.focus();GA_EVENT('postulacion_enviada',{origen:data.convocatoria});if(window.umami)try{umami.track('postulacion',{convocatoria:data.convocatoria})}catch(x){}})
+.catch(function(){b.disabled=false;b.textContent=bl;show(L.errRed);if(window.turnstile)try{turnstile.reset()}catch(x){}})})})})();
 (function(){document.querySelectorAll('.mob .sheet a').forEach(function(a){a.addEventListener('click',function(){var d=a.closest('details');if(d)d.open=false})})})();`;
 
 // ---------- salida ----------
@@ -428,6 +497,7 @@ ${FONTS}
 <link rel="stylesheet" href="/styles.css">
 ${S.umami ? `<script defer src="${S.umami.src}" data-website-id="${S.umami.id}"></script>` : ""}
 ${k === "home" && S.gscVerification ? `<meta name="google-site-verification" content="${S.gscVerification}">` : ""}
+${k === "convocatoria" && S.turnstileSiteKey ? '<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>' : ""}
 ${ld}${pg.ld ? `<script type="application/ld+json">${JSON.stringify(pg.ld)}</script>` : ""}
 </head>
 <body>`;
@@ -480,7 +550,7 @@ function buildDist() {
     "  X-Frame-Options: DENY",
     "  Referrer-Policy: strict-origin-when-cross-origin",
     "  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=()",
-    `  Content-Security-Policy: default-src 'self'; script-src 'self' https://cloud.umami.is https://static.cloudflareinsights.com${G ? " " + G.script : ""}${GA ? " " + GA.script : ""}; connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev${G ? " " + G.connect : ""}${GA ? " " + GA.connect : ""}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:${G ? " " + G.img : ""}${GA ? " " + GA.img : ""};${G || GA ? " frame-src https://www.googletagmanager.com;" : ""} frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`,
+    `  Content-Security-Policy: default-src 'self'; script-src 'self' https://challenges.cloudflare.com https://cloud.umami.is https://static.cloudflareinsights.com${G ? " " + G.script : ""}${GA ? " " + GA.script : ""}; connect-src 'self' https://cloudflareinsights.com https://cloud.umami.is https://gateway.umami.is https://api-gateway.umami.dev${G ? " " + G.connect : ""}${GA ? " " + GA.connect : ""}; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:${G ? " " + G.img : ""}${GA ? " " + GA.img : ""};${G || GA ? " frame-src https://challenges.cloudflare.com https://www.googletagmanager.com;" : " frame-src https://challenges.cloudflare.com;"} frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'`,
     "",
   ].join("\n"));
   write("dist/robots.txt", `User-agent: *\nAllow: /\n\nSitemap: ${S.url}/sitemap.xml\n`);
@@ -490,6 +560,7 @@ function buildDist() {
     "/eventos /encuentros/ 301",
     "/objetos /tienda/ 301",
     "/club /encuentros/ 301",
+    "/postular /convocatoria/ 301",
     "/club/tg1 /living/ 301",
     "/club/playlists /origen/ 301",
     "/terms /terminos/ 301",

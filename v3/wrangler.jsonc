@@ -1,5 +1,6 @@
 {
   "name": "indomito-web",
+  "main": "worker.js",
   "compatibility_date": "2026-09-25",
   "routes": [
     { "pattern": "www.indomitocafe.com", "custom_domain": true },
@@ -7,7 +8,18 @@
   ],
   "assets": {
     "directory": "./dist/",
+    "binding": "ASSETS",
     "not_found_handling": "404-page",
-    "html_handling": "auto-trailing-slash"
-  }
+    "html_handling": "auto-trailing-slash",
+    // Solo /api/* pasa por el Worker; el resto lo sirven los assets directo (sin costo de invocación).
+    "run_worker_first": ["/api/*"]
+  },
+  // Postulaciones (§26 del HANDOFF). El token de Airtable y el secret de Turnstile van como secrets:
+  //   npx wrangler secret put AIRTABLE_TOKEN
+  //   npx wrangler secret put TURNSTILE_SECRET
+  "vars": {
+    "AIRTABLE_BASE": "appNmepcR3NLbZtCH",
+    "AIRTABLE_TABLE": "Postulantes"
+  },
+  "observability": { "enabled": true }
 }

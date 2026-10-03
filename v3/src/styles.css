@@ -263,3 +263,8 @@ p{margin:0}
   .wa-fijo{display:flex;align-items:center;justify-content:center;position:fixed;left:16px;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:40;min-height:52px;background:var(--ink);color:var(--bg);font-weight:500;font-size:var(--fs-body);border-radius:999px;box-shadow:0 6px 24px rgba(0,0,0,.18)}
   body:has(.wa-fijo){padding-bottom:88px}
 }
+/* Convocatoria (§26) */
+.form .consent span{display:flex;gap:10px;align-items:flex-start;color:var(--ink);font-size:var(--fs-meta);line-height:1.45}
+.form .consent input{width:auto;margin-top:3px;accent-color:var(--ink)}
+.form .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.form button:disabled{opacity:.5;cursor:default}

@@ -76,7 +76,7 @@
       "titulo": "Jamaica Edition",
       "fecha": "Laboratorio Sensorial · 2026 · date to be confirmed",
       "bajada": "Burru, ska, rocksteady, reggae, dub, dancehall. Ninety minutes of presence.",
-      "cta": { "label": "Apply →" },
+      "cta": { "label": "Apply →" }, "formulario": { "motivo": "What brings you to this edition?" },
       "nombreCompleto": "Laboratorio Sensorial: Jamaica Edition"
     },
     {
