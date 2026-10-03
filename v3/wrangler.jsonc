@@ -19,7 +19,12 @@
   //   npx wrangler secret put TURNSTILE_SECRET
   "vars": {
     "AIRTABLE_BASE": "appNmepcR3NLbZtCH",
-    "AIRTABLE_TABLE": "Postulantes"
+    "AIRTABLE_TABLE": "Postulantes",
+    // Panel /postulantes/ (§26.4 del HANDOFF). Vacíos = el panel responde 403 (falla cerrado).
+    // ACCESS_TEAM_DOMAIN: https://<equipo>.cloudflareaccess.com · ACCESS_AUD: "Application Audience (AUD) Tag" de la app de Access.
+    "ACCESS_TEAM_DOMAIN": "",
+    "ACCESS_AUD": "",
+    "ADMIN_EMAILS": "soyjorferraro@gmail.com"
   },
   "observability": { "enabled": true }
 }

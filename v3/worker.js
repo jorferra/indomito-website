@@ -82,9 +82,87 @@ async function postulacion(request, env) {
   return json(200, { ok: true });
 }
 
+// ---------- Panel de postulantes (/postulantes/ + /api/admin/*) ----------
+// Protegido por Cloudflare Access. El Worker además valida el JWT de Access (firma RS256, aud, iss, exp)
+// y la lista ADMIN_EMAILS. Si falta configuración, responde 403: falla cerrado.
+const b64url = (s) => Uint8Array.from(atob(s.replace(/-/g, "+").replace(/_/g, "/") + "===".slice((s.length + 3) % 4)), (c) => c.charCodeAt(0));
+let JWKS = { at: 0, keys: [] };
+
+async function accessEmail(request, env) {
+  if (!env.ACCESS_AUD || !env.ACCESS_TEAM_DOMAIN) return null;
+  const token = request.headers.get("cf-access-jwt-assertion");
+  if (!token) return null;
+  const [h, p, sig] = token.split(".");
+  if (!h || !p || !sig) return null;
+  const header = JSON.parse(new TextDecoder().decode(b64url(h)));
+  const payload = JSON.parse(new TextDecoder().decode(b64url(p)));
+  const team = env.ACCESS_TEAM_DOMAIN.replace(/\/$/, "");
+  if (Date.now() - JWKS.at > 3600e3 || !JWKS.keys.some((k) => k.kid === header.kid)) {
+    const r = await fetch(`${team}/cdn-cgi/access/certs`);
+    JWKS = { at: Date.now(), keys: (await r.json()).keys || [] };
+  }
+  const jwk = JWKS.keys.find((k) => k.kid === header.kid);
+  if (!jwk || header.alg !== "RS256") return null;
+  const key = await crypto.subtle.importKey("jwk", jwk, { name: "RSASSA-PKCS1-v1_5", hash: "SHA-256" }, false, ["verify"]);
+  const ok = await crypto.subtle.verify("RSASSA-PKCS1-v1_5", key, b64url(sig), new TextEncoder().encode(`${h}.${p}`));
+  if (!ok) return null;
+  const aud = Array.isArray(payload.aud) ? payload.aud : [payload.aud];
+  if (!aud.includes(env.ACCESS_AUD) || payload.iss !== team || !(payload.exp * 1000 > Date.now())) return null;
+  const email = String(payload.email || "").toLowerCase();
+  const allowed = String(env.ADMIN_EMAILS || "").toLowerCase().split(",").map((s) => s.trim()).filter(Boolean);
+  return allowed.includes(email) ? email : null;
+}
+
+async function airtable(env, path, init = {}) {
+  const r = await fetch(`https://api.airtable.com/v0/${env.AIRTABLE_BASE}/${path}`, {
+    ...init,
+    headers: { Authorization: `Bearer ${env.AIRTABLE_TOKEN}`, "Content-Type": "application/json" },
+  });
+  if (!r.ok) throw new Error(`airtable ${r.status} ${await r.text().catch(() => "")}`);
+  return r.json();
+}
+
+async function listAll(env, table) {
+  const out = [];
+  let offset = "";
+  do {
+    const d = await airtable(env, `${encodeURIComponent(table)}?pageSize=100${offset ? "&offset=" + offset : ""}`);
+    out.push(...d.records);
+    offset = d.offset || "";
+  } while (offset);
+  return out;
+}
+
+const ESTADOS = ["postulado", "aceptado", "confirmado", "asistió", "no asistió", "lista de espera"];
+
+async function admin(request, env, pathname) {
+  const email = await accessEmail(request, env);
+  if (!email) return json(403, { ok: false, error: "acceso" });
+  if (pathname === "/api/admin/datos" && request.method === "GET") {
+    const [convs, posts] = await Promise.all([listAll(env, "Convocatorias"), listAll(env, env.AIRTABLE_TABLE || "Postulantes")]);
+    return json(200, {
+      ok: true, email,
+      convocatorias: convs.map((r) => ({ id: r.fields.Id, nombre: r.fields.Nombre || r.fields.Id, estado: r.fields.Estado || "", cupo: r.fields.Cupo || null })).filter((c) => c.id),
+      postulantes: posts.map((r) => ({ id: r.id, nombre: r.fields.Nombre || "", email: r.fields.Email || "", whatsapp: r.fields.WhatsApp || "", instagram: r.fields.Instagram || "", motivo: r.fields.Motivo || "", convocatoria: r.fields["Convocatoria Id"] || "lista-espera", estado: r.fields.Estado || "postulado", recibido: r.fields.Recibido || r.createdTime })),
+    });
+  }
+  if (pathname === "/api/admin/estado" && request.method === "POST") {
+    let d;
+    try { d = await request.json(); } catch { return json(400, { ok: false, error: "json" }); }
+    if (!/^rec[A-Za-z0-9]{14}$/.test(String(d.id)) || !ESTADOS.includes(d.estado)) return json(422, { ok: false, error: "datos" });
+    await airtable(env, encodeURIComponent(env.AIRTABLE_TABLE || "Postulantes"), { method: "PATCH", body: JSON.stringify({ records: [{ id: d.id, fields: { Estado: d.estado } }] }) });
+    return json(200, { ok: true });
+  }
+  return json(404, { ok: false, error: "not_found" });
+}
+
 export default {
   async fetch(request, env) {
     const { pathname } = new URL(request.url);
+    if (pathname.startsWith("/api/admin/")) {
+      try { return await admin(request, env, pathname); }
+      catch (e) { console.error(e); return json(502, { ok: false, error: "base" }); }
+    }
     if (pathname === "/api/postulacion") {
       if (request.method !== "POST") return json(405, { ok: false, error: "method" });
       try { return await postulacion(request, env); }

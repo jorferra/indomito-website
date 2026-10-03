@@ -575,9 +575,24 @@ Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deplo
 - Se publica como artifact privado de claude.ai con capability `mcp` → conector `Airtable`, tools `list_records_for_table` y `update_records_for_table`. Lee con las credenciales de quien lo abre: cada persona necesita su propio conector de Airtable con acceso a la base `appNmepcR3NLbZtCH`.
 - Muestra una pestaña por convocatoria, cupo asignado (aceptado + confirmado + asistió sobre `Cupo`), conteo por estado y una ficha por persona con WhatsApp, email, Instagram, motivo y selector de estado que escribe en Airtable.
 - Si se agregan campos a `Postulantes`, actualizar los IDs `F`/`C` al principio del script.
-- Atajo: `indomitocafe.com/postulantes` redirige (302) al artifact del panel, vía `_redirects`; excluido en robots.txt.
 - Prueba end-to-end del 3 oct: postulación "Prueba Jor" llegó a Airtable con todos los campos (borrarla a mano antes de abrir la convocatoria).
 
 Deploy — 3 oct 2026 (Codex): publicado el cambio `2ca567f`; CTA de Sistema Portátil en home ES/EN lleva al inicio de la página sin `#consulta` (navegación verificada, foto cargada y descripción, scroll 0). Turnstile visible en `/convocatoria/`, GET `/api/postulacion` devuelve 405 y `dist/admin/` no existe. ID de versión del deploy: `14cfb862-b065-4d04-bf26-29ef9fcde944`.
 
-Deploy — 3 oct 2026 (Codex): publicado `eeed165`; verificado en producción que `https://www.indomitocafe.com/postulantes` devuelve HTTP 302 con `Location: https://claude.ai/artifact/LELuXPJFJi6JPJV26RsZGv`. `dist/admin/` no existe. ID de versión del deploy: `6eb1ce28-4b7e-495f-99a9-ecf0da26dcf1`.
+(Reemplazado por §26.4: el redirect 302 se quita.) Deploy — 3 oct 2026 (Codex): publicado `eeed165`; verificado en producción que `https://www.indomitocafe.com/postulantes` devuelve HTTP 302 con `Location: https://claude.ai/artifact/LELuXPJFJi6JPJV26RsZGv`. `dist/admin/` no existe. ID de versión del deploy: `6eb1ce28-4b7e-495f-99a9-ecf0da26dcf1`.
+
+### 26.4 Panel propio en indomitocafe.com/postulantes/ (3 oct 2026)
+
+Reemplaza al artifact de claude.ai (v3/admin/postulantes.html queda como referencia).
+
+- Página estática: `src/root/postulantes/index.html` + `app.js` (el build los copia a `dist/postulantes/`). `noindex` y `Disallow` en robots.txt.
+- API en `worker.js`: `GET /api/admin/datos` (convocatorias + postulantes) y `POST /api/admin/estado` (`{id, estado}`).
+- Seguridad: Cloudflare Access protege `/postulantes/*` y `/api/admin/*` (login con código por mail). El Worker además valida el JWT de Access (`Cf-Access-Jwt-Assertion`: firma RS256 contra `<equipo>.cloudflareaccess.com/cdn-cgi/access/certs`, `aud`, `iss`, `exp`) y que el mail esté en `ADMIN_EMAILS`. Si falta `ACCESS_TEAM_DOMAIN` o `ACCESS_AUD`, responde 403: falla cerrado.
+- El token de Airtable necesita **también** `data.records:read` (el panel lee). Se agrega editando el token existente en airtable.com/create/tokens; no cambia el secret.
+
+Pendiente para activar (en orden):
+1. Jor: sumar `data.records:read` al token de Airtable.
+2. Cloudflare Zero Trust → Access → Applications → Add → Self-hosted: dominio `www.indomitocafe.com`, paths `postulantes` y `api/admin`; política Allow con los mails de Jor y Andrés; login "One-time PIN". Copiar el **AUD tag** y el team domain.
+3. Completar `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD` y `ADMIN_EMAILS` (sumar el mail de Andrés) en wrangler.jsonc, build y deploy.
+4. Verificar: sin login, /postulantes/ muestra la pantalla de Access; con login, carga la lista; un GET a /api/admin/datos sin sesión da 403.
+5. Cambiar el link del mail de aviso (automatización de Airtable "Aviso de nueva postulación") a https://www.indomitocafe.com/postulantes/.

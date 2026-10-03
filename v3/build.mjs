@@ -571,8 +571,6 @@ function buildDist() {
     "/objetos /tienda/ 301",
     "/club /encuentros/ 301",
     "/postular /convocatoria/ 301",
-    "# Atajo interno al panel de postulantes (artifact privado de claude.ai; solo lo abre quien tiene acceso).",
-    "/postulantes https://claude.ai/artifact/LELuXPJFJi6JPJV26RsZGv 302",
     "/club/tg1 /living/ 301",
     "/club/playlists /origen/ 301",
     "/terms /terminos/ 301",
