@@ -596,3 +596,5 @@ Pendiente para activar (en orden):
 3. Completar `ACCESS_TEAM_DOMAIN`, `ACCESS_AUD` y `ADMIN_EMAILS` (sumar el mail de Andrés) en wrangler.jsonc, build y deploy.
 4. Verificar: sin login, /postulantes/ muestra la pantalla de Access; con login, carga la lista; un GET a /api/admin/datos sin sesión da 403.
 5. Cambiar el link del mail de aviso (automatización de Airtable "Aviso de nueva postulación") a https://www.indomitocafe.com/postulantes/.
+
+Deploy — 3 oct 2026 (Codex): publicado `8095626`. ID de versión del deploy: `67d0a468-f717-4224-ab31-e663a37f1498`. Sin sesión, `/postulantes/` muestra el login de Cloudflare Access (email y código); GET `/api/admin/datos` devuelve 302 al login de Access sin datos. `/postulantes` también redirige a Access y ya no a claude.ai. Home ES/EN, Carta, Archivo Sonoro y Convocatoria coinciden con el build; sintaxis de site.js y del app.js del panel validada. No se probó el panel con sesión ni se modificaron postulaciones.
