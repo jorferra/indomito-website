@@ -566,7 +566,7 @@ Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deplo
 1. Crear token de Airtable (scopes `data.records:write` sobre esa base) → `npx wrangler secret put AIRTABLE_TOKEN`.
 2. Crear widget de Turnstile para indomitocafe.com → site key en `content.json` `site.turnstileSiteKey`, secret con `npx wrangler secret put TURNSTILE_SECRET`. Sin esto el formulario funciona solo con honeypot.
 3. `node build.mjs && npx wrangler deploy`. Probar una postulación real y verla en Airtable.
-4. Exportar respuestas de Tally de LS02 a `Postulantes` y dar de baja el formulario.
+4. ~~Exportar respuestas de Tally~~: revisado el 3 oct 2026, el formulario `9qDQbE` no tenía ninguna respuesta (ni completa ni parcial). No hay nada que migrar; queda solo darlo de baja en Tally.
 5. Facebook (botón) e Instagram (bio): link a `https://www.indomitocafe.com/convocatoria/`.
 
 ### 26.3 Panel de postulantes (3 oct 2026)
