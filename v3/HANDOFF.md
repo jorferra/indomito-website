@@ -521,3 +521,25 @@ Actualización Spotify (1 oct 2026): enlaces unificados en las 72 fichas ES/EN; 
 ## 25. Menú móvil (1 oct 2026)
 
 El desplegable usa fondo `--soft` (crema) y borde inferior `--mute` para distinguirlo de la página blanca. Conserva estructura, enlaces y comportamiento; aplica a ES/EN.
+
+## 26. Convocatorias propias, sin Tally (plan aprobado por Jor, 2 oct 2026)
+
+**Decisión:** las postulaciones dejan de pasar por Tally y por "Anotarme por WhatsApp". Todo entra por un formulario propio del sitio y queda en una base única. WhatsApp queda para conversar, no para anotar.
+
+**Por qué:** hoy los anotados se dispersan (LS02 en Tally, Living y LS03 en el WhatsApp de alguien). Sin base única no se sabe quién vino dos veces, quién quedó afuera ni a quién avisar primero. La base de postulantes es el activo de Indómito.
+
+**Piezas:**
+
+1. **Ruta fija `/convocatoria/`** (ES) y `/en/call/` (EN). Muestra el encuentro con `estado: "convocatoria"` de `content.json`. Si no hay ninguno, muestra "Próxima convocatoria" con un formulario corto de lista de espera. Facebook, la bio de Instagram y los Eventos apuntan siempre a esta URL: no se cambian links nunca más.
+2. **Formulario propio** dentro de esa página. Los campos se definen por encuentro en `content.json` (`formulario.campos[]`), con un set base: nombre, email, WhatsApp, Instagram (opcional), "¿por qué querés venir?" y consentimiento de datos.
+3. **Worker de Cloudflare** (`worker.js`, mismo deploy que el sitio): recibe `POST /api/postulacion`, valida, verifica Turnstile y escribe en Airtable. Se eligió Worker y no n8n para que una caída del servidor de Hetzner no pierda postulaciones.
+4. **Airtable** como fuente de verdad, para que Andrés gestione sin código. Tablas: `Convocatorias` (id = id del encuentro en content.json) y `Postulantes` (estado: postulado → aceptado → confirmado → asistió / no asistió / lista de espera).
+5. **n8n queda para lo posterior:** mail de confirmación, aviso de cupo lleno, recordatorio el día anterior. No está en el camino crítico del envío.
+
+**Secrets (no van al repo):** `AIRTABLE_TOKEN`, `AIRTABLE_BASE`, `TURNSTILE_SECRET`. Se cargan con `npx wrangler secret put NOMBRE`. La site key pública de Turnstile va en `content.json` → `site.turnstileSiteKey`.
+
+**Datos personales:** el formulario explica para qué se usan los datos (avisar de convocatorias de Indómito y Laboratorio Sensorial) y cómo pedir la baja (por WhatsApp o mail). No se comparten con terceros.
+
+**Al abrir una convocatoria nueva:** poner `estado: "convocatoria"` en el encuentro, definir sus campos si cambian, crear la fila en `Convocatorias` de Airtable con el mismo id, build y deploy. Al cerrarla: pasar el encuentro a `proximo` o `archivo`.
+
+**Tally:** el formulario de LS02 (`tally.so/r/9qDQbE`) queda activo hasta exportar sus respuestas a Airtable. Después se da de baja.
