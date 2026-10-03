@@ -576,3 +576,5 @@ Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deplo
 - Muestra una pestaña por convocatoria, cupo asignado (aceptado + confirmado + asistió sobre `Cupo`), conteo por estado y una ficha por persona con WhatsApp, email, Instagram, motivo y selector de estado que escribe en Airtable.
 - Si se agregan campos a `Postulantes`, actualizar los IDs `F`/`C` al principio del script.
 - Prueba end-to-end del 3 oct: postulación "Prueba Jor" llegó a Airtable con todos los campos (borrarla a mano antes de abrir la convocatoria).
+
+Deploy — 3 oct 2026 (Codex): publicado el cambio `2ca567f`; CTA de Sistema Portátil en home ES/EN lleva al inicio de la página sin `#consulta` (navegación verificada, foto cargada y descripción, scroll 0). Turnstile visible en `/convocatoria/`, GET `/api/postulacion` devuelve 405 y `dist/admin/` no existe. ID de versión del deploy: `14cfb862-b065-4d04-bf26-29ef9fcde944`.
