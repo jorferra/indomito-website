@@ -579,3 +579,5 @@ Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deplo
 - Prueba end-to-end del 3 oct: postulación "Prueba Jor" llegó a Airtable con todos los campos (borrarla a mano antes de abrir la convocatoria).
 
 Deploy — 3 oct 2026 (Codex): publicado el cambio `2ca567f`; CTA de Sistema Portátil en home ES/EN lleva al inicio de la página sin `#consulta` (navegación verificada, foto cargada y descripción, scroll 0). Turnstile visible en `/convocatoria/`, GET `/api/postulacion` devuelve 405 y `dist/admin/` no existe. ID de versión del deploy: `14cfb862-b065-4d04-bf26-29ef9fcde944`.
+
+Deploy — 3 oct 2026 (Codex): publicado `eeed165`; verificado en producción que `https://www.indomitocafe.com/postulantes` devuelve HTTP 302 con `Location: https://claude.ai/artifact/LELuXPJFJi6JPJV26RsZGv`. `dist/admin/` no existe. ID de versión del deploy: `6eb1ce28-4b7e-495f-99a9-ecf0da26dcf1`.
