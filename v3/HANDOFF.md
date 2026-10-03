@@ -555,6 +555,14 @@ El desplegable usa fondo `--soft` (crema) y borde inferior `--mute` para disting
 
 ### 26.2 Pendiente para publicar (en este orden)
 
+**Publicación realizada — 3 oct 2026 (Codex):** `main` actualizado desde `origin/main` (668abde). Site key pública de Turnstile cargada en `site.turnstileSiteKey`. Jor cargó `AIRTABLE_TOKEN` y `TURNSTILE_SECRET` por los prompts de Wrangler; ambos nombres verificados con `secret list`, sin guardar valores en el repo. `AIRTABLE_BASE` y `AIRTABLE_TABLE` conservan los valores de `wrangler.jsonc`.
+
+Build correcto: 94 páginas ES/EN y sintaxis de `dist/site.js` validada. Existen `dist/convocatoria/index.html` y `dist/en/call/index.html`; el script de Turnstile aparece exclusivamente en esas dos páginas. Persiste el aviso previo del Archivo Sonoro sobre el año de composición de Satie.
+
+Deploy de `indomito-web` publicado en ambos dominios. **ID de versión del deploy: `f86e5504-b214-45f3-80cb-d878adcc0d51`.** Verificación en producción: `/convocatoria/` carga, Turnstile visible con «¡Operación exitosa!» y lista de espera plegada; LS02 muestra «Laboratorio Sensorial · Edición 02» arriba, H1 «Jamaica» y «Pressure Bloom» abajo. GET `/api/postulacion` devuelve 405 con `error: method`. Home, Carta, Archivo Sonoro y versiones EN (incluida `/en/call/`) responden y coinciden con el build local.
+
+**Pendientes:** Jor realizará manualmente una postulación y comprobará la fila en Airtable; no se envió ninguna prueba ni se verificó todavía el guardado de extremo a extremo. Exportación de respuestas de Tally y posterior baja siguen pendientes; Tally no se modificó. Links de Facebook/Instagram siguen pendientes. No se cambiaron diseño ni textos del sitio.
+
 1. Crear token de Airtable (scopes `data.records:write` sobre esa base) → `npx wrangler secret put AIRTABLE_TOKEN`.
 2. Crear widget de Turnstile para indomitocafe.com → site key en `content.json` `site.turnstileSiteKey`, secret con `npx wrangler secret put TURNSTILE_SECRET`. Sin esto el formulario funciona solo con honeypot.
 3. `node build.mjs && npx wrangler deploy`. Probar una postulación real y verla en Airtable.
